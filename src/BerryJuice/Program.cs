@@ -43,6 +43,7 @@ if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
     app.MapControllers();
     app.MapRazorComponents<App>()
         .AddInteractiveWebAssemblyRenderMode()
+        .AddInteractiveServerRenderMode()
         .AddAdditionalAssemblies(typeof(BerryJuice.Blazor.Client._Imports).Assembly);
 }
 

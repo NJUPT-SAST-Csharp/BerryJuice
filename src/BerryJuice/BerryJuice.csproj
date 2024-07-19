@@ -15,7 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Backend\BerryJuice.WebAPI\BerryJuice.WebAPI.csproj" />
-    <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
+    <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
   </ItemGroup>
 
 </Project>
