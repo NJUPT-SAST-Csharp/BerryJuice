@@ -1,4 +1,4 @@
-@BerryJuice.WebAPI_HostAddress = http://localhost:5054
+@BerryJuice.WebAPI_HostAddress = http://localhost:5148
 
 GET {{BerryJuice.WebAPI_HostAddress}}/weatherforecast/
 Accept: application/json
