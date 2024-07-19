@@ -4,7 +4,7 @@
 
 ## How to contribute?
 
-请阅读[参与指南](https://github.com/NJUPT-SAST-Csharp/BerryJuice/CONTRIBUTION.md)和浏览[Projects](https://github.com/NJUPT-SAST-Csharp/BerryJuice/projects)
+请阅读[参与指南](https://github.com/NJUPT-SAST-Csharp/BerryJuice/blob/main/CONTRIBUTION.md)和浏览[Projects](https://github.com/NJUPT-SAST-Csharp/BerryJuice/projects)
 
 ## 关于这个项目
 
