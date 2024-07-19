@@ -1,4 +1,4 @@
-# BerryJuice 
+# BerryJuice 🧃
 
 一个记账与预算管理软件，旨在尝试和学习Blazor构建Web应用。
 
