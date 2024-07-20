@@ -12,7 +12,7 @@
 
 今年年初的WOC中，我们采用C/S架构，基于WPF进行桌面端开发和ASP.NET进行后端WebAPI的开发，顺利完成了SAST Wiki（虽然这玩意太过简陋了😢）。这次SOC很显然我们有了在技术选择上更大的自由，因此我打算尝试一些新东西，选择ASP.NET Core Blazor作为本次SOC使用的技术栈，使用C#同时完成前端和后端开发，并且使用ORM框架EF Core。
 
-对于后端部分，我有考虑去实现Modular Monolith + DDD，如果各位感兴趣并且愿意负责后端部分可以尝试。
+对于后端部分，我有考虑去实现Modular Monolith + DDD，如果各位感兴趣，在项目后期可以尝试重构😋
 
 ## 项目构成
 
@@ -25,12 +25,15 @@
 	- Backend
 		- `BerryJuice.WebAPI`: 提供WebAPI的项目，也就是Controller层所在的位置
 		- `*.Application`: 熟悉的Application层，承载业务逻辑，基于事件总线，使用`Query`和`Command`
-		- `*.Domain`: 领域模型
+		- `*.Domain`: 领域模型、领域事件、规则
 		- `*.Infrastructure`: 后端的一些基础设施，比如事件总线，.NET主机的配置，EF Core配置
+		- `*.IntegratedEvent`: 集成事件，对应`SAST Image`里面Application层内的跨服务的消息
 	- Shared
 		- 从🦊的`SAST Image`里狠狠`Ctrl+C`&`Ctrl+V`下来的一些东西，感觉不如过段时间打个nuget包方便分发（
 	- `BerryJuice`: 整个解决方案唯一的可启动项目，这样可以在一个可执行文件里同时跑Blazor服务和WebAPI服务，减小开发调试与部署的烦恼，不需要连着开几个小黑框挂后台或者用更高级的Aspire，并且或许能提升性能。
- - 
+
+项目中 `Backend/Modules` 文件夹是为了之后实现Modular Monolith + DDD准备的。
+ 
 ### 一些其它注解
 
 - 必须使用事件总线完成后端Application层的开发。可以使用MediatR
@@ -65,4 +68,4 @@
 
 然后再在任意一款现代浏览器中打开[NJUPT-SAST-Csharp/BerryJuice 的 GitHub 页面](https://github.com/NJUPT-SAST-Csharp/BerryJuice)，先点右上角的Watch，随后点开上方的Project，即可一览当前项目的进度😋
 
-Project中分为Overview Frontend Backend这三个主板块，用于跟踪总体进度，尽量不要动它。我没有对Frontend Backend主板块的条目做细化，这件事交给想要参与某一领域的你来进行，你可以在All板块里对应板块增加item，并且**设置Domain**（可以设置为任何你觉得合适的名称，这样Frontend Backend这两个个主板块里就不会显示了😋之后我们再来协调统一的名称）。比如基础设施搭建这一Domain，我可以细化为EF Core配置、MediatR配置等等，然后你可以把这个item分配给自己，并且相当方便的直接在仓库里创建issue，码完代码提交pr一气呵成。
+Project中分为Overview Frontend Backend这三个主板块，用于跟踪总体进度，尽量不要动它。我没有对Frontend Backend主板块的条目做细化，这件事交给想要参与某一领域的你来进行，你可以在All板块里对应板块增加item，并且**设置Domain**（可以设置为任何你觉得合适的名称）。比如基础设施搭建这一Domain，我可以细化为EF Core配置、MediatR配置等等，然后你可以把这个item分配给自己，并且相当方便的直接在仓库里创建issue，码完代码提交pr一气呵成。
