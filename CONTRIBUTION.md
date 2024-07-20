@@ -12,7 +12,7 @@
 
 今年年初的WOC中，我们采用C/S架构，基于WPF进行桌面端开发和ASP.NET进行后端WebAPI的开发，顺利完成了SAST Wiki（虽然这玩意太过简陋了😢）。这次SOC很显然我们有了在技术选择上更大的自由，因此我打算尝试一些新东西，选择ASP.NET Core Blazor作为本次SOC使用的技术栈，使用C#同时完成前端和后端开发，并且使用ORM框架EF Core。
 
-对于后端部分，我有考虑去实现Modular Monolith + DDD，如果各位感兴趣，在项目后期可以尝试重构😋目前初期准备实现传统MVC架构快速交差。
+对于后端部分，我有考虑去实现Modular Monolith + DDD，如果各位感兴趣，在项目后期可以尝试重构😋
 
 ## 项目构成
 
@@ -24,9 +24,10 @@
 		- `BerryJuice.Blazor.Client`: Blazor网页前端，会被编译成WASM并且跑在浏览器里，以提高组件的响应速度
 	- Backend
 		- `BerryJuice.WebAPI`: 提供WebAPI的项目，也就是Controller层所在的位置
-		- `BerryJuice.Application`: 熟悉的Application层，承载业务逻辑，基于事件总线，使用`Query`和`Command`
-		- `BerryJuice.Data`: 数据模型
-		- `BerryJuice.Infrastructure`: 后端的一些基础设施，比如事件总线，.NET主机的配置，EF Core配置
+		- `*.Application`: 熟悉的Application层，承载业务逻辑，基于事件总线，使用`Query`和`Command`
+		- `*.Domain`: 领域模型、领域事件、规则
+		- `*.Infrastructure`: 后端的一些基础设施，比如事件总线，.NET主机的配置，EF Core配置
+		- `*.IntegratedEvent`: 集成事件，对应`SAST Image`里面Application层内的跨服务的消息
 	- Shared
 		- 从🦊的`SAST Image`里狠狠`Ctrl+C`&`Ctrl+V`下来的一些东西，感觉不如过段时间打个nuget包方便分发（
 	- `BerryJuice`: 整个解决方案唯一的可启动项目，这样可以在一个可执行文件里同时跑Blazor服务和WebAPI服务，减小开发调试与部署的烦恼，不需要连着开几个小黑框挂后台或者用更高级的Aspire，并且或许能提升性能。
