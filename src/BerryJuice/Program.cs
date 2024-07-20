@@ -36,7 +36,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
-app.UseAntiforgery();
+if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
+    app.UseAntiforgery();
 
 if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
 {
