@@ -1,34 +1,24 @@
 using BerryJuice.Blazor.Components;
+using BerryJuice.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
-    builder
-        .Services.AddRazorComponents()
-        .AddInteractiveServerComponents()
-        .AddInteractiveWebAssemblyComponents();
+builder.ConfigureConfiguration(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
-
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.ConfigureServices();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
+    if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
         app.UseWebAssemblyDebugging();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 else
 {
-    if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
+    if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
         app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
@@ -37,12 +27,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
+if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
     app.UseAntiforgery();
 
 app.MapControllers();
 
-if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
+if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
 {
     app.MapRazorComponents<App>()
         .AddInteractiveWebAssemblyRenderMode()
