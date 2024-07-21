@@ -10,30 +10,24 @@ public static class WebApplicationExtension
 
         if (app.Environment.IsDevelopment())
         {
-            if (isBlazorEnabled)
-                app.UseWebAssemblyDebugging();
-
             app.UseSwagger();
             app.UseSwaggerUI();
-        }
-        else
-        {
-            if (isBlazorEnabled)
-                app.UseExceptionHandler("/Error", createScopeForErrors: true);
         }
 
         app.UseHttpsRedirection();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
-
-        if (isBlazorEnabled)
-            app.UseAntiforgery();
-
         app.MapControllers();
 
         if (isBlazorEnabled)
         {
+            if (app.Environment.IsDevelopment())
+                app.UseWebAssemblyDebugging();
+            else
+                app.UseExceptionHandler("/Error", createScopeForErrors: true);
+
+            app.UseAntiforgery();
             app.MapRazorComponents<App>()
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddInteractiveServerRenderMode()
