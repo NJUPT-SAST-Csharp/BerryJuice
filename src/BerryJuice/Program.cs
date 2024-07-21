@@ -7,18 +7,20 @@ builder.ConfigureConfiguration(args);
 
 builder.ConfigureServices();
 
+var isBlazorEnabled = builder.Configuration["BERRYJUICE_USE_BLAZOR"] == "true";
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
 {
-    if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
+    if (isBlazorEnabled)
         app.UseWebAssemblyDebugging();
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 else
 {
-    if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
+    if (isBlazorEnabled)
         app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
@@ -27,12 +29,12 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
 
-if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
+if (isBlazorEnabled)
     app.UseAntiforgery();
 
 app.MapControllers();
 
-if (Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true")
+if (isBlazorEnabled)
 {
     app.MapRazorComponents<App>()
         .AddInteractiveWebAssemblyRenderMode()

@@ -26,7 +26,7 @@ public static class WebApplicationBuilderExtension
 
         builder.Services.AddLogging();
 
-        if (IsBlazorEnabled())
+        if (IsBlazorEnabled(configuration))
             builder.Services.ConfigureBlazor();
 
         builder.Services.AddControllers();
@@ -35,8 +35,8 @@ public static class WebApplicationBuilderExtension
     private static readonly Dictionary<string, string> switchMappings =
         new() { { "--use-blazor", "BERRYJUICE_USE_BLAZOR" } };
 
-    private static bool IsBlazorEnabled()
+    private static bool IsBlazorEnabled(ConfigurationManager configuration)
     {
-        return Environment.GetEnvironmentVariable("BERRYJUICE_USE_BLAZOR") == "true";
+        return configuration["BERRYJUICE_USE_BLAZOR"] == "true";
     }
 }
