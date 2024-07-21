@@ -2,7 +2,10 @@
 
 public static class WebApplicationBuilderExtension
 {
-    public static void ConfigureConfiguration(this WebApplicationBuilder builder, string[] args)
+    public static WebApplicationBuilder ConfigureConfiguration(
+        this WebApplicationBuilder builder,
+        string[] args
+    )
     {
         builder
             .Configuration.AddJsonFile("appsettings.json")
@@ -10,9 +13,11 @@ public static class WebApplicationBuilderExtension
             .AddEnvironmentVariables()
             .AddCommandLine(args, switchMappings)
             .Build();
+
+        return builder;
     }
 
-    public static void ConfigureServices(this WebApplicationBuilder builder)
+    public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder)
     {
         var configuration = builder.Configuration;
 
@@ -30,6 +35,8 @@ public static class WebApplicationBuilderExtension
             builder.Services.ConfigureBlazor();
 
         builder.Services.AddControllers();
+
+        return builder;
     }
 
     private static readonly Dictionary<string, string> switchMappings =
