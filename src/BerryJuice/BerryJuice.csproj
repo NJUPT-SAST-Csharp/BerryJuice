@@ -7,6 +7,8 @@
     <UserSecretsId>73e13428-c2bb-4958-b53c-4f3cb05c12eb</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..</DockerfileContext>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,6 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Backend\BerryJuice.WebAPI\BerryJuice.WebAPI.csproj" />
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
+    <ProjectReference Include="..\Shared\Messenger\Messenger.csproj" />
+    <ProjectReference Include="..\Shared\Primitives\Primitives.csproj" />
   </ItemGroup>
 
 </Project>
