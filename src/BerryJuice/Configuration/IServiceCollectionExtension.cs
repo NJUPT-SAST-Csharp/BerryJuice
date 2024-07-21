@@ -1,5 +1,10 @@
 ﻿using System.Reflection;
+using BerryJuice.EventBus;
+using Messenger;
 using Microsoft.OpenApi.Models;
+using Primitives.Command;
+using Primitives.DomainEvent;
+using Primitives.Query;
 
 namespace BerryJuice.Configuration;
 
@@ -38,6 +43,36 @@ public static class IServiceCollectionExtension
             .AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
+        return services;
+    }
+
+    public static IServiceCollection ConfigureInternalEventBus(this IServiceCollection services)
+    {
+        services.AddScoped<IQueryRequestSender, InternalEventBus>();
+        services.AddScoped<ICommandRequestSender, InternalEventBus>();
+        services.AddScoped<IDomainEventPublisher, InternalEventBus>();
+
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(Accounts.Application.AssemblyReference.Assembly);
+            config.RegisterServicesFromAssembly(Asset.Application.AssemblyReference.Assembly);
+            config.RegisterServicesFromAssembly(Budget.Application.AssemblyReference.Assembly);
+        });
+        return services;
+    }
+
+    public static IServiceCollection ConfigureExternalEventBus(this IServiceCollection services)
+    {
+        services.AddScoped<IMessagePublisher, ExternalEventBus>();
+
+        services.AddMediatR(config =>
+        {
+            config.RegisterServicesFromAssembly(
+                Accounts.IntegrationEvent.AssemblyReference.Assembly
+            );
+            config.RegisterServicesFromAssembly(Asset.IntegrationEvent.AssemblyReference.Assembly);
+            config.RegisterServicesFromAssembly(Budget.IntegrationEvent.AssemblyReference.Assembly);
+        });
         return services;
     }
 }

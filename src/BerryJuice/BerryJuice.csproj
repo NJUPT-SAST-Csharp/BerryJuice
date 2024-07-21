@@ -18,6 +18,8 @@
   <ItemGroup>
     <ProjectReference Include="..\Backend\BerryJuice.WebAPI\BerryJuice.WebAPI.csproj" />
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
+    <ProjectReference Include="..\Shared\Messenger\Messenger.csproj" />
+    <ProjectReference Include="..\Shared\Primitives\Primitives.csproj" />
   </ItemGroup>
 
 </Project>

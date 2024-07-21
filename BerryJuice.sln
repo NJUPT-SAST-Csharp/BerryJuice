@@ -59,6 +59,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{31252D
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primitives", "src\Shared\Primitives\Primitives.csproj", "{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger", "src\Shared\Messenger\Messenger.csproj", "{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -133,6 +135,10 @@ Global
 		{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -158,6 +164,7 @@ Global
 		{C17061EC-DF53-4656-825F-2D98330B1EAC} = {4A6A5AF0-57EC-4DA9-9CA0-F74AB181007E}
 		{45840F17-404B-48F8-87E9-E736095E3C54} = {1E0B9FA0-862C-4823-8640-B837379D676C}
 		{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
+		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F92302E-8755-4906-818F-BBCEC313538F}
