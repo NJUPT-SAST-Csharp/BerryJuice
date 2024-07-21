@@ -36,12 +36,14 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthorization();
+
 if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
     app.UseAntiforgery();
 
+app.MapControllers();
+
 if (Environment.GetEnvironmentVariable("USE_BLAZOR") == "true")
 {
-    app.MapControllers();
     app.MapRazorComponents<App>()
         .AddInteractiveWebAssemblyRenderMode()
         .AddInteractiveServerRenderMode()
