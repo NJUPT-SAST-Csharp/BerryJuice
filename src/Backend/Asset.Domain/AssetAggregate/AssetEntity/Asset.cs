@@ -15,9 +15,9 @@ public class Asset : EntityBase<AssetId>, IAggregateRoot<Asset>
         _adjustmentRecords = [];
     }
 
-    public static Asset CreateNewAsset(string name,decimal balance)
+    public static Asset CreateNewAsset(string name, decimal balance)
     {
-        var asset = new Asset(name,balance);
+        var asset = new Asset(name, balance);
         asset.AddDomainEvent(new AssetCreatedDomainEvent(asset.Id));
         return asset;
     }

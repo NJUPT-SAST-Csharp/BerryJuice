@@ -16,7 +16,7 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
         _description = description;
         SubBudgets = new List<SubBudget>();
     }
-    
+
     public static Budget CreateBudget(DateTime startDate, DateTime endDate, decimal amount, string description)
     {
         var budget = new Budget(startDate, endDate, amount, description);
