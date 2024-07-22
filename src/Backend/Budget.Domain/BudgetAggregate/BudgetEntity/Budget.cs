@@ -3,12 +3,13 @@ using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 using Budget.Domain.BudgetAggregate.SubBudgetEntity;
 using Primitives.Entity;
 using Shared.Primitives;
+using Utilities;
 
 namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 
 public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
 {
-    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description) : base(new BudgetId(1))
+    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description) : base(new BudgetId(SnowFlakeIdGenerator.NewId))
     {
         _startDate = startDate;
         _endDate = endDate;

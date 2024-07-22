@@ -1,13 +1,14 @@
 using Asset.Domain.AssetAggregate.AssetEntity;
 using Asset.Domain.AssetAggregate.AssetEntity.Event;
 using Primitives.Entity;
+using Utilities;
 
 namespace Asset.Domain.AssetAggregate.AdjustmentRecordEntity;
 
 public class AdjustmentRecord : EntityBase<AdjustmentRecordId>
 {
     private AdjustmentRecord(AssetId assetId, decimal amount, string? reason, DateTime adjustmentDate) : base(
-        new AdjustmentRecordId(1))
+        new AdjustmentRecordId(SnowFlakeIdGenerator.NewId))
     {
         _assetId = assetId;
         _amount = amount;

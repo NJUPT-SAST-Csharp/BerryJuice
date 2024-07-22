@@ -2,13 +2,14 @@ using Accounts.Domain.AccountAggregate.AccountEntity.Events;
 using Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
 using Primitives.Entity;
 using Shared.Primitives;
+using Utilities;
 
 namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 {
     private Account(DateTime date, decimal amount, MethodOfPayment methodOfPayment, string tag, string? description) :
-        base(new AccountId(1))
+        base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
         _date = date;
         _amount = amount;

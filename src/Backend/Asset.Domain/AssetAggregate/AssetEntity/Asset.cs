@@ -2,12 +2,13 @@ using Asset.Domain.AssetAggregate.AdjustmentRecordEntity;
 using Asset.Domain.AssetAggregate.AssetEntity.Event;
 using Primitives.Entity;
 using Shared.Primitives;
+using Utilities;
 
 namespace Asset.Domain.AssetAggregate.AssetEntity;
 
 public class Asset : EntityBase<AssetId>, IAggregateRoot<Asset>
 {
-    private Asset(string name, decimal balance) : base(new AssetId(1))
+    private Asset(string name, decimal balance) : base(new AssetId(SnowFlakeIdGenerator.NewId))
     {
         _name = name;
         _balance = balance;

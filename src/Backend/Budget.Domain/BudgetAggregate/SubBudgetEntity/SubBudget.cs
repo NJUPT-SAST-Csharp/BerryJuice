@@ -1,12 +1,13 @@
 using Accounts.Domain.AccountAggregate.TagEntity;
 using Budget.Domain.BudgetAggregate.SubBudgetEntity.Events;
 using Primitives.Entity;
+using Utilities;
 
 namespace Budget.Domain.BudgetAggregate.SubBudgetEntity;
 
 public class SubBudget : EntityBase<SubBudgetId>
 {
-    private SubBudget(TagId tagId, decimal amount) : base(new SubBudgetId(1))
+    private SubBudget(TagId tagId, decimal amount) : base(new SubBudgetId(SnowFlakeIdGenerator.NewId))
     {
         _tagId = tagId;
         _amount = amount;
