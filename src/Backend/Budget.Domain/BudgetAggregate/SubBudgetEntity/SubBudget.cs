@@ -12,7 +12,7 @@ public class SubBudget : EntityBase<SubBudgetId>
     }
     public static SubBudget CreateSubBudget(string tag, decimal amount)
     {
-        var subBudget= new SubBudget(tag, amount);
+        var subBudget = new SubBudget(tag, amount);
         subBudget.AddDomainEvent(new SubBudgetCreatedDomainEvent(subBudget.Id));
         return subBudget;
     }
