@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="AssetAggregate\AdjustmentRecordEntity\Event\" />
+    <Folder Include="AssetAggregate\AdjustmentRecordEntity\Events\" />
   </ItemGroup>
 
 </Project>
