@@ -7,9 +7,9 @@ public class AccountAggregate(IAccountRepository accountRepository)
 {
     private readonly IAccountRepository _accountRepository= accountRepository;
     
-    public async Task<Account> CreateAccountAsync(DateTime date, decimal amount, string tag, string? description)
+    public async Task<Account> CreateAccountAsync(DateTime date, decimal amount,MethodOfPayment methodOfPayment, string tag, string? description)
     {
-        var account = new Account(date, amount, tag, description);
+        var account = new Account(date, amount,methodOfPayment, tag, description);
         await _accountRepository.CreateAccountAsync(account);
         return account;
     }
