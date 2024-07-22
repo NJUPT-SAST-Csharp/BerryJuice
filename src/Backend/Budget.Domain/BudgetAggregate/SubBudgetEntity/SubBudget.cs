@@ -1,3 +1,4 @@
+using Accounts.Domain.AccountAggregate.TagEntity;
 using Budget.Domain.BudgetAggregate.SubBudgetEntity.Events;
 using Primitives.Entity;
 
@@ -5,18 +6,19 @@ namespace Budget.Domain.BudgetAggregate.SubBudgetEntity;
 
 public class SubBudget : EntityBase<SubBudgetId>
 {
-    private SubBudget(string tag, decimal amount) : base(new SubBudgetId(1))
+    private SubBudget(TagId tagId, decimal amount) : base(new SubBudgetId(1))
     {
-        Tag = tag;
-        Amount = amount;
+        _tagId = tagId;
+        _amount = amount;
     }
-    public static SubBudget CreateSubBudget(string tag, decimal amount)
+
+    public static SubBudget CreateSubBudget(TagId tagId, decimal amount)
     {
-        var subBudget= new SubBudget(tag, amount);
+        var subBudget = new SubBudget(tagId, amount);
         subBudget.AddDomainEvent(new SubBudgetCreatedDomainEvent(subBudget.Id));
         return subBudget;
     }
 
-    public string Tag { get; private set; }
-    public decimal Amount { get; private set; }
+    private TagId _tagId;
+    private decimal _amount;
 }
