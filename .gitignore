@@ -403,3 +403,4 @@ FodyWeavers.xsd
 # MacOS
 .DS_Store
 
+/src/BerryJuice/Properties/serviceDependencies.local.json
