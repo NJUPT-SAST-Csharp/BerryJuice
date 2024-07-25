@@ -2,6 +2,8 @@
 
 一个记账与预算管理软件，旨在尝试和学习Blazor构建Web应用。
 
+顺便尝试了在Azure上部署，[戳这里](https://berryjuice20240725020110.azurewebsites.net/)
+
 ## How to contribute?
 
 请阅读[参与指南](https://github.com/NJUPT-SAST-Csharp/BerryJuice/blob/main/CONTRIBUTION.md)和浏览[Projects](https://github.com/NJUPT-SAST-Csharp/BerryJuice/projects)
