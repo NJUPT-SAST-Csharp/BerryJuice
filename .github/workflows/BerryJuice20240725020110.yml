@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Web App BerryJuice20240725020110
 on:
   push:
     branches:
-    - Shirasagi/Infrastructure/AddPostgresqlDependency
+    - Release
 env:
   AZURE_WEBAPP_NAME: BerryJuice20240725020110
   AZURE_WEBAPP_PACKAGE_PATH: src\BerryJuice\published
