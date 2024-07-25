@@ -8,7 +8,9 @@
       "applicationUrl": "http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "true"
+        "BERRYJUICE_USE_BLAZOR": "true",
+        "VaultUri": "https://berryjuicevault.vault.azure.net/",
+        "AZURE_USERNAME": "1259678893@qq.com"
       }
     },
     "https": {
@@ -19,7 +21,9 @@
       "applicationUrl": "https://localhost:5272;http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "true"
+        "BERRYJUICE_USE_BLAZOR": "true",
+        "VaultUri": "https://berryjuicevault.vault.azure.net/",
+        "AZURE_USERNAME": "1259678893@qq.com"
       }
     },
     "http (WebAPI Only)": {
@@ -30,7 +34,9 @@
       "applicationUrl": "http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "false"
+        "BERRYJUICE_USE_BLAZOR": "false",
+        "VaultUri": "https://berryjuicevault.vault.azure.net/",
+        "AZURE_USERNAME": "1259678893@qq.com"
       }
     },
     "https (WebAPI Only)": {
@@ -41,7 +47,9 @@
       "applicationUrl": "https://localhost:5272;http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "false"
+        "BERRYJUICE_USE_BLAZOR": "false",
+        "VaultUri": "https://berryjuicevault.vault.azure.net/",
+        "AZURE_USERNAME": "1259678893@qq.com"
       }
     },
     "Container (Dockerfile)": {
@@ -50,7 +58,9 @@
       "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "5272",
-        "ASPNETCORE_HTTP_PORTS": "5271"
+        "ASPNETCORE_HTTP_PORTS": "5271",
+        "VaultUri": "https://berryjuicevault.vault.azure.net/",
+        "AZURE_USERNAME": "1259678893@qq.com"
       },
       "publishAllPorts": true,
       "useSSL": true
