@@ -8,9 +8,7 @@
       "applicationUrl": "http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "true",
-        "VaultUri": "https://berryjuicevault.vault.azure.net/",
-        "AZURE_USERNAME": "1259678893@qq.com"
+        "BERRYJUICE_USE_BLAZOR": "true"
       }
     },
     "https": {
@@ -21,9 +19,7 @@
       "applicationUrl": "https://localhost:5272;http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "true",
-        "VaultUri": "https://berryjuicevault.vault.azure.net/",
-        "AZURE_USERNAME": "1259678893@qq.com"
+        "BERRYJUICE_USE_BLAZOR": "true"
       }
     },
     "http (WebAPI Only)": {
@@ -34,9 +30,7 @@
       "applicationUrl": "http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "false",
-        "VaultUri": "https://berryjuicevault.vault.azure.net/",
-        "AZURE_USERNAME": "1259678893@qq.com"
+        "BERRYJUICE_USE_BLAZOR": "false"
       }
     },
     "https (WebAPI Only)": {
@@ -47,9 +41,7 @@
       "applicationUrl": "https://localhost:5272;http://localhost:5271",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "BERRYJUICE_USE_BLAZOR": "false",
-        "VaultUri": "https://berryjuicevault.vault.azure.net/",
-        "AZURE_USERNAME": "1259678893@qq.com"
+        "BERRYJUICE_USE_BLAZOR": "false"
       }
     },
     "Container (Dockerfile)": {
@@ -59,11 +51,10 @@
       "environmentVariables": {
         "ASPNETCORE_HTTPS_PORTS": "5272",
         "ASPNETCORE_HTTP_PORTS": "5271",
-        "VaultUri": "https://berryjuicevault.vault.azure.net/",
-        "AZURE_USERNAME": "1259678893@qq.com"
+        "BERRYJUICE_USE_BLAZOR": "true"
       },
       "publishAllPorts": true,
-      "useSSL": true
+      "useSSL": false
     }
   },
   "$schema": "http://json.schemastore.org/launchsettings.json"
