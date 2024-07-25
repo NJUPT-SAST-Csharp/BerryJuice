@@ -399,4 +399,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
-/src/BerryJuice/Properties/serviceDependencies.local.json
+
+# MacOS
+.DS_Store
+

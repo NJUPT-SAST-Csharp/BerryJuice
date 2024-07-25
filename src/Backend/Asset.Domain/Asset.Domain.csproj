@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="AssetAggregate\AssetEntity\" />
+    <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
+    <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AssetAggregate\AdjustmentRecordEntity\Events\" />
   </ItemGroup>
 
 </Project>

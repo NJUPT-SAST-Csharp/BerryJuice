@@ -61,6 +61,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primitives", "src\Shared\Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger", "src\Shared\Messenger\Messenger.csproj", "{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "src\Shared\Utilities\Utilities.csproj", "{B38365A1-2265-4AEE-92FF-0170650C4FC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -139,6 +141,10 @@ Global
 		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B38365A1-2265-4AEE-92FF-0170650C4FC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B38365A1-2265-4AEE-92FF-0170650C4FC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B38365A1-2265-4AEE-92FF-0170650C4FC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B38365A1-2265-4AEE-92FF-0170650C4FC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +171,7 @@ Global
 		{45840F17-404B-48F8-87E9-E736095E3C54} = {1E0B9FA0-862C-4823-8640-B837379D676C}
 		{BB5E56DB-9F35-4FA7-AD66-E41ED8F66EE1} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
 		{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
+		{B38365A1-2265-4AEE-92FF-0170650C4FC6} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F92302E-8755-4906-818F-BBCEC313538F}
