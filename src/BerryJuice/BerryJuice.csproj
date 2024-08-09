@@ -27,6 +27,7 @@
     <ProjectReference Include="..\Backend\Budget.Infrastructure\Budget.Infrastructure.csproj" />
     <ProjectReference Include="..\Backend\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj" />
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
+    <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj" />
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
     <ProjectReference Include="..\Shared\Exceptions\Exceptions.csproj" />
     <ProjectReference Include="..\Shared\Messenger\Messenger.csproj" />

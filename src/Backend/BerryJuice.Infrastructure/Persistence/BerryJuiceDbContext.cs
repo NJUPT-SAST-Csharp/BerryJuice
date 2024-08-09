@@ -2,5 +2,5 @@
 
 namespace BerryJuice.Infrastructure.Persistence;
 
-internal class BerryJuiceDbContext(DbContextOptions<BerryJuiceDbContext> options)
+public class BerryJuiceDbContext(DbContextOptions<BerryJuiceDbContext> options)
     : DbContext(options) { }

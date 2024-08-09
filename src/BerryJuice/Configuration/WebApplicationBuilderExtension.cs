@@ -1,4 +1,5 @@
-﻿using BerryJuice.Infrastructure.Configuration;
+﻿using BerryJuice.Blazor.Infrastructure.Configuration;
+using BerryJuice.Infrastructure.Configuration;
 using Exceptions.Exceptions;
 
 namespace BerryJuice.Configuration;

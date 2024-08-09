@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
     <ProjectReference Include="..\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
   </ItemGroup>
 
