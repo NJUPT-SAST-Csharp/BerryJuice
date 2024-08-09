@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BerryJuice.Persistence;
+namespace BerryJuice.Infrastructure.Persistence;
 
 internal class BerryJuiceDbContext(DbContextOptions<BerryJuiceDbContext> options)
     : DbContext(options) { }

@@ -1,5 +1,4 @@
-﻿using BerryJuice.Persistence;
-using Primitives;
+﻿using Primitives;
 using Primitives.DomainEvent;
 using Shared.Primitives.DomainEvent;
 

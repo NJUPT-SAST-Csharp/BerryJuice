@@ -4,7 +4,6 @@ using BerryJuice.Infrastructure.EventBus;
 using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
 using BerryJuice.Infrastructure.Persistence.TypeConverters;
-using BerryJuice.Persistence;
 using Dapper;
 using Messenger;
 using Microsoft.EntityFrameworkCore;
