@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Messenger;
 
-namespace BerryJuice.EventBus;
+namespace BerryJuice.Infrastructure.EventBus;
 
 internal class ExternalEventBus(IMediator mediator) : IMessagePublisher
 {

@@ -5,7 +5,7 @@ using Primitives.Query;
 using Shared.Primitives.DomainEvent;
 using Shared.Primitives.Query;
 
-namespace BerryJuice.EventBus;
+namespace BerryJuice.Infrastructure.EventBus;
 
 internal class InternalEventBus(IMediator mediator)
     : IQueryRequestSender,

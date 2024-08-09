@@ -1,4 +1,8 @@
-﻿namespace BerryJuice.Configuration;
+﻿using BerryJuice.Blazor.Infrastructure.Configuration;
+using BerryJuice.Infrastructure.Configuration;
+using Exceptions.Exceptions;
+
+namespace BerryJuice.Configuration;
 
 public static class WebApplicationBuilderExtension
 {
@@ -24,10 +28,20 @@ public static class WebApplicationBuilderExtension
         if (builder.Environment.IsDevelopment())
         {
             builder.Services.ConfigureSwagger();
+            builder.Services.ConfigureLocalDatabase(
+                configuration.GetConnectionString("LocalPostgres")
+                    ?? throw new ConnectionStringNotFoundException("LocalPostgres")
+            );
+        }
+        else
+        {
+            builder.Services.ConfigureLocalDatabase(
+                configuration.GetConnectionString("CSharpGroupAzure")
+                    ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
+            );
         }
 
-        // builder.Services.ConfigureOptions(configuration);
-        // SAST Image has this, but obviously it does nothing.
+        builder.Services.ConfigureRepository();
 
         builder.Services.AddLogging();
 
@@ -35,6 +49,9 @@ public static class WebApplicationBuilderExtension
             builder.Services.ConfigureBlazor();
 
         builder.Services.AddControllers();
+
+        builder.Services.ConfigureExternalEventBus();
+        builder.Services.ConfigureInternalEventBus();
 
         return builder;
     }

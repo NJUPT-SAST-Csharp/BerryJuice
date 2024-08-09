@@ -403,3 +403,7 @@ FodyWeavers.xsd
 # MacOS
 .DS_Store
 
+/src/BerryJuice/appsettings.Development.json
+/src/BerryJuice/appsettings.Production.json
+/src/BerryJuice/appsettings.Development.json
+/src/BerryJuice/appsettings.Production.json
