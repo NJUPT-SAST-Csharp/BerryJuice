@@ -24,34 +24,33 @@ public static class WebApplicationBuilderExtension
     public static WebApplicationBuilder ConfigureServices(this WebApplicationBuilder builder)
     {
         var configuration = builder.Configuration;
+        var environment = builder.Environment;
 
-        if (builder.Environment.IsDevelopment())
-        {
-            builder.Services.ConfigureSwagger();
-            builder.Services.ConfigureLocalDatabase(
-                configuration.GetConnectionString("LocalPostgres")
-                    ?? throw new ConnectionStringNotFoundException("LocalPostgres")
-            );
-        }
-        else
-        {
-            builder.Services.ConfigureLocalDatabase(
-                configuration.GetConnectionString("CSharpGroupAzure")
-                    ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
-            );
-        }
-
-        builder.Services.ConfigureRepository();
-
-        builder.Services.AddLogging();
-
-        if (IsBlazorEnabled(configuration))
-            builder.Services.ConfigureBlazor();
-
-        builder.Services.AddControllers();
-
-        builder.Services.ConfigureExternalEventBus();
-        builder.Services.ConfigureInternalEventBus();
+        builder
+            .Services.IfIsDevelopment(
+                environment,
+                (services) =>
+                    services
+                        .ConfigureSwagger()
+                        .ConfigureLocalDatabase(
+                            configuration.GetConnectionString("LocalPostgres")
+                                ?? throw new ConnectionStringNotFoundException("LocalPostgres")
+                        )
+            )
+            .IfIsNotDevelopment(
+                environment,
+                (services) =>
+                    services.ConfigureLocalDatabase(
+                        configuration.GetConnectionString("CSharpGroupAzure")
+                            ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
+                    )
+            )
+            .IfBlazorEnabled(configuration, (services) => services.ConfigureBlazor())
+            .ConfigureRepository()
+            .ConfigureLogging()
+            .ConfigureExternalEventBus()
+            .ConfigureInternalEventBus()
+            .ConfigureController();
 
         return builder;
     }
@@ -59,8 +58,36 @@ public static class WebApplicationBuilderExtension
     private static readonly Dictionary<string, string> switchMappings =
         new() { { "--use-blazor", "BERRYJUICE_USE_BLAZOR" } };
 
-    private static bool IsBlazorEnabled(ConfigurationManager configuration)
+    private static IServiceCollection IfIsDevelopment(
+        this IServiceCollection services,
+        IWebHostEnvironment environment,
+        Action<IServiceCollection> action
+    )
     {
-        return configuration["BERRYJUICE_USE_BLAZOR"] == "true";
+        if (environment.IsDevelopment())
+            action(services);
+        return services;
+    }
+
+    private static IServiceCollection IfIsNotDevelopment(
+        this IServiceCollection services,
+        IWebHostEnvironment environment,
+        Action<IServiceCollection> action
+    )
+    {
+        if (!environment.IsDevelopment())
+            action(services);
+        return services;
+    }
+
+    private static IServiceCollection IfBlazorEnabled(
+        this IServiceCollection services,
+        ConfigurationManager configuration,
+        Action<IServiceCollection> action
+    )
+    {
+        if (configuration["BERRYJUICE_USE_BLAZOR"] == "true")
+            action(services);
+        return services;
     }
 }
