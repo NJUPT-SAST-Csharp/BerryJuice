@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Backend\Accounts.Application\Accounts.Application.csproj" />
+    <ProjectReference Include="..\..\Backend\Asset.Application\Asset.Application.csproj" />
+    <ProjectReference Include="..\..\Backend\Budget.Application\Budget.Application.csproj" />
+    <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
     <ProjectReference Include="..\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
   </ItemGroup>
 
