@@ -40,7 +40,7 @@ public static class WebApplicationBuilderExtension
             .IfIsNotDevelopment(
                 environment,
                 (services) =>
-                    services.ConfigureLocalDatabase(
+                    services.ConfigureAzureDatabase(
                         configuration.GetConnectionString("CSharpGroupAzure")
                             ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
                     )

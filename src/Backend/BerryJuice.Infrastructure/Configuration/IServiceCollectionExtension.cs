@@ -121,4 +121,12 @@ public static class IServiceCollectionExtension
 
         return services;
     }
+
+    public static IServiceCollection ConfigureAzureDatabase(
+        this IServiceCollection services,
+        string connectionString
+    )
+    {
+        return services;
+    }
 }
