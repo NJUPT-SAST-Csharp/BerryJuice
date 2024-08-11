@@ -1,6 +1,81 @@
 ﻿@page "/Wallet"
-<h3>MyWallet</h3>
+@rendermode InteractiveServer
+
+<h3>My Wallet</h3>
+
+<label for="selectBank">Select Bank:</label>
+<select id="selectBank" @bind="selectedBank">
+    <option value="">-- Select a Bank --</option>
+    @foreach (var bank in banks)
+    {
+        <option value="@bank">@bank</option>
+    }
+</select>
+
+<label for="money">Money:</label>
+<InputText id="money" @bind-Value="asset.Money" />
+
+<button @onclick="AddAsset">Add</button>
+
+<h4>Assets List</h4>
+<ul>
+    @foreach (var a in assets)
+    {
+        <li>
+            <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money
+        </li>
+    }
+</ul>
+
+<h4>Total Money: @totalMoney</h4>
+
+<style>
+    label {
+        display: inline-block;
+        width: 120px;
+        margin-bottom: 10px;
+    }
+
+    select, input {
+        height: 30px;
+        font-size: 15px;
+        padding: 5px;
+        margin-bottom: 10px;
+        width: 200px;
+    }
+</style>
 
 @code {
+    private class Asset
+    {
+        public string? Bank { get; set; }
+        public string? Money { get; set; }
+    }
 
+    private string? selectedBank;
+    private List<string> banks = new List<string>
+    {
+        "Bank A",
+        "Bank B",
+        "Bank C",
+        "Bank D"
+    };
+
+    private Asset asset = new Asset();
+    private List<Asset> assets = new List<Asset>();
+    private decimal totalMoney = 0;
+
+    private void AddAsset()
+    {
+        asset.Bank = selectedBank;
+
+        if (!string.IsNullOrEmpty(asset.Bank) && decimal.TryParse(asset.Money, out decimal moneyValue))
+        {
+            assets.Add(new Asset { Bank = asset.Bank, Money = asset.Money });
+            totalMoney += moneyValue;
+            asset = new Asset();
+            selectedBank = null;
+        }
+        StateHasChanged();
+    }
 }
