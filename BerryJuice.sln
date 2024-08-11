@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 17
+# Visual Studio Version 17
 VisualStudioVersion = 17.11.35103.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerryJuice", "src\BerryJuice\BerryJuice.csproj", "{FBF4B0ED-957C-4ACE-97DF-DC1EFF40F28A}"
@@ -61,13 +61,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Primitives", "src\Shared\Pr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Messenger", "src\Shared\Messenger\Messenger.csproj", "{74ECE2AD-77E4-4511-BAD8-F4BAE76677F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "src\Shared\Utilities\Utilities.csproj", "{B38365A1-2265-4AEE-92FF-0170650C4FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Utilities", "src\Shared\Utilities\Utilities.csproj", "{B38365A1-2265-4AEE-92FF-0170650C4FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerryJuice.Infrastructure", "src\Backend\BerryJuice.Infrastructure\BerryJuice.Infrastructure.csproj", "{A3DF818B-233E-43C7-974C-B9BA3C229CD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerryJuice.Infrastructure", "src\Backend\BerryJuice.Infrastructure\BerryJuice.Infrastructure.csproj", "{A3DF818B-233E-43C7-974C-B9BA3C229CD3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "src\Shared\Exceptions\Exceptions.csproj", "{D8DC82A5-711D-4CF0-972C-73143ED184B6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BerryJuice.Blazor.Infrastructure", "src\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj", "{3E75855E-5A71-436C-BCFD-B5AC10556978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerryJuice.Blazor.Infrastructure", "src\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj", "{3E75855E-5A71-436C-BCFD-B5AC10556978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
