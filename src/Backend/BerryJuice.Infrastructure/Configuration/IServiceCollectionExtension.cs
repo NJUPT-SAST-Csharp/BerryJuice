@@ -84,6 +84,18 @@ public static class IServiceCollectionExtension
         return services;
     }
 
+    public static IServiceCollection ConfigureController(this IServiceCollection services)
+    {
+        services.AddControllers();
+        return services;
+    }
+
+    public static IServiceCollection ConfigureLogging(this IServiceCollection services)
+    {
+        services.AddLogging();
+        return services;
+    }
+
     public static IServiceCollection ConfigureRepository(this IServiceCollection services)
     {
         return services;
@@ -107,6 +119,14 @@ public static class IServiceCollectionExtension
             connectionString
         ));
 
+        return services;
+    }
+
+    public static IServiceCollection ConfigureAzureDatabase(
+        this IServiceCollection services,
+        string connectionString
+    )
+    {
         return services;
     }
 }
