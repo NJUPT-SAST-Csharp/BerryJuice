@@ -57,37 +57,4 @@ public static class WebApplicationBuilderExtension
 
     private static readonly Dictionary<string, string> switchMappings =
         new() { { "--use-blazor", "BERRYJUICE_USE_BLAZOR" } };
-
-    private static IServiceCollection IfIsDevelopment(
-        this IServiceCollection services,
-        IWebHostEnvironment environment,
-        Action<IServiceCollection> action
-    )
-    {
-        if (environment.IsDevelopment())
-            action(services);
-        return services;
-    }
-
-    private static IServiceCollection IfIsNotDevelopment(
-        this IServiceCollection services,
-        IWebHostEnvironment environment,
-        Action<IServiceCollection> action
-    )
-    {
-        if (!environment.IsDevelopment())
-            action(services);
-        return services;
-    }
-
-    private static IServiceCollection IfBlazorEnabled(
-        this IServiceCollection services,
-        ConfigurationManager configuration,
-        Action<IServiceCollection> action
-    )
-    {
-        if (configuration["BERRYJUICE_USE_BLAZOR"] == "true")
-            action(services);
-        return services;
-    }
 }
