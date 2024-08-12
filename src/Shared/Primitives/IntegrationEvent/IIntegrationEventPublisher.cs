@@ -1,10 +1,10 @@
 ﻿namespace Primitives.IntegrationEvent;
 
-internal interface IIntegrationEventPublisher
+public interface IIntegrationEventPublisher
 {
-    public Task PublishAsync<TEvent>(
-        TEvent domainEvent,
+    public Task PublishAsync<TIntegrationEvent>(
+        TIntegrationEvent domainEvent,
         CancellationToken cancellationToken = default
     )
-        where TEvent : IIntegrationEvent;
+        where TIntegrationEvent : IIntegrationEvent;
 }
