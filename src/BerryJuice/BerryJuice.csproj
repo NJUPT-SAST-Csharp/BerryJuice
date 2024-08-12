@@ -30,7 +30,6 @@
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj" />
     <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
     <ProjectReference Include="..\Shared\Exceptions\Exceptions.csproj" />
-    <ProjectReference Include="..\Shared\Messenger\Messenger.csproj" />
     <ProjectReference Include="..\Shared\Primitives\Primitives.csproj" />
     <ProjectReference Include="..\Shared\Utilities\Utilities.csproj" />
   </ItemGroup>
