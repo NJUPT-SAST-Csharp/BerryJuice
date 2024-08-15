@@ -1,0 +1,35 @@
+﻿@page "/test"
+@using Accounts.Application.TestService.GetTest
+@using EventBus
+@using Accounts.Application
+@inject IEventBusWrapper _eventBus
+@rendermode InteractiveServer
+
+<PageTitle>Test</PageTitle>
+
+<h1>Test</h1>
+<hr />
+@if(Query == -1)
+{
+    <p>Click the button to query the server</p>
+}
+else
+{
+    <p>Query result is: @Query</p>
+}
+<button @onclick="TestQuery" >Query Button</button>
+
+@code {
+    public int Query { get; set; } = -1;
+
+    private async void TestQuery()
+    {
+        var query = new TestQuery();
+        var result = await _eventBus.QueryAsync<int>(query);
+
+        await InvokeAsync(
+            () => Query = result
+        );
+
+    }
+}
