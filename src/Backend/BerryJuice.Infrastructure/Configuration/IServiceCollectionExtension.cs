@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Reflection;
+using Accounts.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.EventBus;
 using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
@@ -107,6 +108,11 @@ public static class IServiceCollectionExtension
     )
     {
         services.AddDbContext<BerryJuiceDbContext>(options =>
+        {
+            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+        });
+
+        services.AddDbContext<AccountsContext>(options =>
         {
             options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
         });
