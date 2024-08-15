@@ -5,7 +5,6 @@ using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
 using BerryJuice.Infrastructure.Persistence.TypeConverters;
 using Dapper;
-using Messenger;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
@@ -13,6 +12,7 @@ using Npgsql;
 using Primitives;
 using Primitives.Command;
 using Primitives.DomainEvent;
+using Primitives.IntegrationEvent;
 using Primitives.Query;
 
 namespace BerryJuice.Infrastructure.Configuration;
@@ -75,7 +75,7 @@ public static class IServiceCollectionExtension
             Budget.IntegrationEvent.AssemblyReference.Assembly
         };
 
-        services.AddSingleton<IMessagePublisher, ExternalEventBus>();
+        services.AddSingleton<IIntegrationEventPublisher, ExternalEventBus>();
 
         services.AddMediatR(config =>
         {

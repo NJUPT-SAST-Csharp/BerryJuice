@@ -1,20 +1,18 @@
 ﻿using MediatR;
-using Messenger;
+using Primitives.IntegrationEvent;
 
 namespace BerryJuice.Infrastructure.EventBus;
 
-internal class ExternalEventBus(IMediator mediator) : IMessagePublisher
+internal class ExternalEventBus(IMediator mediator) : IIntegrationEventPublisher
 {
     private readonly IMediator _mediator = mediator;
 
-    public async Task<bool> PublishAsync<TMessage>(
-        string channel,
-        TMessage message,
+    public async Task PublishAsync<TIntegrationEvent>(
+        TIntegrationEvent @event,
         CancellationToken cancellationToken = default
     )
-        where TMessage : IMessage
+        where TIntegrationEvent : IIntegrationEvent
     {
-        await _mediator.Publish(message, cancellationToken);
-        return true;
+        await _mediator.Publish(@event, cancellationToken);
     }
 }
