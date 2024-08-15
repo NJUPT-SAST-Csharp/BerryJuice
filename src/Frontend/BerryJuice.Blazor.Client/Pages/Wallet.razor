@@ -3,31 +3,36 @@
 
 <h3>My Wallet</h3>
 
-<label for="selectBank">Select Bank:</label>
-<select id="selectBank" @bind="selectedBank">
-    <option value="">-- Select a Bank --</option>
-    @foreach (var bank in banks)
-    {
-        <option value="@bank">@bank</option>
-    }
-</select>
+<div class="form-group">
+    <label for="selectBank">Select Bank:</label>
+    <select id="selectBank" @bind="selectedBank">
+        <option value="">-- Select a Bank --</option>
+        @foreach (var bank in banks)
+        {
+            <option value="@bank">@bank</option>
+        }
+    </select>
+</div>
 
-<label for="money">Money:</label>
-<InputText id="money" @bind-Value="asset.Money" />
+<div class="form-group">
+    <label for="money">Money:</label>
+    <InputText id="money" @bind-Value="asset.Money" />
+</div>
 
-<button @onclick="AddAsset">Add</button>
+<button class="btn" @onclick="AddAsset">Add</button>
 
 <h4>Assets List</h4>
-<ul>
+<ul class="asset-list">
     @foreach (var a in assets)
     {
-        <li>
+        <li class="asset-item">
             <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money
         </li>
     }
 </ul>
 
 <h4>Total Money: @totalMoney</h4>
+
 
 @code {
     private class Asset
