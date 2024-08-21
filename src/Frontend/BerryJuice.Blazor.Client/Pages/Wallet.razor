@@ -3,25 +3,29 @@
 
 <h3>My Wallet</h3>
 
-<label for="selectBank">Select Bank:</label>
-<select id="selectBank" @bind="selectedBank">
-    <option value="">-- Select a Bank --</option>
-    @foreach (var bank in banks)
-    {
-        <option value="@bank">@bank</option>
-    }
-</select>
+<div class="form-group">
+    <label for="selectBank">Select Bank:</label>
+    <select id="selectBank" @bind="selectedBank">
+        <option value="">-- Select a Bank --</option>
+        @foreach (var bank in banks)
+        {
+            <option value="@bank">@bank</option>
+        }
+    </select>
+</div>
 
-<label for="money">Money:</label>
-<InputText id="money" @bind-Value="asset.Money" />
+<div class="form-group">
+    <label for="money">Money:</label>
+    <InputText id="money" @bind-Value="asset.Money" />
+</div>
 
-<button @onclick="AddAsset">Add</button>
+<button class="btn" @onclick="AddAsset">Add</button>
 
 <h4>Assets List</h4>
-<ul>
+<ul class="asset-list">
     @foreach (var a in assets)
     {
-        <li>
+        <li class="asset-item">
             <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money
         </li>
     }
@@ -29,21 +33,6 @@
 
 <h4>Total Money: @totalMoney</h4>
 
-<style>
-    label {
-        display: inline-block;
-        width: 120px;
-        margin-bottom: 10px;
-    }
-
-    select, input {
-        height: 30px;
-        font-size: 15px;
-        padding: 5px;
-        margin-bottom: 10px;
-        width: 200px;
-    }
-</style>
 
 @code {
     private class Asset
@@ -64,7 +53,6 @@
     private Asset asset = new Asset();
     private List<Asset> assets = new List<Asset>();
     private decimal totalMoney = 0;
-
     private void AddAsset()
     {
         asset.Bank = selectedBank;
