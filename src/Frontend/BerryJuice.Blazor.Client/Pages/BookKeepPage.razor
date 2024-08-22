@@ -17,7 +17,10 @@
 <ul>
     @foreach (var entry in costEntries)
     {
-        <li>@entry.ExpenseType: @entry.Money</li>
+        <li>@entry.ExpenseType: @entry.Money
+            <button @onclick="() => EditCostEntry(entry)">Edit</button>
+            <button @onclick="() => DeleteCostEntry(entry)">Delete</button>
+        </li>
     }
 </ul>
 
@@ -47,5 +50,17 @@
 
             newCostEntry = new CostEntry();
         }
+    }
+    private void EditCostEntry(CostEntry entry)
+    {
+        newCostEntry.ExpenseType = entry.ExpenseType;
+        newCostEntry.Money = entry.Money;
+
+        costEntries.Remove(entry);
+    }
+
+    private void DeleteCostEntry(CostEntry entry)
+    {
+        costEntries.Remove(entry);
     }
 }
