@@ -1,4 +1,3 @@
-using Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
 using Shared.Primitives.DomainEvent;
 
 namespace Accounts.Domain.AccountAggregate.AccountEntity.Events;

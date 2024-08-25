@@ -67,6 +67,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Exceptions", "src\Shared\Ex
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerryJuice.Blazor.Infrastructure", "src\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj", "{3E75855E-5A71-436C-BCFD-B5AC10556978}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Enums", "src\Shared\Enums\Enums.csproj", "{7F52CEE4-83E2-42CB-885A-662B5FB33256}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -157,6 +159,10 @@ Global
 		{3E75855E-5A71-436C-BCFD-B5AC10556978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E75855E-5A71-436C-BCFD-B5AC10556978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E75855E-5A71-436C-BCFD-B5AC10556978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F52CEE4-83E2-42CB-885A-662B5FB33256}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F52CEE4-83E2-42CB-885A-662B5FB33256}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F52CEE4-83E2-42CB-885A-662B5FB33256}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F52CEE4-83E2-42CB-885A-662B5FB33256}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -186,6 +192,7 @@ Global
 		{A3DF818B-233E-43C7-974C-B9BA3C229CD3} = {3A8D6BC7-0756-417B-B104-F26C66EBF2F9}
 		{D8DC82A5-711D-4CF0-972C-73143ED184B6} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
 		{3E75855E-5A71-436C-BCFD-B5AC10556978} = {7FCDE7F0-B65C-4927-B17E-3F73B6D508A6}
+		{7F52CEE4-83E2-42CB-885A-662B5FB33256} = {31252D6A-ABCD-444C-8B36-64943D27FACB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3F92302E-8755-4906-818F-BBCEC313538F}
