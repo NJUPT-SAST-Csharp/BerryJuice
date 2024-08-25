@@ -1,5 +1,4 @@
 using Accounts.Domain.AccountAggregate.AccountEntity;
-using Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
 
 namespace Accounts.Domain.AccountAggregate;
 
