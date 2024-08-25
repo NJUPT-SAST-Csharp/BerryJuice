@@ -1,5 +1,4 @@
-﻿using BerryJuice.Blazor.EventBus;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace BerryJuice.Blazor.Infrastructure.Configuration;
 
@@ -11,7 +10,6 @@ public static class IServiceCollectionExtension
             .AddRazorComponents()
             .AddInteractiveServerComponents()
             .AddInteractiveWebAssemblyComponents();
-        services.AddSingleton<IEventBusWrapper, EventBusWrapper>();
         return services;
     }
 }
