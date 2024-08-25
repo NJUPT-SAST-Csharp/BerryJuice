@@ -1,4 +1,5 @@
-﻿using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
+﻿using Accounts.Domain.AccountAggregate.TagEntity;
+using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
 using Primitives.Entity;
 using Shared.Primitives;
 using Utilities;
@@ -22,7 +23,8 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
     public static Transaction CreateNewTransaction(
         TransactionAmount amount,
         DateTime createdAt,
-        string description = ""
+        TagId[] tags,
+        string description
     )
     {
         var transaction = new Transaction(
@@ -39,4 +41,6 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
     private DateTime _createdAt;
 
     private TransactionDescription _description;
+
+    private readonly TagId[] _tags = [];
 }
