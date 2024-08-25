@@ -28,4 +28,8 @@
     <ProjectReference Include="..\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="EventBus\" />
+  </ItemGroup>
+
 </Project>

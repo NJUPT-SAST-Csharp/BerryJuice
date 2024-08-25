@@ -13,6 +13,7 @@ using Npgsql;
 using Primitives;
 using Primitives.Command;
 using Primitives.DomainEvent;
+using Primitives.EventBusScopedWrapper;
 using Primitives.IntegrationEvent;
 using Primitives.Query;
 
@@ -59,6 +60,8 @@ public static class IServiceCollectionExtension
         services.AddSingleton<IQueryRequestSender, InternalEventBus>();
         services.AddSingleton<ICommandRequestSender, InternalEventBus>();
         services.AddSingleton<IDomainEventPublisher, InternalEventBus>();
+
+        services.AddSingleton<IEventBusWrapper, EventBusWrapper>();
 
         services.AddMediatR(config =>
         {

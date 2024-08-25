@@ -1,6 +1,6 @@
 ﻿using Primitives.Command;
 using Primitives.Query;
 
-namespace BerryJuice.Blazor.EventBus;
+namespace Primitives.EventBusScopedWrapper;
 
 public interface IEventBusWrapper : IQueryRequestSender, ICommandRequestSender { }

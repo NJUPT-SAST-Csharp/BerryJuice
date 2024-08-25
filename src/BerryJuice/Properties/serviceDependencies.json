@@ -4,10 +4,6 @@
       "type": "mssql",
       "connectionId": "ConnectionStrings:CSharpGroupAzure"
     },
-    "secrets2": {
-      "type": "secrets",
-      "connectionId": null
-    },
     "postgresql1": {
       "ignored": "true",
       "type": "postgresql"
@@ -15,6 +11,10 @@
     "secrets1": {
       "ignored": "true",
       "type": "secrets.keyVault"
+    },
+    "secrets2": {
+      "type": "secrets",
+      "connectionId": null
     }
   }
 }

@@ -8,8 +8,14 @@ namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 {
-    private Account(DateTime date, decimal amount, MethodOfPayment methodOfPayment, string tag, string? description) :
-        base(new AccountId(SnowFlakeIdGenerator.NewId))
+    private Account(
+        DateTime date,
+        decimal amount,
+        MethodOfPayment methodOfPayment,
+        string tag,
+        string? description
+    )
+        : base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
         _date = date;
         _amount = amount;
@@ -18,8 +24,13 @@ public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
         _description = description;
     }
 
-    public static Account CreateNewAccount(DateTime date, decimal amount, MethodOfPayment methodOfPayment, string tag,
-        string? description)
+    public static Account CreateNewAccount(
+        DateTime date,
+        decimal amount,
+        MethodOfPayment methodOfPayment,
+        string tag,
+        string? description
+    )
     {
         var account = new Account(date, amount, methodOfPayment, tag, description);
         account.AddDomainEvent(new AccountCreatedDomainEvent(account.Id));
@@ -31,6 +42,7 @@ public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
     private decimal _amount;
 
     private MethodOfPayment _method;
+
     private string _tag;
 
     private string? _description;
