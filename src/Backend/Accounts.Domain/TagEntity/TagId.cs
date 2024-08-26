@@ -1,4 +1,4 @@
-namespace Accounts.Domain.AccountAggregate.TagEntity;
+namespace Accounts.Domain.TagEntity;
 
 public readonly record struct TagId(long Value)
 {

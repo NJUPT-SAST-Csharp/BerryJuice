@@ -1,4 +1,4 @@
-using Accounts.Domain.AccountAggregate.TagEntity;
+using Accounts.Domain.TagEntity;
 using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 using Budget.Domain.BudgetAggregate.SubBudgetEntity;
 using Primitives.Entity;
@@ -8,7 +8,8 @@ namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 
 public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
 {
-    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description) : base(new BudgetId(1))
+    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description)
+        : base(new BudgetId(1))
     {
         _startDate = startDate;
         _endDate = endDate;
@@ -17,7 +18,12 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
         SubBudgets = new List<SubBudget>();
     }
 
-    public static Budget CreateBudget(DateTime startDate, DateTime endDate, decimal amount, string description)
+    public static Budget CreateBudget(
+        DateTime startDate,
+        DateTime endDate,
+        decimal amount,
+        string description
+    )
     {
         var budget = new Budget(startDate, endDate, amount, description);
         budget.AddDomainEvent(new BudgetCreatedDomainEvent(budget.Id));

@@ -1,5 +1,5 @@
-﻿using Accounts.Domain.AccountAggregate.TagEntity;
-using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
+﻿using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
+using Accounts.Domain.TagEntity;
 using Primitives.Entity;
 using Shared.Primitives;
 using Utilities;
