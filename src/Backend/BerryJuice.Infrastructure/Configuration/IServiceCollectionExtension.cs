@@ -21,7 +21,7 @@ namespace BerryJuice.Infrastructure.Configuration;
 
 public static class IServiceCollectionExtension
 {
-    public static IServiceCollection ConfigureSwagger(this IServiceCollection services)
+    public static IServiceCollection ConfigureSwagger (this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
@@ -48,7 +48,7 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureInternalEventBus(this IServiceCollection services)
+    public static IServiceCollection ConfigureInternalEventBus (this IServiceCollection services)
     {
         var assemblies = new[]
         {
@@ -70,7 +70,7 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureExternalEventBus(this IServiceCollection services)
+    public static IServiceCollection ConfigureExternalEventBus (this IServiceCollection services)
     {
         var assemblies = new[]
         {
@@ -88,36 +88,37 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureController(this IServiceCollection services)
+    public static IServiceCollection ConfigureController (this IServiceCollection services)
     {
         services.AddControllers();
         return services;
     }
 
-    public static IServiceCollection ConfigureLogging(this IServiceCollection services)
+    public static IServiceCollection ConfigureLogging (this IServiceCollection services)
     {
         services.AddLogging();
         return services;
     }
 
-    public static IServiceCollection ConfigureRepository(this IServiceCollection services)
+    public static IServiceCollection ConfigureRepository (this IServiceCollection services)
     {
         return services;
     }
 
-    public static IServiceCollection ConfigureLocalDatabase(
+    public static IServiceCollection ConfigureLocalDatabase (
         this IServiceCollection services,
         string connectionString
     )
     {
         services.AddDbContext<BerryJuiceDbContext>(options =>
         {
-            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BerryJuice")).UseSnakeCaseNamingConvention();
+
         });
 
         services.AddDbContext<AccountsContext>(options =>
         {
-            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+            options.UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BJAccounts")).UseSnakeCaseNamingConvention();
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -131,7 +132,7 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureAzureDatabase(
+    public static IServiceCollection ConfigureAzureDatabase (
         this IServiceCollection services,
         string connectionString
     )

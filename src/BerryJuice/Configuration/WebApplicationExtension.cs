@@ -1,5 +1,6 @@
 ﻿using Accounts.Infrastructure.Persistence;
 using BerryJuice.Blazor.Components;
+using BerryJuice.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using _Imports = BerryJuice.Blazor.Client._Imports;
 
@@ -39,8 +40,11 @@ public static class WebApplicationExtension
 
         // apply migrations
         using var scope = app.Services.CreateScope();
-        var context = scope.ServiceProvider.GetRequiredService<AccountsContext>();
-        context.Database.Migrate();
+        var accountsContext = scope.ServiceProvider.GetRequiredService<AccountsContext>();
+        accountsContext.Database.Migrate();
+
+        var berryJuiceContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
+        berryJuiceContext.Database.Migrate();
 
         return app;
     }
