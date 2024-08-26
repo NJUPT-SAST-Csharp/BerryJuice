@@ -8,20 +8,20 @@ namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 {
-    private Account(AccountDescription description)
+    private Account (AccountDescription description)
         : base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
         _description = description;
     }
 
-    public static Account CreateNewAccount(string description)
+    public static Account CreateNewAccount (string description)
     {
         var account = new Account(new AccountDescription(description));
         account.AddDomainEvent(new AccountCreatedDomainEvent(account.Id));
         return account;
     }
 
-    private readonly IList<Transaction> _transactions = [];
+    private readonly List<Transaction> _transactions = [];
 
     private AccountDescription _description;
 }
