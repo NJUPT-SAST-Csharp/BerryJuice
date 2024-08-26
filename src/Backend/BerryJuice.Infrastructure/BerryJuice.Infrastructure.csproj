@@ -35,7 +35,6 @@
 
   <ItemGroup>
     <Folder Include="Persistence\EntityTypeConfigurations\" />
-    <Folder Include="Persistence\Migrations\" />
   </ItemGroup>
 
 </Project>
