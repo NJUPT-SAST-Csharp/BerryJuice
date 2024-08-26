@@ -1,9 +1,8 @@
-using Accounts.Domain.AccountAggregate.TransactionEntity;
 using Primitives.Entity;
 using Shared.Primitives;
 using Utilities;
 
-namespace Accounts.Domain.TagEntity;
+namespace Budget.Domain.BudgetAggregate.TagEntity;
 
 public class Tag : EntityBase<TagId>, IAggregateRoot<Tag>
 {
@@ -20,6 +19,4 @@ public class Tag : EntityBase<TagId>, IAggregateRoot<Tag>
     }
 
     private string _name;
-
-    private List<Transaction> _transactions = [];
 }

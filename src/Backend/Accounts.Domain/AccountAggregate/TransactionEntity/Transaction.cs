@@ -8,29 +8,44 @@ namespace Accounts.Domain.AccountAggregate.TransactionEntity;
 
 public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction>
 {
-    private Transaction(
+    private Transaction (
         TransactionAmount amount,
         DateTime createdAt,
-        TransactionDescription description
+        TransactionDescription description,
+        List<Tag> tags
     )
         : base(new TransactionId(SnowFlakeIdGenerator.NewId))
     {
         _amount = amount;
         _createdAt = createdAt;
         _description = description;
+        _tags = tags;
     }
 
-    public static Transaction CreateNewTransaction(
+    private Transaction (
+        DateTime createdAt,
+        TransactionDescription description
+    ) // EF Core need this
+        : base(new TransactionId(SnowFlakeIdGenerator.NewId))
+    {
+        _amount = new TransactionAmount();
+        _createdAt = createdAt;
+        _description = description;
+        _tags = [ ];
+    }
+
+    public static Transaction CreateNewTransaction (
         TransactionAmount amount,
         DateTime createdAt,
-        TagId[] tags,
-        string description
+        string description,
+        List<Tag> tags
     )
     {
         var transaction = new Transaction(
             amount,
             createdAt,
-            new TransactionDescription(description)
+            new TransactionDescription(description),
+            tags
         );
         transaction.AddDomainEvent(new TransactionCreatedDomainEvent(transaction.Id));
         return transaction;
@@ -42,5 +57,5 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
 
     private TransactionDescription _description;
 
-    private readonly TagId[] _tags = [];
+    private readonly List<Tag> _tags;
 }
