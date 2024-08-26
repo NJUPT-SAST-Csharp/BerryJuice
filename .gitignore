@@ -407,3 +407,8 @@ FodyWeavers.xsd
 /src/BerryJuice/appsettings.Production.json
 /src/BerryJuice/appsettings.Development.json
 /src/BerryJuice/appsettings.Production.json
+
+/src/Backend/Accounts.Infrastructure/Persistence/Migrations
+/src/Backend/Asset.Infrastructure/Persistence/Migrations
+/src/Backend/Budget.Infrastructure/Persistence/Migrations
+/src/Backend/BerryJuice.Infrastructure/Persistence/Migrations
