@@ -3,10 +3,7 @@ using Enums;
 
 namespace Accounts.Domain.AccountAggregate.TransactionEntity;
 
-public record struct TransactionAmount(
-    CurrencyType Currency = CurrencyType.CNY,
-    decimal Amount = 0m
-)
+public record TransactionAmount(CurrencyType Currency = CurrencyType.CNY, decimal Amount = 0m)
 {
     public static TransactionAmount operator +(TransactionAmount a, TransactionAmount b)
     {

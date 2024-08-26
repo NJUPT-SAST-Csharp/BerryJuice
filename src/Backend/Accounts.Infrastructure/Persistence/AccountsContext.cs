@@ -9,6 +9,7 @@ public class AccountsContext(DbContextOptions<AccountsContext> options) : DbCont
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.HasDefaultSchema("BJAccounts");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountsContext).Assembly);
     }
 }

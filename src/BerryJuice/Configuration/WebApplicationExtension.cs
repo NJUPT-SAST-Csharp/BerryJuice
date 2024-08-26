@@ -1,4 +1,5 @@
 ﻿using BerryJuice.Blazor.Components;
+using _Imports = BerryJuice.Blazor.Client._Imports;
 
 namespace BerryJuice.Configuration;
 
@@ -25,13 +26,13 @@ public static class WebApplicationExtension
             if (app.Environment.IsDevelopment())
                 app.UseWebAssemblyDebugging();
             else
-                app.UseExceptionHandler("/Error", createScopeForErrors: true);
+                app.UseExceptionHandler("/Error", true);
 
             app.UseAntiforgery();
             app.MapRazorComponents<App>()
-                .AddInteractiveWebAssemblyRenderMode()
-                .AddInteractiveServerRenderMode()
-                .AddAdditionalAssemblies(typeof(BerryJuice.Blazor.Client._Imports).Assembly);
+               .AddInteractiveWebAssemblyRenderMode()
+               .AddInteractiveServerRenderMode()
+               .AddAdditionalAssemblies(typeof(_Imports).Assembly);
         }
 
         return app;
