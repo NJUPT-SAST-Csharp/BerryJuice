@@ -10,10 +10,13 @@
 
   <ItemGroup>
 
+    <None Remove="Pages\Budget.razor.css" />
+
     <None Remove="Pages\Wallet.razor.css" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Pages\Budget.razor.css" />
     <Content Include="Pages\Wallet.razor.css" />
   </ItemGroup>
 
