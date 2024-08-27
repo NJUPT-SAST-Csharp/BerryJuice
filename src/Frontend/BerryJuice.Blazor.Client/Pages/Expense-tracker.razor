@@ -1,0 +1,63 @@
+﻿@page "/expense-tracker"
+@using System.Text.Json
+@rendermode InteractiveServer
+
+<h3>添加记录</h3>
+
+<div>
+    <label for="money">金额：</label>
+    <input id="money" @bind="money" />
+</div>
+
+<div>
+    <label for="description">简介：</label>
+    <input id="description" @bind="description" />
+</div>
+
+<button @onclick="AddRecord">添加</button>
+
+@if (records.Count > 0)
+{
+    <h4>已添加的记录：</h4>
+    <ul>
+        @foreach (var record in records)
+        {
+            <li>@record.Time.ToString("yyyy-MM-dd HH:mm:ss") - 金额：@record.Money，简介：@record.Description</li>
+        }
+    </ul>
+}
+
+@code {
+    private decimal money;
+    private string description;
+    private List<Record> records = new List<Record>();
+
+    private void AddRecord()
+    {
+        var newRecord = new Record
+            {
+                Time = DateTime.Now,
+                Money = money,
+                Description = description
+            };
+        records.Add(newRecord);
+        money = 0;
+        description = string.Empty;
+    }
+
+    private class Record
+    {
+        public DateTime Time
+        {
+            get; set;
+        }
+        public decimal Money
+        {
+            get; set;
+        }
+        public string Description
+        {
+            get; set;
+        }
+    }
+}

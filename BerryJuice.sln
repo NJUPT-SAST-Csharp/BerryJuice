@@ -1,5 +1,5 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# 17
+# Visual Studio Version 17
 VisualStudioVersion = 17.11.35103.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BerryJuice", "src\BerryJuice\BerryJuice.csproj", "{FBF4B0ED-957C-4ACE-97DF-DC1EFF40F28A}"
