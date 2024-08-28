@@ -16,7 +16,7 @@
 
 <div class="form-group">
     <label for="money">Money:</label>
-    <InputText id="money" @bind-Value="asset.Money" />
+    <InputText id="money" @bind-Value="moneyInput" />
 </div>
 
 <button class="btn" @onclick="AddAsset">Add</button>
@@ -26,22 +26,23 @@
     @foreach (var a in assets)
     {
         <li class="asset-item">
-            <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money
+            <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss")
         </li>
     }
 </ul>
 
 <h4>Total Money: @totalMoney</h4>
 
-
 @code {
     private class Asset
     {
         public string? Bank { get; set; }
-        public string? Money { get; set; }
+        public decimal Money { get; set; }
+        public DateTime LastModified { get; set; }
     }
 
     private string? selectedBank;
+    private string? moneyInput;
     private List<string> banks = new List<string>
     {
         "Bank A",
@@ -50,20 +51,28 @@
         "Bank D"
     };
 
-    private Asset asset = new Asset();
     private List<Asset> assets = new List<Asset>();
     private decimal totalMoney = 0;
+
     private void AddAsset()
     {
-        asset.Bank = selectedBank;
-
-        if (!string.IsNullOrEmpty(asset.Bank) && decimal.TryParse(asset.Money, out decimal moneyValue))
+        if (!string.IsNullOrEmpty(selectedBank) && decimal.TryParse(moneyInput, out decimal moneyValue))
         {
-            assets.Add(new Asset { Bank = asset.Bank, Money = asset.Money });
+            var existingAsset = assets.FirstOrDefault(a => a.Bank == selectedBank);
+
+            if (existingAsset != null)
+            {
+                existingAsset.Money += moneyValue;
+                existingAsset.LastModified = DateTime.Now;
+            }
+            else
+            {
+                assets.Add(new Asset { Bank = selectedBank, Money = moneyValue, LastModified = DateTime.Now });
+            }
+
             totalMoney += moneyValue;
-            asset = new Asset(); 
+            moneyInput = string.Empty;
             selectedBank = null;
         }
-        StateHasChanged(); 
     }
 }
