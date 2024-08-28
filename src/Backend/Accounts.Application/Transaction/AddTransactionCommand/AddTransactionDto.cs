@@ -1,5 +1,3 @@
-﻿using Accounts.Domain.AccountAggregate.TransactionEntity;
+﻿namespace Accounts.Application.Transaction.AddTransactionCommand;
 
-namespace Accounts.Application.Transaction.AddTransactionCommand;
-
-public record AddTransactionDto(TransactionId Id);
+public record AddTransactionDto(long Id);
