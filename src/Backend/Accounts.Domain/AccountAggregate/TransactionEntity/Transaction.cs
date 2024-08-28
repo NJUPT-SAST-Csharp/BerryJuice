@@ -22,7 +22,8 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
         _tags = tags;
     }
 
-    private Transaction(DateTime createdAt, TransactionDescription description) // EF Core need this
+    // EF Core need this constructor due to limitations that it can't use constructor which has owned entity
+    private Transaction(DateTime createdAt, TransactionDescription description)
         : base(new TransactionId(SnowFlakeIdGenerator.NewId))
     {
         _amount = new TransactionAmount();
