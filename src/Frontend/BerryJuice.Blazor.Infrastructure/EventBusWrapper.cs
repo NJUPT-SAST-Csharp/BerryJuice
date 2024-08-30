@@ -14,7 +14,7 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
         CancellationToken cancellationToken = default
     )
     {
-        return await DoInScope(async serviceProvider =>
+        return await DoInScopeAsync(async serviceProvider =>
         {
             var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
             return await commandSender.CommandAsync(command, cancellationToken);
@@ -26,7 +26,7 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
         CancellationToken cancellationToken = default
     )
     {
-        await DoInScope(async serviceProvider =>
+        await DoInScopeAsync(async serviceProvider =>
         {
             var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
             await commandSender.CommandAsync(command, cancellationToken);
@@ -38,21 +38,21 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
         CancellationToken cancellationToken = default
     )
     {
-        return await DoInScope(async serviceProvider =>
+        return await DoInScopeAsync(async serviceProvider =>
         {
             var query = serviceProvider.GetRequiredService<IQueryRequestSender>();
             return await query.QueryAsync(request, cancellationToken);
         });
     }
 
-    private async Task DoInScope(Func<IServiceProvider, Task> action)
+    private async Task DoInScopeAsync(Func<IServiceProvider, Task> action)
     {
         using var scope = scopeFactory.CreateScope();
         using var dbContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
         await action.Invoke(scope.ServiceProvider);
     }
 
-    private async Task<TResponse> DoInScope<TResponse>(
+    private async Task<TResponse> DoInScopeAsync<TResponse>(
         Func<IServiceProvider, Task<TResponse>> action
     )
     {
