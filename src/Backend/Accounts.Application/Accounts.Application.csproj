@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Shared\Exceptions\Exceptions.csproj" />
     <ProjectReference Include="..\Accounts.Domain\Accounts.Domain.csproj" />
     <ProjectReference Include="..\Accounts.IntegrationEvent\Accounts.IntegrationEvent.csproj" />
     <ProjectReference Include="..\Asset.IntegrationEvent\Asset.IntegrationEvent.csproj" />

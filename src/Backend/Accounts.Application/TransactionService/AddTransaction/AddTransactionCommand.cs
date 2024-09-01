@@ -4,7 +4,7 @@ using Accounts.Domain.TagEntity;
 using Enums;
 using Primitives.Command;
 
-namespace Accounts.Application.Transaction.AddTransactionCommand;
+namespace Accounts.Application.TransactionService.AddTransaction;
 
 public sealed class AddTransactionCommand(
     long id,

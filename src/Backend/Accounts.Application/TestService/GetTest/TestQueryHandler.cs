@@ -4,8 +4,9 @@ namespace Accounts.Application.TestService.GetTest;
 
 internal sealed class TestQueryHandler : IQueryRequestHandler<TestQuery, int>
 {
-    public Task<int> Handle(TestQuery request, CancellationToken cancellationToken)
+    public async Task<int> Handle(TestQuery request, CancellationToken cancellationToken)
     {
-        return Task.FromResult(request.Number);
+        await Task.Delay(2000, cancellationToken);
+        return request.Number;
     }
 }

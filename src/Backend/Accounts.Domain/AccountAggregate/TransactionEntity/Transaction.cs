@@ -32,7 +32,7 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
         _tags = [];
     }
 
-    public static Transaction CreateNewTransaction(
+    internal static Transaction CreateNewTransaction(
         TransactionAmount amount,
         DateTime createdAt,
         TransactionDescription description,

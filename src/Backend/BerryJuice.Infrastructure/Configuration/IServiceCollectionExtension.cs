@@ -1,5 +1,6 @@
 ﻿using System.Data.Common;
 using System.Reflection;
+using Accounts.Infrastructure.Configuration;
 using Accounts.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.EventBus;
 using BerryJuice.Infrastructure.Persistence;
@@ -16,12 +17,13 @@ using Primitives.DomainEvent;
 using Primitives.EventBusScopedWrapper;
 using Primitives.IntegrationEvent;
 using Primitives.Query;
+using Primitives.QueryDatabase;
 
 namespace BerryJuice.Infrastructure.Configuration;
 
 public static class IServiceCollectionExtension
 {
-    public static IServiceCollection ConfigureSwagger (this IServiceCollection services)
+    public static IServiceCollection ConfigureSwagger(this IServiceCollection services)
     {
         services.AddEndpointsApiExplorer();
         services.AddSwaggerGen(options =>
@@ -48,7 +50,7 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureInternalEventBus (this IServiceCollection services)
+    public static IServiceCollection ConfigureInternalEventBus(this IServiceCollection services)
     {
         var assemblies = new[]
         {
@@ -57,9 +59,9 @@ public static class IServiceCollectionExtension
             Budget.Application.AssemblyReference.Assembly
         };
 
-        services.AddSingleton<IQueryRequestSender, InternalEventBus>();
-        services.AddSingleton<ICommandRequestSender, InternalEventBus>();
-        services.AddSingleton<IDomainEventPublisher, InternalEventBus>();
+        services.AddScoped<IQueryRequestSender, InternalEventBus>();
+        services.AddScoped<ICommandRequestSender, InternalEventBus>();
+        services.AddScoped<IDomainEventPublisher, InternalEventBus>();
 
         services.AddSingleton<IEventBusWrapper, EventBusWrapper>();
 
@@ -70,7 +72,7 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureExternalEventBus (this IServiceCollection services)
+    public static IServiceCollection ConfigureExternalEventBus(this IServiceCollection services)
     {
         var assemblies = new[]
         {
@@ -88,37 +90,46 @@ public static class IServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection ConfigureController (this IServiceCollection services)
+    public static IServiceCollection ConfigureController(this IServiceCollection services)
     {
         services.AddControllers();
         return services;
     }
 
-    public static IServiceCollection ConfigureLogging (this IServiceCollection services)
+    public static IServiceCollection ConfigureLogging(this IServiceCollection services)
     {
         services.AddLogging();
         return services;
     }
 
-    public static IServiceCollection ConfigureRepository (this IServiceCollection services)
+    public static IServiceCollection ConfigureRepository(this IServiceCollection services)
     {
         return services;
     }
 
-    public static IServiceCollection ConfigureLocalDatabase (
+    public static IServiceCollection ConfigureLocalDatabase(
         this IServiceCollection services,
         string connectionString
     )
     {
         services.AddDbContext<BerryJuiceDbContext>(options =>
         {
-            options.UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BerryJuice")).UseSnakeCaseNamingConvention();
-
+            options
+                .UseNpgsql(
+                    connectionString,
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BerryJuice")
+                )
+                .UseSnakeCaseNamingConvention();
         });
 
         services.AddDbContext<AccountsContext>(options =>
         {
-            options.UseNpgsql(connectionString, x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BJAccounts")).UseSnakeCaseNamingConvention();
+            options
+                .UseNpgsql(
+                    connectionString,
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BJAccounts")
+                )
+                .UseSnakeCaseNamingConvention();
         });
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -129,10 +140,14 @@ public static class IServiceCollectionExtension
             connectionString
         ));
 
+        services.ConfigureAccountsRepository();
+        // services.ConfigureAssetRepository();
+        // services.ConfigureBudgetRepository();
+
         return services;
     }
 
-    public static IServiceCollection ConfigureAzureDatabase (
+    public static IServiceCollection ConfigureAzureDatabase(
         this IServiceCollection services,
         string connectionString
     )
