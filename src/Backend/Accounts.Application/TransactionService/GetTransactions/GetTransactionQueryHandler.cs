@@ -12,6 +12,6 @@ public sealed class GetTransactionQueryHandler(IGetTransactionRepository repo)
         CancellationToken cancellationToken
     )
     {
-        return _repo.GetTransactionsByAdminAsync(cancellationToken);
+        return _repo.GetTransactionsByAdminAsync(request.AccountId, cancellationToken);
     }
 }

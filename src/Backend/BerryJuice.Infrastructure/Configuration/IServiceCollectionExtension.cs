@@ -117,7 +117,7 @@ public static class IServiceCollectionExtension
             options
                 .UseNpgsql(
                     connectionString,
-                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BerryJuice")
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_berryjuice")
                 )
                 .UseSnakeCaseNamingConvention();
         });
@@ -127,7 +127,7 @@ public static class IServiceCollectionExtension
             options
                 .UseNpgsql(
                     connectionString,
-                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "BJAccounts")
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_accounts")
                 )
                 .UseSnakeCaseNamingConvention();
         });

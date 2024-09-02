@@ -17,7 +17,7 @@ internal sealed class AccountQueryRepository(IDbConnectionFactory factory) : IGe
         const string sql =
             @"
                 SELECT id as Id, description as Description
-                FROM BJAccounts.accounts
+                FROM bj_accounts.accounts
             ";
 
         return _connection.QueryAsync<AccountDto>(sql);

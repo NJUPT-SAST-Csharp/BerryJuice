@@ -2,6 +2,8 @@
 @using Accounts.Application.AccountService
 @using Accounts.Application.AccountService.GetAccounts
 @using Accounts.Application.TestService.GetTest
+@using Accounts.Application.TransactionService
+@using Accounts.Application.TransactionService.GetTransactions
 @using Primitives.EventBusScopedWrapper
 @using Accounts.Application
 @inject IEventBusWrapper _eventBus
@@ -11,7 +13,7 @@
 
 <h1>Test</h1>
 <hr />
-@if(Query == -1)
+@if (Query == -1)
 {
     <p>Click the button to query the server</p>
 }
@@ -19,9 +21,9 @@ else
 {
     <p>Query result is: @Query</p>
 }
-<button @onclick="TestQuery" >Query Button</button>
+<button @onclick="TestQuery">Query Button</button>
 
-<hr/>
+<hr />
 
 <h2>Test Get Accounts</h2>
 
@@ -29,9 +31,25 @@ else
     @foreach (var account in Accounts)
     {
         <li>
-            @account.Description
+            @account.Item1.Description
             <ul>
-                id: @account.Id
+                id: @account.Item1.Id
+                Transactions:
+                @foreach (var transaction in account.Item2)
+                {
+                    <li>
+                        @transaction.Description
+                        <ul>
+                            id: @transaction.TransactionId
+                            amount: @transaction.Amount
+                            Tag:
+                            @foreach (var tag in transaction.Tags)
+                            {
+                                @tag.TagName
+                            }
+                        </ul>
+                    </li>
+                }
             </ul>
         </li>
     }
@@ -41,7 +59,7 @@ else
 @code {
     public int Query { get; set; } = -1;
 
-    public List<AccountDto> Accounts { get; set; } = new List<AccountDto>();
+    public List<(AccountDto, List<TransactionDto>)> Accounts { get; set; } = new();
 
     private async void TestQuery(MouseEventArgs e)
     {
@@ -53,14 +71,25 @@ else
         );
 
     }
+
     private async Task TestGetAccounts(MouseEventArgs e)
     {
         var query = new GetAccountsQuery();
         var result = await _eventBus.QueryAsync<IEnumerable<AccountDto>>(query);
 
+        var accounts = new List<(AccountDto, List<TransactionDto>)>();
+
+        foreach(var account in result)
+        {
+            var transactionsQuery = new GetTransactionsQuery(account.Id);
+            var transactions = await _eventBus.QueryAsync<IEnumerable<TransactionDto>>(transactionsQuery);
+            accounts.Add((account, transactions.ToList()));
+        }
+
         await InvokeAsync(
-            () => Accounts = result.ToList()
+            () => Accounts = accounts
         );
+
 
     }
 }
