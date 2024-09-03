@@ -8,11 +8,11 @@ namespace BerryJuice.Configuration;
 
 public static class WebApplicationExtension
 {
-    public static WebApplication ConfigureApplication (this WebApplication app)
+    public static WebApplication ConfigureApplication(this WebApplication app)
     {
         var isBlazorEnabled = app.Configuration["BERRYJUICE_USE_BLAZOR"] == "true";
 
-        if ( app.Environment.IsDevelopment() )
+        if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
             app.UseSwaggerUI();
@@ -24,9 +24,9 @@ public static class WebApplicationExtension
         app.UseAuthorization();
         app.MapControllers();
 
-        if ( isBlazorEnabled )
+        if (isBlazorEnabled)
         {
-            if ( app.Environment.IsDevelopment() )
+            if (app.Environment.IsDevelopment())
                 app.UseWebAssemblyDebugging();
             else
                 app.UseExceptionHandler("/Error", true);

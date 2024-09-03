@@ -7,7 +7,7 @@ namespace Accounts.Infrastructure.Persistence.EntityTypeConfigurations;
 
 internal class AccountEntityTypeConfiguration : IEntityTypeConfiguration<Account>
 {
-    public void Configure (EntityTypeBuilder<Account> builder)
+    public void Configure(EntityTypeBuilder<Account> builder)
     {
         builder.ToTable("accounts");
 

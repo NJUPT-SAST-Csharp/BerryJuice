@@ -7,7 +7,7 @@ namespace Accounts.Infrastructure.Persistence.EntityTypeConfigurations;
 
 public class TransactionEntityTypeConfiguration : IEntityTypeConfiguration<Transaction>
 {
-    public void Configure (EntityTypeBuilder<Transaction> builder)
+    public void Configure(EntityTypeBuilder<Transaction> builder)
     {
         builder.ToTable("transactions");
 

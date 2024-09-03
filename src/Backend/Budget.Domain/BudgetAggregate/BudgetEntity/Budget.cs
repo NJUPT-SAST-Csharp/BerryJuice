@@ -8,7 +8,7 @@ namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 
 public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
 {
-    private Budget (DateTime startDate, DateTime endDate, decimal amount, string description)
+    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description)
         : base(new BudgetId(1))
     {
         _startDate = startDate;
@@ -18,7 +18,7 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
         SubBudgets = new List<SubBudget>();
     }
 
-    public static Budget CreateBudget (
+    public static Budget CreateBudget(
         DateTime startDate,
         DateTime endDate,
         decimal amount,
@@ -36,7 +36,7 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
     private string _description;
     private readonly List<SubBudget> SubBudgets;
 
-    public void AddSubBudget (TagId tagId, decimal amount)
+    public void AddSubBudget(TagId tagId, decimal amount)
     {
         var subBudget = SubBudget.CreateSubBudget(tagId, amount);
         SubBudgets.Add(subBudget);
