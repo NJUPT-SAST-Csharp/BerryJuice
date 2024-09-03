@@ -1,8 +1,20 @@
 ﻿@page "/User"
 @rendermode InteractiveServer
+@inject NavigationManager Navigation
 
 <h3>UserPage</h3>
 
-@code {
+@* 用户信息展示 *@
 
+<button class="btn btn-primary" @onclick="navigation">Login</button>
+<button class="btn btn-primary" @onclick="_navigation">Register</button>
+@code {
+	public void navigation()
+	{
+		Navigation.NavigateTo("/Login");
+	}
+	public void _navigation()
+	{
+		Navigation.NavigateTo("/Register");
+	}
 }

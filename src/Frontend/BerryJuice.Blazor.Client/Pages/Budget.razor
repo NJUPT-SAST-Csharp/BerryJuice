@@ -1,7 +1,50 @@
 ﻿@page "/Budget"
 @rendermode InteractiveServer
 
+<h1>Budget</h1>
+<label for="BudgetType">Type:</label>
+<input  id="BudgetType" @bind="budget.Name" placeholder="Enter expense type" />
+
+<label for="Account">Amount:</label>
+<input id="Account" type="number" @bind="budget.Account" placeholder="Enter amount" />
+
+<button @onclick="AddBudgetEntries">Add Budget Entry</button>
+
+<h2>Budget Entries</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var entry in BudgetEntries)
+        {
+            <tr>
+                <td>@entry.Name</td>
+                <td>@entry.Account.ToString("C")</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
 @code {
+    private class BudgetItem
+    {
+        public string Name { get; set; }
+        public decimal Account { get; set; }
+    }
 
+    private List<BudgetItem> BudgetEntries = new List<BudgetItem>();
+    private BudgetItem budget = new BudgetItem();
+
+    private void AddBudgetEntries()
+    {
+        if (!string.IsNullOrWhiteSpace(budget.Name) && budget.Account > 0)
+        {
+            BudgetEntries.Add(new BudgetItem { Name = budget.Name, Account = budget.Account });
+            budget = new BudgetItem();
+        }
+    }
 }
