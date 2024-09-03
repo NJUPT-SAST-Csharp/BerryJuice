@@ -3,10 +3,10 @@
 
 <h1>Budget</h1>
 <label for="BudgetType">Type:</label>
-<input  id="BudgetType" @bind="budget.Name" placeholder="Enter expense type" />
+<input  id="BudgetType" @bind="inputName" placeholder="Enter expense type" />
 
 <label for="Account">Amount:</label>
-<input id="Account" type="number" @bind="budget.Account" placeholder="Enter amount" />
+<input id="Account" type="number" @bind="inputMoney" placeholder="Enter amount" />
 
 <button @onclick="AddBudgetEntries">Add Budget Entry</button>
 
@@ -35,16 +35,27 @@
         public string Name { get; set; }
         public decimal Account { get; set; }
     }
+    private string? inputName { get; set; }
+    private decimal inputMoney { get; set; }
 
     private List<BudgetItem> BudgetEntries = new List<BudgetItem>();
     private BudgetItem budget = new BudgetItem();
 
     private void AddBudgetEntries()
     {
-        if (!string.IsNullOrWhiteSpace(budget.Name) && budget.Account > 0)
+        if (!string.IsNullOrWhiteSpace(inputName) && inputMoney > 0)
         {
-            BudgetEntries.Add(new BudgetItem { Name = budget.Name, Account = budget.Account });
-            budget = new BudgetItem();
+            var existingBudget = BudgetEntries.FirstOrDefault(a => a.Name == inputName);
+            if (existingBudget == null)
+            {
+                BudgetEntries.Add(new BudgetItem { Name = inputName, Account = inputMoney });
+            }
+            else
+            {
+                existingBudget.Account += inputMoney;
+            }
         }
+        inputName = string.Empty;
+        inputMoney = 0;
     }
 }
