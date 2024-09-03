@@ -1,5 +1,7 @@
 using Accounts.Domain.AccountAggregate.AccountEntity.Events;
-using Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
+using Accounts.Domain.AccountAggregate.TransactionEntity;
+using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
+using Accounts.Domain.TagEntity;
 using Primitives.Entity;
 using Shared.Primitives;
 using Utilities;
@@ -8,30 +10,36 @@ namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 {
-    private Account(DateTime date, decimal amount, MethodOfPayment methodOfPayment, string tag, string? description) :
-        base(new AccountId(SnowFlakeIdGenerator.NewId))
+    private Account(AccountDescription description)
+        : base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
-        _date = date;
-        _amount = amount;
-        _method = methodOfPayment;
-        _tag = tag;
         _description = description;
     }
 
-    public static Account CreateNewAccount(DateTime date, decimal amount, MethodOfPayment methodOfPayment, string tag,
-        string? description)
+    public static Account CreateNewAccount(AccountDescription description)
     {
-        var account = new Account(date, amount, methodOfPayment, tag, description);
+        var account = new Account(description);
         account.AddDomainEvent(new AccountCreatedDomainEvent(account.Id));
         return account;
     }
 
-    private DateTime _date;
+    public TransactionId AddTransaction(
+        TransactionAmount amount,
+        DateTime createdAt,
+        TransactionDescription description,
+        List<Tag> tags
+    )
+    {
+        var transaction = Transaction.CreateNewTransaction(amount, createdAt, description, tags);
 
-    private decimal _amount;
+        _transactions.Add(transaction);
 
-    private MethodOfPayment _method;
-    private string _tag;
+        transaction.AddDomainEvent(new TransactionCreatedDomainEvent(transaction.Id));
 
-    private string? _description;
+        return transaction.Id;
+    }
+
+    private readonly List<Transaction> _transactions = [];
+
+    private AccountDescription _description;
 }

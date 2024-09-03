@@ -1,11 +1,9 @@
-﻿using BerryJuice.Blazor.EventBus;
-using BerryJuice.Infrastructure.Persistence;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Primitives.Command;
 using Primitives.Query;
 using Shared.Primitives.Query;
 
-namespace BerryJuice.Blazor.Infrastructure;
+namespace Primitives.EventBusScopedWrapper;
 
 public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapper
 {
@@ -48,7 +46,6 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
     private async Task DoInScopeAsync(Func<IServiceProvider, Task> action)
     {
         using var scope = scopeFactory.CreateScope();
-        using var dbContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
         await action.Invoke(scope.ServiceProvider);
     }
 
@@ -57,7 +54,6 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
     )
     {
         using var scope = scopeFactory.CreateScope();
-        using var dbContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
         return await action.Invoke(scope.ServiceProvider);
     }
 }

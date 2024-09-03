@@ -1,10 +1,16 @@
 using Accounts.Domain.AccountAggregate.AccountEntity;
-using Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
 
 namespace Accounts.Domain.AccountAggregate;
 
 public interface IAccountRepository
 {
-    Task CreateAccountAsync(Account account);
-    Task DeleteAccountAsync(AccountId accountId);
+    public Task<Account> GetAccountAsync(
+        AccountId id,
+        CancellationToken cancellationToken = default
+    );
+
+    public Task<AccountId> AddAccountAsync(
+        Account account,
+        CancellationToken cancellationToken = default
+    );
 }

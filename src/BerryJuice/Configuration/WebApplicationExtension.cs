@@ -1,4 +1,8 @@
-﻿using BerryJuice.Blazor.Components;
+﻿using Accounts.Infrastructure.Persistence;
+using BerryJuice.Blazor.Components;
+using BerryJuice.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using _Imports = BerryJuice.Blazor.Client._Imports;
 
 namespace BerryJuice.Configuration;
 
@@ -25,14 +29,22 @@ public static class WebApplicationExtension
             if (app.Environment.IsDevelopment())
                 app.UseWebAssemblyDebugging();
             else
-                app.UseExceptionHandler("/Error", createScopeForErrors: true);
+                app.UseExceptionHandler("/Error", true);
 
             app.UseAntiforgery();
             app.MapRazorComponents<App>()
-                .AddInteractiveWebAssemblyRenderMode()
-                .AddInteractiveServerRenderMode()
-                .AddAdditionalAssemblies(typeof(BerryJuice.Blazor.Client._Imports).Assembly);
+               .AddInteractiveWebAssemblyRenderMode()
+               .AddInteractiveServerRenderMode()
+               .AddAdditionalAssemblies(typeof(_Imports).Assembly);
         }
+
+        // apply migrations
+        using var scope = app.Services.CreateScope();
+        var accountsContext = scope.ServiceProvider.GetRequiredService<AccountsContext>();
+        accountsContext.Database.Migrate();
+
+        var berryJuiceContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
+        berryJuiceContext.Database.Migrate();
 
         return app;
     }

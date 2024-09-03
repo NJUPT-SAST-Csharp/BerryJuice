@@ -1,4 +1,4 @@
-namespace Accounts.Domain.AccountAggregate.AccountEntity.ValueObjects;
+namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public readonly record struct AccountId(long Value)
 {

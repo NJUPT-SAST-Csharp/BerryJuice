@@ -33,4 +33,8 @@
     <ProjectReference Include="..\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Persistence\EntityTypeConfigurations\" />
+  </ItemGroup>
+
 </Project>

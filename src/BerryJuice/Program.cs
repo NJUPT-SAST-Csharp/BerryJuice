@@ -1,9 +1,9 @@
 using BerryJuice.Configuration;
 
 WebApplication
-    .CreateBuilder(args)
-    .ConfigureConfiguration(args)
-    .ConfigureServices()
-    .Build()
-    .ConfigureApplication()
-    .Run();
+   .CreateBuilder(args)
+   .ConfigureConfiguration(args)
+   .ConfigureServices()
+   .Build()
+   .ConfigureApplication()
+   .Run();

@@ -2,11 +2,12 @@ using Primitives.Entity;
 using Shared.Primitives;
 using Utilities;
 
-namespace Accounts.Domain.AccountAggregate.TagEntity;
+namespace Budget.Domain.BudgetAggregate.TagEntity;
 
 public class Tag : EntityBase<TagId>, IAggregateRoot<Tag>
 {
-    private Tag(string name) : base(new TagId(SnowFlakeIdGenerator.NewId))
+    private Tag(string name)
+        : base(new TagId(SnowFlakeIdGenerator.NewId))
     {
         _name = name;
     }

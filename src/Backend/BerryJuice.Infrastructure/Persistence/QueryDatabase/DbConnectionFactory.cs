@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Npgsql;
+using Primitives.QueryDatabase;
 
 namespace BerryJuice.Infrastructure.Persistence.QueryDatabase;
 

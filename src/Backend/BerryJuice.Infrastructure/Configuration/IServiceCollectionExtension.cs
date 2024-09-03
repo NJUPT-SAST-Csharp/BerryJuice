@@ -1,5 +1,7 @@
 ﻿using System.Data.Common;
 using System.Reflection;
+using Accounts.Infrastructure.Configuration;
+using Accounts.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.EventBus;
 using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
@@ -12,8 +14,11 @@ using Npgsql;
 using Primitives;
 using Primitives.Command;
 using Primitives.DomainEvent;
+using Primitives.EventBusScopedWrapper;
 using Primitives.IntegrationEvent;
 using Primitives.Query;
+using Primitives.QueryDatabase;
+using UnitOfWork = BerryJuice.Infrastructure.Persistence.UnitOfWork;
 
 namespace BerryJuice.Infrastructure.Configuration;
 
@@ -55,9 +60,11 @@ public static class IServiceCollectionExtension
             Budget.Application.AssemblyReference.Assembly
         };
 
-        services.AddSingleton<IQueryRequestSender, InternalEventBus>();
-        services.AddSingleton<ICommandRequestSender, InternalEventBus>();
-        services.AddSingleton<IDomainEventPublisher, InternalEventBus>();
+        services.AddScoped<IQueryRequestSender, InternalEventBus>();
+        services.AddScoped<ICommandRequestSender, InternalEventBus>();
+        services.AddScoped<IDomainEventPublisher, InternalEventBus>();
+
+        services.AddSingleton<IEventBusWrapper, EventBusWrapper>();
 
         services.AddMediatR(config =>
         {
@@ -108,16 +115,35 @@ public static class IServiceCollectionExtension
     {
         services.AddDbContext<BerryJuiceDbContext>(options =>
         {
-            options.UseNpgsql(connectionString).UseSnakeCaseNamingConvention();
+            options
+                .UseNpgsql(
+                    connectionString,
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_berryjuice")
+                )
+                .UseSnakeCaseNamingConvention();
         });
 
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddDbContext<AccountsContext>(options =>
+        {
+            options
+                .UseNpgsql(
+                    connectionString,
+                    x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_accounts")
+                )
+                .UseSnakeCaseNamingConvention();
+        });
+
+        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>("berryjuice");
 
         SqlMapper.AddTypeHandler(new UriStringConverter());
         services.AddSingleton<DbDataSource>(new NpgsqlDataSourceBuilder(connectionString).Build());
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>(_ => new DbConnectionFactory(
             connectionString
         ));
+
+        services.ConfigureAccountsRepository();
+        // services.ConfigureAssetRepository();
+        // services.ConfigureBudgetRepository();
 
         return services;
     }
