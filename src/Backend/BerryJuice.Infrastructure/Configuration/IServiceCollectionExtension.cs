@@ -18,6 +18,7 @@ using Primitives.EventBusScopedWrapper;
 using Primitives.IntegrationEvent;
 using Primitives.Query;
 using Primitives.QueryDatabase;
+using UnitOfWork = BerryJuice.Infrastructure.Persistence.UnitOfWork;
 
 namespace BerryJuice.Infrastructure.Configuration;
 
@@ -132,7 +133,7 @@ public static class IServiceCollectionExtension
                 .UseSnakeCaseNamingConvention();
         });
 
-        services.AddScoped<IUnitOfWork, UnitOfWork>();
+        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>("berryjuice");
 
         SqlMapper.AddTypeHandler(new UriStringConverter());
         services.AddSingleton<DbDataSource>(new NpgsqlDataSourceBuilder(connectionString).Build());

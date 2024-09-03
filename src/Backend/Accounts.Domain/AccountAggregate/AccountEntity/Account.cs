@@ -16,9 +16,9 @@ public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
         _description = description;
     }
 
-    public static Account CreateNewAccount(string description)
+    public static Account CreateNewAccount(AccountDescription description)
     {
-        var account = new Account(new AccountDescription(description));
+        var account = new Account(description);
         account.AddDomainEvent(new AccountCreatedDomainEvent(account.Id));
         return account;
     }

@@ -15,7 +15,7 @@ internal class AccountRepository(AccountsContext context) : IAccountRepository
         CancellationToken cancellationToken = default
     )
     {
-        var a = await _context.Accounts.AddAsync(account);
+        var a = await _context.Accounts.AddAsync(account, cancellationToken);
         return a.Entity.Id;
     }
 

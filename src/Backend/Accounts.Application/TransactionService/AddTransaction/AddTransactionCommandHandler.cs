@@ -1,5 +1,6 @@
 ﻿using Accounts.Domain.AccountAggregate;
 using Accounts.Domain.TagEntity;
+using Microsoft.Extensions.DependencyInjection;
 using Primitives;
 using Primitives.Command;
 
@@ -8,7 +9,7 @@ namespace Accounts.Application.TransactionService.AddTransaction;
 public sealed class AddTransactionCommandHandler(
     IAccountRepository accountRepo,
     ITagRepository tagRepo,
-    IUnitOfWork unitOfWork
+    [FromKeyedServices("accounts")] IUnitOfWork unitOfWork
 ) : ICommandRequestHandler<AddTransactionCommand, AddTransactionDto>
 {
     private readonly IAccountRepository _accountRepo = accountRepo;

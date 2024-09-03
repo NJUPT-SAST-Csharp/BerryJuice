@@ -1,5 +1,6 @@
 ﻿@page "/test"
 @using Accounts.Application.AccountService
+@using Accounts.Application.AccountService.CreateAccount
 @using Accounts.Application.AccountService.GetAccounts
 @using Accounts.Application.TestService.GetTest
 @using Accounts.Application.TransactionService
@@ -56,6 +57,8 @@ else
 </ul>
 
 <button @onclick="TestGetAccounts">Query Button</button>
+
+<button @onclick="TestAddAccount">Add a new account with random name</button>
 @code {
     public int Query { get; set; } = -1;
 
@@ -91,5 +94,10 @@ else
         );
 
 
+    }
+    private async Task TestAddAccount(MouseEventArgs e)
+    {
+        var command = new CreateAccountCommand("Random Account");
+        var result = await _eventBus.CommandAsync(command);
     }
 }
