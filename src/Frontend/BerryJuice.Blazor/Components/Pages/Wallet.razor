@@ -4,12 +4,12 @@
 <h3>My Wallet</h3>
 
 <div class="form-group">
-    <label for="selectBank">Select Bank:</label>
-    <select id="selectBank" @bind="selectedBank">
-        <option value="">-- Select a Bank --</option>
-        @foreach (var bank in banks)
+    <label for="selectAccount">Select Account:</label>
+    <select id="selectAccount" @bind="selectedAccount">
+        <option value="">-- Select a Account --</option>
+        @foreach (var Account in Accounts)
         {
-            <option value="@bank">@bank</option>
+            <option value="@Account">@Account</option>
         }
     </select>
 </div>
@@ -26,7 +26,7 @@
     @foreach (var a in assets)
     {
         <li class="asset-item">
-            <strong>Bank:</strong> @a.Bank, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss")
+            <strong>Account:</strong> @a.Account, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss")
         </li>
     }
 </ul>
@@ -36,19 +36,19 @@
 @code {
     private class Asset
     {
-        public string? Bank { get; set; }
+        public string? Account { get; set; }
         public decimal Money { get; set; }
         public DateTime LastModified { get; set; }
     }
 
-    private string? selectedBank;
+    private string? selectedAccount;
     private string? moneyInput;
-    private List<string> banks = new List<string>
+    private List<string> Accounts = new List<string>
     {
-        "Bank A",
-        "Bank B",
-        "Bank C",
-        "Bank D"
+        "Account A",
+        "Account B",
+        "Account C",
+        "Account D"
     };
 
     private List<Asset> assets = new List<Asset>();
@@ -56,9 +56,9 @@
 
     private void AddAsset()
     {
-        if (!string.IsNullOrEmpty(selectedBank) && decimal.TryParse(moneyInput, out decimal moneyValue))
+        if (!string.IsNullOrEmpty(selectedAccount) && decimal.TryParse(moneyInput, out decimal moneyValue))
         {
-            var existingAsset = assets.FirstOrDefault(a => a.Bank == selectedBank);
+            var existingAsset = assets.FirstOrDefault(a => a.Account == selectedAccount);
 
             if (existingAsset != null)
             {
@@ -67,12 +67,12 @@
             }
             else
             {
-                assets.Add(new Asset { Bank = selectedBank, Money = moneyValue, LastModified = DateTime.Now });
+                assets.Add(new Asset { Account = selectedAccount, Money = moneyValue, LastModified = DateTime.Now });
             }
 
             totalMoney += moneyValue;
             moneyInput = string.Empty;
-            selectedBank = null;
+            selectedAccount = null;
         }
     }
 }
