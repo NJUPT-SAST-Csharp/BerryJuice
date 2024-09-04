@@ -1,0 +1,72 @@
+﻿@page "/Wallet"
+@using Accounts.Application.AccountService
+@using Accounts.Application.AccountService.GetAccounts
+@using Accounts.Application.TransactionService
+@using Accounts.Application.TransactionService.AddTransaction
+@using Primitives.EventBusScopedWrapper
+@using Accounts.Application
+@inject IEventBusWrapper _eventBus
+@rendermode InteractiveServer
+
+<h3>My Wallet</h3>
+
+<div class="form-group">
+    <label for="selectAccount">Select Account:</label>
+    <select id="selectAccount" @bind="selectedAccount">
+        <option value="">-- Select a Account --</option>
+        @foreach (var Account in Accounts)
+        {
+            <option value="@Account">@Account.Description</option>
+        }
+    </select>
+</div>
+
+<div class="form-group">
+    <label for="money">Money:</label>
+    <InputText id="money" @bind-Value="moneyInput" />
+</div>
+
+<button class="btn" @onclick="AddTransaction">Add</button>
+
+<h4>Transactions List</h4>
+<ul class="Transaction-list">
+    @foreach (var a in Transactions)
+    {
+        <li class="Transaction-item">
+            @* <strong>Account:</strong> @a.Account, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss") *@
+
+        </li>
+    }
+</ul>
+
+<h4>Total Money: @* @totalMoney *@</h4>
+
+@code {
+
+    private AccountDto? selectedAccount;
+
+    private string? moneyInput;
+
+    private List<AccountDto> Accounts = [];
+
+    private List<TransactionDto> Transactions = [];
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UpdateAccountList();
+    }
+
+    private async Task UpdateAccountList()
+    {
+        Accounts = (await _eventBus.QueryAsync(new GetAccountsQuery())).ToList();
+    }
+
+    private async Task AddTransaction()
+    {
+        if (selectedAccount is not null && selectedAccount.Id != 0 && decimal.TryParse(moneyInput, out decimal moneyValue))
+        {
+            var transactionId = await _eventBus.CommandAsync(new AddTransactionCommand(selectedAccount.Id, Enums.CurrencyType.CNY, moneyValue, [], "test"));
+        }
+    }
+}
