@@ -13,16 +13,6 @@
 <PageTitle>Test</PageTitle>
 
 <h1>Test</h1>
-<hr />
-@if (Query == -1)
-{
-    <p>Click the button to query the server</p>
-}
-else
-{
-    <p>Query result is: @Query</p>
-}
-<button @onclick="TestQuery">Query Button</button>
 
 <hr />
 
@@ -63,17 +53,6 @@ else
     public int Query { get; set; } = -1;
 
     public List<(AccountDto, List<TransactionDto>)> Accounts { get; set; } = new();
-
-    private async void TestQuery(MouseEventArgs e)
-    {
-        var query = new TestQuery();
-        var result = await _eventBus.QueryAsync<int>(query);
-
-        await InvokeAsync(
-            () => Query = result
-        );
-
-    }
 
     private async Task TestGetAccounts(MouseEventArgs e)
     {
