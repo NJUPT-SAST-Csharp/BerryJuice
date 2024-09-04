@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TagService\Commands\" />
+    <Folder Include="TagService\Queries\" />
+  </ItemGroup>
+
 </Project>
