@@ -1,4 +1,11 @@
 ﻿@page "/Wallet"
+@using Accounts.Application.AccountService
+@using Accounts.Application.AccountService.GetAccounts
+@using Accounts.Application.TransactionService
+@using Accounts.Application.TransactionService.AddTransaction
+@using Primitives.EventBusScopedWrapper
+@using Accounts.Application
+@inject IEventBusWrapper _eventBus
 @rendermode InteractiveServer
 
 <h3>My Wallet</h3>
@@ -9,7 +16,7 @@
         <option value="">-- Select a Account --</option>
         @foreach (var Account in Accounts)
         {
-            <option value="@Account">@Account</option>
+            <option value="@Account">@Account.Description</option>
         }
     </select>
 </div>
@@ -19,60 +26,47 @@
     <InputText id="money" @bind-Value="moneyInput" />
 </div>
 
-<button class="btn" @onclick="AddAsset">Add</button>
+<button class="btn" @onclick="AddTransaction">Add</button>
 
-<h4>Assets List</h4>
-<ul class="asset-list">
-    @foreach (var a in assets)
+<h4>Transactions List</h4>
+<ul class="Transaction-list">
+    @foreach (var a in Transactions)
     {
-        <li class="asset-item">
-            <strong>Account:</strong> @a.Account, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss")
+        <li class="Transaction-item">
+            @* <strong>Account:</strong> @a.Account, <strong>Money:</strong> @a.Money, <strong>Last Modified:</strong> @a.LastModified.ToString("yyyy-MM-dd HH:mm:ss") *@
+
         </li>
     }
 </ul>
 
-<h4>Total Money: @totalMoney</h4>
+<h4>Total Money: @* @totalMoney *@</h4>
 
 @code {
-    private class Asset
+
+    private AccountDto? selectedAccount;
+
+    private string? moneyInput;
+
+    private List<AccountDto> Accounts = [];
+
+    private List<TransactionDto> Transactions = [];
+
+
+    protected override async Task OnInitializedAsync()
     {
-        public string? Account { get; set; }
-        public decimal Money { get; set; }
-        public DateTime LastModified { get; set; }
+        await UpdateAccountList();
     }
 
-    private string? selectedAccount;
-    private string? moneyInput;
-    private List<string> Accounts = new List<string>
+    private async Task UpdateAccountList()
     {
-        "Account A",
-        "Account B",
-        "Account C",
-        "Account D"
-    };
+        Accounts = (await _eventBus.QueryAsync(new GetAccountsQuery())).ToList();
+    }
 
-    private List<Asset> assets = new List<Asset>();
-    private decimal totalMoney = 0;
-
-    private void AddAsset()
+    private async Task AddTransaction()
     {
-        if (!string.IsNullOrEmpty(selectedAccount) && decimal.TryParse(moneyInput, out decimal moneyValue))
+        if (selectedAccount is not null && selectedAccount.Id != 0 && decimal.TryParse(moneyInput, out decimal moneyValue))
         {
-            var existingAsset = assets.FirstOrDefault(a => a.Account == selectedAccount);
-
-            if (existingAsset != null)
-            {
-                existingAsset.Money += moneyValue;
-                existingAsset.LastModified = DateTime.Now;
-            }
-            else
-            {
-                assets.Add(new Asset { Account = selectedAccount, Money = moneyValue, LastModified = DateTime.Now });
-            }
-
-            totalMoney += moneyValue;
-            moneyInput = string.Empty;
-            selectedAccount = null;
+            var transactionId = await _eventBus.CommandAsync(new AddTransactionCommand(selectedAccount.Id, Enums.CurrencyType.CNY, moneyValue, [], "test"));
         }
     }
 }
