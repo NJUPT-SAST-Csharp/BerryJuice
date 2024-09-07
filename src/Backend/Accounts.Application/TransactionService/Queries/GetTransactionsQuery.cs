@@ -1,11 +1,12 @@
-﻿using Accounts.Domain.AccountAggregate.AccountEntity;
+﻿using Accounts.Application.TransactionService.Models;
+using Accounts.Domain.AccountAggregate.AccountEntity;
 using Shared.Primitives.Query;
 
-namespace Accounts.Application.TransactionService.GetTransactions;
+namespace Accounts.Application.TransactionService.Queries;
 
 public sealed class GetTransactionsQuery(
     long accountId
-) : IQueryRequest<IEnumerable<TransactionDto>>
+) : IQueryRequest<IEnumerable<TransactionModel>>
 {
     public AccountId AccountId { get; } = new(accountId);
 }
@@ -13,7 +14,7 @@ public sealed class GetTransactionsQuery(
 // TODO: Implement DTO
 public interface IGetTransactionRepository
 {
-    public Task<IEnumerable<TransactionDto>> GetTransactionsByAdminAsync(
+    public Task<IEnumerable<TransactionModel>> GetTransactionsByAdminAsync(
         AccountId id,
         CancellationToken cancellationToken = default
     );
@@ -21,12 +22,10 @@ public interface IGetTransactionRepository
 
 public sealed class GetTransactionQueryHandler(
     IGetTransactionRepository repo
-) : IQueryRequestHandler<GetTransactionsQuery, IEnumerable<TransactionDto>>
+) : IQueryRequestHandler<GetTransactionsQuery, IEnumerable<TransactionModel>>
 {
-    private readonly IGetTransactionRepository _repo = repo;
-
-    public Task<IEnumerable<TransactionDto>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
+    public Task<IEnumerable<TransactionModel>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
     {
-        return _repo.GetTransactionsByAdminAsync(request.AccountId, cancellationToken);
+        return repo.GetTransactionsByAdminAsync(request.AccountId, cancellationToken);
     }
 }

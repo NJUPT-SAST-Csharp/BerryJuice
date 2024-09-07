@@ -1,6 +1,6 @@
 ﻿using Accounts.Domain.AccountAggregate.AccountEntity;
 
-namespace Accounts.Application.AccountService.DeleteAccount;
+namespace Accounts.Application.AccountService.Commands;
 
 public sealed class DeleteAccountCommand(
     long id
