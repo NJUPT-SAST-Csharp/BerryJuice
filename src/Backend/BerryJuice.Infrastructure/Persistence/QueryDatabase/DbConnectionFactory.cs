@@ -4,10 +4,12 @@ using Primitives.QueryDatabase;
 
 namespace BerryJuice.Infrastructure.Persistence.QueryDatabase;
 
-internal sealed class DbConnectionFactory(string connectionString) : IDbConnectionFactory
+internal sealed class DbConnectionFactory(
+    string connectionString
+) : IDbConnectionFactory
 {
     private readonly string _connectionString = connectionString;
-    private IDbConnection? _connection = null;
+    private IDbConnection? _connection;
 
     public void Dispose()
     {
@@ -24,6 +26,7 @@ internal sealed class DbConnectionFactory(string connectionString) : IDbConnecti
             _connection = new NpgsqlConnection(_connectionString);
             _connection.Open();
         }
+
         return _connection;
     }
 }

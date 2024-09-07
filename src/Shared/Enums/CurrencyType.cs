@@ -5,5 +5,5 @@ public enum CurrencyType
     USD,
     CNY,
     HKD,
-    JPY
+    JPY,
 }

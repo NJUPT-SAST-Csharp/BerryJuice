@@ -1,0 +1,25 @@
+﻿@using Primitives.EventBusScopedWrapper
+@inject IEventBusWrapper EventBus
+@rendermode InteractiveServer
+
+<h4>Transactions List</h4>
+<ul class="Transaction-list">
+    @foreach (var transaction in _transactions)
+    {
+    <li class="Transaction-item">
+        @(transaction.Description)
+        <ul>
+            <li>Amount: @(transaction.Amount)</li>
+            <li>
+                Tags:
+                <ul>
+                    @foreach (var tag in transaction.Tags)
+                    {
+                        <li>@(tag.TagName)</li>
+                    }
+                </ul>
+            </li>
+        </ul>
+    </li>
+    }
+</ul>

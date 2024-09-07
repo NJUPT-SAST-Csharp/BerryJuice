@@ -1,20 +1,26 @@
 ﻿using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
 using Accounts.Domain.TagEntity;
 using Primitives.Entity;
-using Shared.Primitives;
 using Utilities;
 
 namespace Accounts.Domain.AccountAggregate.TransactionEntity;
 
 public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction>
 {
+    private readonly List<Tag> _tags;
+
+    private TransactionAmount _amount;
+
+    private DateTime _createdAt;
+
+    private TransactionDescription _description;
+
     private Transaction(
         TransactionAmount amount,
         DateTime createdAt,
         TransactionDescription description,
         List<Tag> tags
-    )
-        : base(new TransactionId(SnowFlakeIdGenerator.NewId))
+    ) : base(new TransactionId(SnowFlakeIdGenerator.NewId))
     {
         _amount = amount;
         _createdAt = createdAt;
@@ -23,8 +29,9 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
     }
 
     // EF Core need this constructor due to limitations that it can't use constructor which has owned entity
-    private Transaction(DateTime createdAt, TransactionDescription description)
-        : base(new TransactionId(SnowFlakeIdGenerator.NewId))
+    private Transaction(DateTime createdAt, TransactionDescription description) : base(
+        new TransactionId(SnowFlakeIdGenerator.NewId)
+    )
     {
         _amount = new TransactionAmount();
         _createdAt = createdAt;
@@ -43,12 +50,4 @@ public class Transaction : EntityBase<TransactionId>, IAggregateRoot<Transaction
         transaction.AddDomainEvent(new TransactionCreatedDomainEvent(transaction.Id));
         return transaction;
     }
-
-    private TransactionAmount _amount;
-
-    private DateTime _createdAt;
-
-    private TransactionDescription _description;
-
-    private readonly List<Tag> _tags;
 }

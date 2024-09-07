@@ -1,32 +1,50 @@
-﻿using Primitives.Rule;
-using Shared.Primitives.DomainEvent;
+﻿using Primitives.DomainEvent;
+using Primitives.Rule;
 
 namespace Primitives.Entity;
 
 public abstract class EntityBase<T> : IEquatable<EntityBase<T>>, IDomainEventContainer, IEntity<T>
     where T : IEquatable<T>
 {
+    private readonly List<IDomainEvent> _domainEvents = [];
+
     protected EntityBase(T id)
     {
         Id = id;
     }
 
-    public static bool operator ==(EntityBase<T> left, EntityBase<T> right) =>
-        ReferenceEquals(left, right) || left is { } && right is { } && left.Equals(right);
-
-    public static bool operator !=(EntityBase<T> left, EntityBase<T> right) => !(left == right);
-
-    private readonly List<IDomainEvent> _domainEvents = [];
-
     public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
 
-    public T Id { get; private init; }
+    public void AddDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
+
+    public void ClearDomainEvents()
+    {
+        _domainEvents.Clear();
+    }
+
+    public T Id { get; }
 
     public bool Equals(EntityBase<T>? other)
     {
         if (other is null)
+        {
             return false;
+        }
+
         return other.Id.Equals(Id);
+    }
+
+    public static bool operator ==(EntityBase<T> left, EntityBase<T> right)
+    {
+        return ReferenceEquals(left, right) || (left is not null && right is not null && left.Equals(right));
+    }
+
+    public static bool operator !=(EntityBase<T> left, EntityBase<T> right)
+    {
+        return !(left == right);
     }
 
     public override int GetHashCode()
@@ -56,8 +74,4 @@ public abstract class EntityBase<T> : IEquatable<EntityBase<T>>, IDomainEventCon
             throw new DomainBusinessRuleInvalidException(rule, typeof(TAsyncRule).Name);
         }
     }
-
-    public void AddDomainEvent(IDomainEvent domainEvent) => _domainEvents.Add(domainEvent);
-
-    public void ClearDomainEvents() => _domainEvents.Clear();
 }

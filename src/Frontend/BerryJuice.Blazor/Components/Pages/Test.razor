@@ -1,30 +1,20 @@
 ﻿@page "/test"
 @using Accounts.Application.AccountService
-@using Accounts.Application.AccountService.CreateAccount
-@using Accounts.Application.AccountService.GetAccounts
-@using Accounts.Application.TestService.GetTest
+@using Accounts.Application.AccountService.Commands
+@using Accounts.Application.AccountService.Models
+@using Accounts.Application.AccountService.Queries
 @using Accounts.Application.TransactionService
-@using Accounts.Application.TransactionService.GetTransactions
+@using Accounts.Application.TransactionService.Models
+@using Accounts.Application.TransactionService.Queries
 @using Primitives.EventBusScopedWrapper
-@using Accounts.Application
 @inject IEventBusWrapper _eventBus
 @rendermode InteractiveServer
 
 <PageTitle>Test</PageTitle>
 
 <h1>Test</h1>
-<hr />
-@if (Query == -1)
-{
-    <p>Click the button to query the server</p>
-}
-else
-{
-    <p>Query result is: @Query</p>
-}
-<button @onclick="TestQuery">Query Button</button>
 
-<hr />
+<hr/>
 
 <h2>Test Get Accounts</h2>
 
@@ -59,45 +49,33 @@ else
 <button @onclick="TestGetAccounts">Query Button</button>
 
 <button @onclick="TestAddAccount">Add a new account with random name</button>
+
 @code {
     public int Query { get; set; } = -1;
 
-    public List<(AccountDto, List<TransactionDto>)> Accounts { get; set; } = new();
-
-    private async void TestQuery(MouseEventArgs e)
-    {
-        var query = new TestQuery();
-        var result = await _eventBus.QueryAsync<int>(query);
-
-        await InvokeAsync(
-            () => Query = result
-        );
-
-    }
+    public List<(AccountModel, List<TransactionModel>)> Accounts { get; set; } = new();
 
     private async Task TestGetAccounts(MouseEventArgs e)
     {
         var query = new GetAccountsQuery();
-        var result = await _eventBus.QueryAsync<IEnumerable<AccountDto>>(query);
+        var result = await _eventBus.QueryAsync(query);
 
-        var accounts = new List<(AccountDto, List<TransactionDto>)>();
+        var accounts = new List<(AccountModel, List<TransactionModel>)>();
 
-        foreach(var account in result)
+        foreach (var account in result.Accounts)
         {
             var transactionsQuery = new GetTransactionsQuery(account.Id);
-            var transactions = await _eventBus.QueryAsync<IEnumerable<TransactionDto>>(transactionsQuery);
-            accounts.Add((account, transactions.ToList()));
+            var transactions = await _eventBus.QueryAsync(transactionsQuery);
+            accounts.Add((account, transactions.Transactions.ToList()));
         }
 
-        await InvokeAsync(
-            () => Accounts = accounts
-        );
-
-
+        await InvokeAsync(workItem: () => Accounts = accounts);
     }
+
     private async Task TestAddAccount(MouseEventArgs e)
     {
-        var command = new CreateAccountCommand("Random Account");
+        var command = new CreateAccountCommand(description: "Random Account");
         var result = await _eventBus.CommandAsync(command);
     }
+
 }

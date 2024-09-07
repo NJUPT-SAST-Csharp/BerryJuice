@@ -10,7 +10,7 @@ public static class WebApplicationExtension
 {
     public static WebApplication ConfigureApplication(this WebApplication app)
     {
-        var isBlazorEnabled = app.Configuration["BERRYJUICE_USE_BLAZOR"] == "true";
+        var isBlazorEnabled = app.Configuration[key: "BERRYJUICE_USE_BLAZOR"] == "true";
 
         if (app.Environment.IsDevelopment())
         {
@@ -27,12 +27,16 @@ public static class WebApplicationExtension
         if (isBlazorEnabled)
         {
             if (app.Environment.IsDevelopment())
+            {
                 app.UseWebAssemblyDebugging();
-            else
-                app.UseExceptionHandler("/Error", true);
+            } else
+            {
+                app.UseExceptionHandler(errorHandlingPath: "/Error", createScopeForErrors: true);
+            }
 
             app.UseAntiforgery();
-            app.MapRazorComponents<App>()
+            app
+               .MapRazorComponents<App>()
                .AddInteractiveWebAssemblyRenderMode()
                .AddInteractiveServerRenderMode()
                .AddAdditionalAssemblies(typeof(_Imports).Assembly);

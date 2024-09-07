@@ -1,11 +1,10 @@
-﻿namespace Shared.Primitives.DomainEvent
+﻿namespace Primitives.DomainEvent;
+
+public interface IDomainEventContainer
 {
-    public interface IDomainEventContainer
-    {
-        public IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
 
-        public void ClearDomainEvents();
+    public void ClearDomainEvents();
 
-        public void AddDomainEvent(IDomainEvent domainEvent);
-    }
+    public void AddDomainEvent(IDomainEvent domainEvent);
 }

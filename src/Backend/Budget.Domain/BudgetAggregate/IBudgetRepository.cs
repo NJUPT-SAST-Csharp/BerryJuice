@@ -1,6 +1,3 @@
 namespace Budget.Domain.BudgetAggregate;
 
-public interface IBudgetRepository
-{
-
-}
+public interface IBudgetRepository { }

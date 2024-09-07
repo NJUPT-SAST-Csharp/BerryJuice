@@ -9,23 +9,27 @@ internal class AccountEntityTypeConfiguration : IEntityTypeConfiguration<Account
 {
     public void Configure(EntityTypeBuilder<Account> builder)
     {
-        builder.ToTable("accounts");
+        builder.ToTable(name: "accounts");
 
-        builder.HasKey(account => account.Id);
+        builder.HasKey(keyExpression: account => account.Id);
         builder
-            .Property(account => account.Id)
-            .HasColumnName("id")
-            .HasConversion(x => x.Value, x => new AccountId(x));
+           .Property(propertyExpression: account => account.Id)
+           .HasColumnName(name: "id")
+           .HasConversion(
+                convertToProviderExpression: x => x.Value,
+                convertFromProviderExpression: x => new AccountId(x)
+            );
 
-        builder.Ignore(account => account.DomainEvents);
+        builder.Ignore(propertyExpression: account => account.DomainEvents);
 
         builder
-            .Property<AccountDescription>("_description")
-            .HasColumnName("description")
-            .HasConversion(x => x.Value, x => new AccountDescription(x));
+           .Property<AccountDescription>(propertyName: "_description")
+           .HasColumnName(name: "description")
+           .HasConversion(
+                convertToProviderExpression: x => x.Value,
+                convertFromProviderExpression: x => new AccountDescription(x)
+            );
 
-        builder.HasMany<Transaction>(
-            "_transactions"
-        );
+        builder.HasMany<Transaction>(navigationName: "_transactions");
     }
 }

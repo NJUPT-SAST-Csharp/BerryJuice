@@ -1,5 +1,5 @@
-﻿using Accounts.Application.AccountService.GetAccounts;
-using Accounts.Application.TransactionService.GetTransactions;
+﻿using Accounts.Application.AccountService.Queries;
+using Accounts.Application.TransactionService.Queries;
 using Accounts.Domain.AccountAggregate;
 using Accounts.Domain.TagEntity;
 using Accounts.Infrastructure.DomainRepository;
@@ -23,7 +23,7 @@ public static class IServiceCollectionExtension
         services.AddScoped<IGetTransactionRepository, TransactionQueryRepository>();
 
         // IUnitOfWork
-        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>("accounts");
+        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "accounts");
 
         return services;
     }

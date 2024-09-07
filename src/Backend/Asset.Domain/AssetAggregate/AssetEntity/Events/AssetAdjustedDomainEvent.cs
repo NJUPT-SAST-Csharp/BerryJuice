@@ -1,9 +1,12 @@
 using Asset.Domain.AssetAggregate.AdjustmentRecordEntity;
-using Shared.Primitives.DomainEvent;
+using Primitives.DomainEvent;
 
-namespace Asset.Domain.AssetAggregate.AssetEntity.Event;
+namespace Asset.Domain.AssetAggregate.AssetEntity.Events;
 
-public class AssetAdjustedDomainEvent(AssetId assetId, AdjustmentRecordId adjustmentRecordId) : IDomainEvent
+public class AssetAdjustedDomainEvent(
+    AssetId assetId,
+    AdjustmentRecordId adjustmentRecordId
+) : IDomainEvent
 {
     public AssetId AssetId { get; } = assetId;
 

@@ -1,6 +1,4 @@
-﻿namespace Shared.Primitives
-{
-    public interface IAggregateRoot<T>
-        where T : IAggregateRoot<T>
-    { }
-}
+﻿namespace Primitives.Entity;
+
+public interface IAggregateRoot<T>
+    where T : IAggregateRoot<T> { }

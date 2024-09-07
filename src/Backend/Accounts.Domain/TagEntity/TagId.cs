@@ -1,6 +1,11 @@
 namespace Accounts.Domain.TagEntity;
 
-public readonly record struct TagId(long Value)
+public readonly record struct TagId(
+    long Value
+)
 {
-    public override string ToString() => Value.ToString();
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
 }

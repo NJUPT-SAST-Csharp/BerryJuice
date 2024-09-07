@@ -1,8 +1,10 @@
-using Shared.Primitives.DomainEvent;
+using Primitives.DomainEvent;
 
 namespace Accounts.Domain.AccountAggregate.AccountEntity.Events;
 
-public class AccountCreatedDomainEvent(AccountId accountId) : IDomainEvent
+public class AccountCreatedDomainEvent(
+    AccountId accountId
+) : IDomainEvent
 {
     public AccountId AccountId { get; } = accountId;
 }

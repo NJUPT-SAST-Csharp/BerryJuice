@@ -1,6 +1,5 @@
 ﻿using MediatR;
 
-namespace Shared.Primitives.Query
-{
-    public interface IQueryRequest<TResponse> : IRequest<TResponse> { }
-}
+namespace Primitives.Query;
+
+public interface IQueryRequest<TResponse> : IRequest<TResponse> { }

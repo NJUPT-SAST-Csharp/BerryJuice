@@ -1,8 +1,10 @@
-using Shared.Primitives.DomainEvent;
+using Primitives.DomainEvent;
 
 namespace Budget.Domain.BudgetAggregate.SubBudgetEntity.Events;
 
-public class SubBudgetCreatedDomainEvent(SubBudgetId subBudgetId) : IDomainEvent
+public class SubBudgetCreatedDomainEvent(
+    SubBudgetId subBudgetId
+) : IDomainEvent
 {
     public SubBudgetId SubBudgetId { get; } = subBudgetId;
 }

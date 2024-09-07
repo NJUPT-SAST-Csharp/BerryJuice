@@ -1,6 +1,11 @@
 namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
-public readonly record struct AccountId(long Value)
+public readonly record struct AccountId(
+    long Value
+)
 {
-    public override string ToString() => Value.ToString();
+    public override string ToString()
+    {
+        return Value.ToString();
+    }
 }
