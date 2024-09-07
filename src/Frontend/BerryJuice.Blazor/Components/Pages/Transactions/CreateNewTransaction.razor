@@ -1,0 +1,12 @@
+﻿@using Primitives.EventBusScopedWrapper
+@inject IEventBusWrapper EventBus
+@rendermode InteractiveServer
+
+<h4>Add Transaction</h4>
+
+<div class="form-group">
+    <label for="money">Money:</label>
+    <InputText id="money" @bind-Value="MoneyInput"/>
+</div>
+
+<button class="btn" @onclick="AddTransactionAsync">Add</button>
