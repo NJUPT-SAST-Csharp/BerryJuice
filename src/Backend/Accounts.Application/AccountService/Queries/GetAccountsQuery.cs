@@ -1,23 +1,27 @@
 ﻿using Accounts.Application.AccountService.Models;
+using JetBrains.Annotations;
 using Shared.Primitives.Query;
 
 namespace Accounts.Application.AccountService.Queries;
 
-public sealed class GetAccountsQuery : IQueryRequest<IEnumerable<AccountModel>> { }
+public sealed class GetAccountsQuery : IQueryRequest<GetAccountsDto> { }
+
+public record GetAccountsDto(
+    IEnumerable<AccountModel> Accounts
+);
 
 public interface IGetAccountsRepository
 {
     public Task<IEnumerable<AccountModel>> GetAccountsByAdminAsync(CancellationToken cancellationToken = default);
 }
 
+[UsedImplicitly]
 public sealed class GetAccountsQueryHandler(
     IGetAccountsRepository getAccountsRepository
-) : IQueryRequestHandler<GetAccountsQuery, IEnumerable<AccountModel>>
+) : IQueryRequestHandler<GetAccountsQuery, GetAccountsDto>
 {
-    public async Task<IEnumerable<AccountModel>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+    public async Task<GetAccountsDto> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
     {
-        return await getAccountsRepository.GetAccountsByAdminAsync(cancellationToken);
+        return new GetAccountsDto(await getAccountsRepository.GetAccountsByAdminAsync(cancellationToken));
     }
 }
-
-// TODO: Implement DTO

@@ -61,7 +61,7 @@
 
     private async Task UpdateAccountList()
     {
-        _accounts = (await EventBus.QueryAsync(new GetAccountsQuery())).ToList();
+        _accounts = (await EventBus.QueryAsync(new GetAccountsQuery())).Accounts.ToList();
     }
 
     private async Task AddTransaction()

@@ -12,7 +12,7 @@ public record TransactionModel(
     List<TagModel> Tags
 )
 {
-    public TransactionModel() : this(0, 0, CurrencyType.USD, null, new DateTime(), new List<TagModel>()) { }
+    public TransactionModel() : this(0, 0, CurrencyType.USD, "", new DateTime(), new List<TagModel>()) { }
 
     public required long TransactionId { get; init; } = TransactionId;
     public required long Amount { get; init; } = Amount;
