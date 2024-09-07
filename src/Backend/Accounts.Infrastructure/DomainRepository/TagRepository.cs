@@ -18,8 +18,8 @@ internal class TagRepository(AccountsContext context) : ITagRepository
     public async Task<Tag> GetTagAsync(TagId id, CancellationToken cancellationToken = default)
     {
         var t = await _context
-            .Tags.Where<Tag>(t => t.Id == id)
-            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+                     .Tags.Where<Tag>(t => t.Id == id)
+                     .FirstOrDefaultAsync(cancellationToken: cancellationToken);
         return t ?? throw new DbNotFoundException(nameof(Tag), id.Value.ToString());
     }
 }

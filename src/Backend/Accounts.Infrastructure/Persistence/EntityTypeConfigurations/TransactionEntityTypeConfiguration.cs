@@ -28,7 +28,7 @@ public class TransactionEntityTypeConfiguration : IEntityTypeConfiguration<Trans
                 builder.Property(x => x.Amount).HasColumnName("amount");
                 builder.Property(x => x.Currency).HasColumnName("currency");
             }
-            );
+        );
 
         builder.Property<TransactionDescription>("_description")
                .HasColumnName("description").HasConversion(x => x.Value, x => new TransactionDescription(x));

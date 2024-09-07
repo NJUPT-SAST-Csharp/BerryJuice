@@ -65,4 +65,3 @@ public sealed class AddTransactionCommandHandler (
         return new AddTransactionDto(id.Value);
     }
 }
-

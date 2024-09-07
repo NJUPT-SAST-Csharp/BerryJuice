@@ -1,12 +1,11 @@
 ﻿using Shared.Primitives.Query;
 
-namespace Primitives.Query
+namespace Primitives.Query;
+
+public interface IQueryRequestSender
 {
-    public interface IQueryRequestSender
-    {
-        public Task<TResponse> QueryAsync<TResponse>(
-            IQueryRequest<TResponse> request,
-            CancellationToken cancellationToken = default
-        );
-    }
+    public Task<TResponse> QueryAsync<TResponse>(
+        IQueryRequest<TResponse> request,
+        CancellationToken cancellationToken = default
+    );
 }

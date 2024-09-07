@@ -1,9 +1,8 @@
-﻿namespace Primitives.Rule
-{
-    public interface IDomainBusinessRule
-    {
-        bool IsBroken { get; }
+﻿namespace Primitives.Rule;
 
-        string Message { get; }
-    }
+public interface IDomainBusinessRule
+{
+    bool IsBroken { get; }
+
+    string Message { get; }
 }

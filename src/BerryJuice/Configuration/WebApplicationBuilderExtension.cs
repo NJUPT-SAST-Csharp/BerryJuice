@@ -38,16 +38,16 @@ public static class WebApplicationBuilderExtension
                        .ConfigureLocalDatabase(
                             configuration.GetConnectionString("LocalPostgres")
                          ?? throw new ConnectionStringNotFoundException("LocalPostgres")
-                            )
-                )
+                        )
+            )
            .IfIsNotDevelopment(
                 environment,
                 services =>
                     services.ConfigureAzureDatabase(
                         configuration.GetConnectionString("CSharpGroupAzure")
                      ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
-                        )
-                )
+                    )
+            )
            .IfBlazorEnabled(configuration, services => services.ConfigureBlazor())
            .ConfigureRepository()
            .ConfigureLogging()

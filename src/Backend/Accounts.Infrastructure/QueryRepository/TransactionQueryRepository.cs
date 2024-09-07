@@ -62,7 +62,7 @@ internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTr
         foreach (var tagEntry in transactions_tag)
         {
             var transaction = transactions.FirstOrDefault(t =>
-                t.TransactionId == tagEntry.TransactionId
+                                                              t.TransactionId == tagEntry.TransactionId
             );
             transaction?.Tags.Add(tagEntry.Tags.First());
         }

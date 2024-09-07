@@ -1,8 +1,7 @@
 ﻿using MediatR;
 
-namespace Primitives.Command
-{
-    public interface ICommandRequest : IRequest { }
+namespace Primitives.Command;
 
-    public interface ICommandRequest<TResponse> : IRequest<TResponse> { }
-}
+public interface ICommandRequest : IRequest { }
+
+public interface ICommandRequest<TResponse> : IRequest<TResponse> { }

@@ -23,6 +23,6 @@ public class Asset : EntityBase<AssetId>, IAggregateRoot<Asset>
     }
 
     private string _name;
-    private decimal _balance; //余额
+    private decimal _balance;                          //余额
     private List<AdjustmentRecord> _adjustmentRecords; //校准的记录
 }

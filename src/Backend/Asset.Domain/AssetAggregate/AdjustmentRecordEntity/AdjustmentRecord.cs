@@ -17,7 +17,7 @@ public class AdjustmentRecord : EntityBase<AdjustmentRecordId>
     }
 
     public static AdjustmentRecord CreateNewAdjustmentRecord(AssetId assetId, decimal amount, string? reason,
-        DateTime adjustmentDate)
+                                                             DateTime adjustmentDate)
     {
         var record = new AdjustmentRecord(assetId, amount, reason, adjustmentDate);
         record.AddDomainEvent(new AssetAdjustedDomainEvent(record._assetId, record.Id));

@@ -17,10 +17,10 @@ internal class UnitOfWork(BerryJuiceDbContext dbContext, IDomainEventPublisher e
         );
 
         var domainEntities = _dbContext
-            .ChangeTracker.Entries<IDomainEventContainer>()
-            .Where(x => x.Entity.DomainEvents.Count > 0)
-            .Select(x => x.Entity)
-            .ToList();
+                            .ChangeTracker.Entries<IDomainEventContainer>()
+                            .Where(x => x.Entity.DomainEvents.Count > 0)
+                            .Select(x => x.Entity)
+                            .ToList();
 
         // First SaveChangesAsync() call is to save the changes made by the command handlers
         await _dbContext.SaveChangesAsync(cancellationToken);

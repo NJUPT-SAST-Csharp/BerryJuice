@@ -9,8 +9,8 @@ namespace BerryJuice.Infrastructure.EventBus;
 
 internal class InternalEventBus(IMediator mediator)
     : IQueryRequestSender,
-        IDomainEventPublisher,
-        ICommandRequestSender
+      IDomainEventPublisher,
+      ICommandRequestSender
 {
     private readonly IMediator _mediator = mediator;
 
