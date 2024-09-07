@@ -17,7 +17,7 @@ public sealed class NoPermissionExceptionHandler : IExceptionHandler
         {
             httpContext.Response.StatusCode = StatusCodes.Status403Forbidden;
             httpContext.Response.WriteAsJsonAsync(
-                new ProblemDetails()
+                new ProblemDetails
                 {
                     Status = StatusCodes.Status403Forbidden,
                     Title = "No Permission",
@@ -26,8 +26,9 @@ public sealed class NoPermissionExceptionHandler : IExceptionHandler
                 },
                 cancellationToken
             );
-            return ValueTask.FromResult(true);
+            return ValueTask.FromResult(result: true);
         }
-        return ValueTask.FromResult(false);
+
+        return ValueTask.FromResult(result: false);
     }
 }

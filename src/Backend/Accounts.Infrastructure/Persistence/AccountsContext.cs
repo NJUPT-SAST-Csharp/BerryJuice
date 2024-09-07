@@ -4,7 +4,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Accounts.Infrastructure.Persistence;
 
-public class AccountsContext(DbContextOptions<AccountsContext> options) : DbContext(options)
+public class AccountsContext(
+    DbContextOptions<AccountsContext> options
+) : DbContext(options)
 {
     public DbSet<Account> Accounts { get; set; }
 
@@ -12,7 +14,7 @@ public class AccountsContext(DbContextOptions<AccountsContext> options) : DbCont
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.HasDefaultSchema("bj_accounts");
+        modelBuilder.HasDefaultSchema(schema: "bj_accounts");
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(AccountsContext).Assembly);
     }
 }

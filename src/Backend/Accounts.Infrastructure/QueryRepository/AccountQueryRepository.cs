@@ -6,16 +6,15 @@ using Primitives.QueryDatabase;
 
 namespace Accounts.Infrastructure.QueryRepository;
 
-internal sealed class AccountQueryRepository(IDbConnectionFactory factory) : IGetAccountsRepository
+internal sealed class AccountQueryRepository(
+    IDbConnectionFactory factory
+) : IGetAccountsRepository
 {
     private readonly IDbConnection _connection = factory.GetConnection();
 
-    public Task<IEnumerable<AccountDto>> GetAccountsByAdminAsync(
-        CancellationToken cancellationToken = default
-    )
+    public Task<IEnumerable<AccountDto>> GetAccountsByAdminAsync(CancellationToken cancellationToken = default)
     {
-        const string sql =
-            @"
+        const string sql = @"
                 SELECT id as Id, description as Description
                 FROM bj_accounts.accounts
             ";

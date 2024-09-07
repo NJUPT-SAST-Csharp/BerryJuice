@@ -23,7 +23,7 @@ public static class IServiceCollectionExtension
         services.AddScoped<IGetTransactionRepository, TransactionQueryRepository>();
 
         // IUnitOfWork
-        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>("accounts");
+        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "accounts");
 
         return services;
     }

@@ -5,30 +5,33 @@ using Shared.Primitives.Query;
 
 namespace Primitives.EventBusScopedWrapper;
 
-public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapper
+public class EventBusWrapper(
+    IServiceScopeFactory scopeFactory
+) : IEventBusWrapper
 {
     public async Task<TResponse> CommandAsync<TResponse>(
         ICommandRequest<TResponse> command,
         CancellationToken cancellationToken = default
     )
     {
-        return await DoInScopeAsync(async serviceProvider =>
-        {
-            var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
-            return await commandSender.CommandAsync(command, cancellationToken);
-        });
+        return await DoInScopeAsync(
+            action: async serviceProvider =>
+            {
+                var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
+                return await commandSender.CommandAsync(command, cancellationToken);
+            }
+        );
     }
 
-    public async Task CommandAsync(
-        ICommandRequest command,
-        CancellationToken cancellationToken = default
-    )
+    public async Task CommandAsync(ICommandRequest command, CancellationToken cancellationToken = default)
     {
-        await DoInScopeAsync(async serviceProvider =>
-        {
-            var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
-            await commandSender.CommandAsync(command, cancellationToken);
-        });
+        await DoInScopeAsync(
+            action: async serviceProvider =>
+            {
+                var commandSender = serviceProvider.GetRequiredService<ICommandRequestSender>();
+                await commandSender.CommandAsync(command, cancellationToken);
+            }
+        );
     }
 
     public async Task<TResponse> QueryAsync<TResponse>(
@@ -36,11 +39,13 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
         CancellationToken cancellationToken = default
     )
     {
-        return await DoInScopeAsync(async serviceProvider =>
-        {
-            var query = serviceProvider.GetRequiredService<IQueryRequestSender>();
-            return await query.QueryAsync(request, cancellationToken);
-        });
+        return await DoInScopeAsync(
+            action: async serviceProvider =>
+            {
+                var query = serviceProvider.GetRequiredService<IQueryRequestSender>();
+                return await query.QueryAsync(request, cancellationToken);
+            }
+        );
     }
 
     private async Task DoInScopeAsync(Func<IServiceProvider, Task> action)
@@ -49,9 +54,7 @@ public class EventBusWrapper(IServiceScopeFactory scopeFactory) : IEventBusWrapp
         await action.Invoke(scope.ServiceProvider);
     }
 
-    private async Task<TResponse> DoInScopeAsync<TResponse>(
-        Func<IServiceProvider, Task<TResponse>> action
-    )
+    private async Task<TResponse> DoInScopeAsync<TResponse>(Func<IServiceProvider, Task<TResponse>> action)
     {
         using var scope = scopeFactory.CreateScope();
         return await action.Invoke(scope.ServiceProvider);

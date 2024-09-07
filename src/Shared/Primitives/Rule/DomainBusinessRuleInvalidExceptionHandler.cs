@@ -6,12 +6,12 @@ using Primitives.Rule;
 namespace SastImg.WebAPI.Configurations;
 
 /// <summary>
-/// TODO: complete
+///     TODO: complete
 /// </summary>
 public class DomainBusinessRuleInvalidExceptionHandler : IExceptionHandler
 {
     /// <summary>
-    /// TODO: complete
+    ///     TODO: complete
     /// </summary>
     public ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
@@ -23,17 +23,18 @@ public class DomainBusinessRuleInvalidExceptionHandler : IExceptionHandler
         {
             httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             httpContext.Response.WriteAsJsonAsync<ProblemDetails>(
-                new()
+                new ProblemDetails
                 {
                     Status = StatusCodes.Status400BadRequest,
                     Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
                     Title = "Bad Request",
-                    Detail = ruleInvalidException.Message
+                    Detail = ruleInvalidException.Message,
                 },
                 cancellationToken
             );
-            return ValueTask.FromResult(true);
+            return ValueTask.FromResult(result: true);
         }
-        return ValueTask.FromResult(false);
+
+        return ValueTask.FromResult(result: false);
     }
 }

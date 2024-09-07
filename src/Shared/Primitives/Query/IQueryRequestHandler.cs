@@ -3,5 +3,4 @@
 namespace Shared.Primitives.Query;
 
 public interface IQueryRequestHandler<TQuery, TResult> : IRequestHandler<TQuery, TResult>
-    where TQuery : IQueryRequest<TResult>
-{ }
+    where TQuery : IQueryRequest<TResult> { }

@@ -46,10 +46,10 @@ nav {
     transition: color 0.3s ease;
 }
 
-    .nav-link:hover {
-        color: #b71c1c;
-    }
+.nav-link:hover {
+    color: #b71c1c;
+}
 
-    .nav-link:active {
-        color: #880e4f;
-    }
+.nav-link:active {
+    color: #880e4f;
+}

@@ -16,17 +16,18 @@ public sealed class DomainObjectValidationExceptionHandler : IExceptionHandler
         {
             httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
             httpContext.Response.WriteAsJsonAsync<ProblemDetails>(
-                new()
+                new ProblemDetails
                 {
                     Status = StatusCodes.Status400BadRequest,
                     Type = "https://tools.ietf.org/html/rfc9110#section-15.5.1",
                     Title = "Bad Request",
-                    Detail = ex.Message
+                    Detail = ex.Message,
                 },
                 cancellationToken
             );
-            return ValueTask.FromResult(true);
+            return ValueTask.FromResult(result: true);
         }
-        return ValueTask.FromResult(false);
+
+        return ValueTask.FromResult(result: false);
     }
 }

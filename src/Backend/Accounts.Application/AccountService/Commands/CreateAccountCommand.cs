@@ -6,24 +6,26 @@ using Primitives.Command;
 
 namespace Accounts.Application.AccountService.CreateAccount;
 
-public sealed class CreateAccountCommand (string description) : ICommandRequest<CreateAccountDto>
+public sealed class CreateAccountCommand(
+    string description
+) : ICommandRequest<CreateAccountDto>
 {
     public AccountDescription Description { get; } = new(description);
 }
 
-public record CreateAccountDto (long Id);
-internal sealed class CreateAccountCommandHandler (
+public record CreateAccountDto(
+    long Id
+);
+
+internal sealed class CreateAccountCommandHandler(
     IAccountRepository accountRepository,
-    [FromKeyedServices("accounts")] IUnitOfWork unitOfWork
+    [FromKeyedServices(key: "accounts")] IUnitOfWork unitOfWork
 ) : ICommandRequestHandler<CreateAccountCommand, CreateAccountDto>
 {
-    private IAccountRepository _accountRepository = accountRepository;
-    private IUnitOfWork _unitOfWork = unitOfWork;
+    private readonly IAccountRepository _accountRepository = accountRepository;
+    private readonly IUnitOfWork _unitOfWork = unitOfWork;
 
-    public async Task<CreateAccountDto> Handle (
-        CreateAccountCommand request,
-        CancellationToken cancellationToken
-    )
+    public async Task<CreateAccountDto> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
     {
         var account = Account.CreateNewAccount(request.Description);
         var newId = await _accountRepository.AddAccountAsync(account, cancellationToken);

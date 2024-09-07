@@ -8,7 +8,9 @@ using Primitives.QueryDatabase;
 
 namespace Accounts.Infrastructure.QueryRepository;
 
-internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTransactionRepository
+internal class TransactionQueryRepository(
+    IDbConnectionFactory factory
+) : IGetTransactionRepository
 {
     private readonly IDbConnection _connection = factory.GetConnection();
 
@@ -17,8 +19,7 @@ internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTr
         CancellationToken cancellationToken = default
     )
     {
-        const string sql1 =
-            @"
+        const string sql1 = @"
                 SELECT  t.id as TransactionId,
                         t.amount as Amount, 
                         t.currency as CurrencyType, 
@@ -32,8 +33,7 @@ internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTr
                 WHERE t.account_id = @AccountId
             ";
 
-        const string sql2 =
-            @"
+        const string sql2 = @"
                 SELECT  t.id as TransactionId, 
                         t.amount as Amount, 
                         t.currency as CurrencyType, 
@@ -43,14 +43,11 @@ internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTr
                 WHERE t.account_id = @AccountId
             ";
 
-        var transactions = await _connection.QueryAsync<TransactionDto>(
-            sql2,
-            new { AccountId = id.Value }
-        );
+        var transactions = await _connection.QueryAsync<TransactionDto>(sql2, new { AccountId = id.Value });
 
         var transactions_tag = await _connection.QueryAsync<TransactionDto, TagDto, TransactionDto>(
             sql1,
-            (transaction, tag) =>
+            map: (transaction, tag) =>
             {
                 transaction.Tags.Add(tag);
                 return transaction;
@@ -61,9 +58,7 @@ internal class TransactionQueryRepository(IDbConnectionFactory factory) : IGetTr
 
         foreach (var tagEntry in transactions_tag)
         {
-            var transaction = transactions.FirstOrDefault(t =>
-                                                              t.TransactionId == tagEntry.TransactionId
-            );
+            var transaction = transactions.FirstOrDefault(predicate: t => t.TransactionId == tagEntry.TransactionId);
             transaction?.Tags.Add(tagEntry.Tags.First());
         }
 

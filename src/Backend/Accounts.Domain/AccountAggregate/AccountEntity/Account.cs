@@ -10,8 +10,11 @@ namespace Accounts.Domain.AccountAggregate.AccountEntity;
 
 public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 {
-    private Account(AccountDescription description)
-        : base(new AccountId(SnowFlakeIdGenerator.NewId))
+    private readonly List<Transaction> _transactions = [];
+
+    private AccountDescription _description;
+
+    private Account(AccountDescription description) : base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
         _description = description;
     }
@@ -38,8 +41,4 @@ public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 
         return transaction.Id;
     }
-
-    private readonly List<Transaction> _transactions = [];
-
-    private AccountDescription _description;
 }

@@ -8,13 +8,17 @@
 
 <button class="btn btn-primary" @onclick="navigation">Login</button>
 <button class="btn btn-primary" @onclick="_navigation">Register</button>
+
 @code {
-	public void navigation()
-	{
-		Navigation.NavigateTo("/Login");
-	}
-	public void _navigation()
-	{
-		Navigation.NavigateTo("/Register");
-	}
+
+    public void navigation()
+    {
+        Navigation.NavigateTo(uri: "/Login");
+    }
+
+    public void _navigation()
+    {
+        Navigation.NavigateTo(uri: "/Register");
+    }
+
 }

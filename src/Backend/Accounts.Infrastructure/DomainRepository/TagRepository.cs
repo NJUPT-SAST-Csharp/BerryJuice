@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Accounts.Infrastructure.DomainRepository;
 
-internal class TagRepository(AccountsContext context) : ITagRepository
+internal class TagRepository(
+    AccountsContext context
+) : ITagRepository
 {
     private readonly AccountsContext _context = context;
 
@@ -17,9 +19,7 @@ internal class TagRepository(AccountsContext context) : ITagRepository
 
     public async Task<Tag> GetTagAsync(TagId id, CancellationToken cancellationToken = default)
     {
-        var t = await _context
-                     .Tags.Where<Tag>(t => t.Id == id)
-                     .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+        var t = await _context.Tags.Where(predicate: t => t.Id == id).FirstOrDefaultAsync(cancellationToken);
         return t ?? throw new DbNotFoundException(nameof(Tag), id.Value.ToString());
     }
 }

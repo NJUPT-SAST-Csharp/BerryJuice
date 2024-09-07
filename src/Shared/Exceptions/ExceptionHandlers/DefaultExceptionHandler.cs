@@ -14,15 +14,15 @@ public sealed class DefaultExceptionHandler : IExceptionHandler
     {
         httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
         httpContext.Response.WriteAsJsonAsync(
-            new ProblemDetails()
+            new ProblemDetails
             {
                 Status = StatusCodes.Status500InternalServerError,
                 Detail = exception.Message,
                 Title = "Unhandled Unknown Exception",
-                Type = "https://datatracker.ietf.org/doc/html/rfc9110#section-15.6.1"
+                Type = "https://datatracker.ietf.org/doc/html/rfc9110#section-15.6.1",
             },
             cancellationToken
         );
-        return ValueTask.FromResult(true);
+        return ValueTask.FromResult(result: true);
     }
 }

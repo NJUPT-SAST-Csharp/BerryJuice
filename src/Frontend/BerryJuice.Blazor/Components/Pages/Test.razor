@@ -5,7 +5,6 @@
 @using Accounts.Application.TransactionService
 @using Accounts.Application.TransactionService.GetTransactions
 @using Primitives.EventBusScopedWrapper
-@using Accounts.Application
 @inject IEventBusWrapper _eventBus
 @rendermode InteractiveServer
 
@@ -13,7 +12,7 @@
 
 <h1>Test</h1>
 
-<hr />
+<hr/>
 
 <h2>Test Get Accounts</h2>
 
@@ -48,6 +47,7 @@
 <button @onclick="TestGetAccounts">Query Button</button>
 
 <button @onclick="TestAddAccount">Add a new account with random name</button>
+
 @code {
     public int Query { get; set; } = -1;
 
@@ -56,26 +56,24 @@
     private async Task TestGetAccounts(MouseEventArgs e)
     {
         var query = new GetAccountsQuery();
-        var result = await _eventBus.QueryAsync<IEnumerable<AccountDto>>(query);
+        var result = await _eventBus.QueryAsync(query);
 
         var accounts = new List<(AccountDto, List<TransactionDto>)>();
 
-        foreach(var account in result)
+        foreach (var account in result)
         {
             var transactionsQuery = new GetTransactionsQuery(account.Id);
-            var transactions = await _eventBus.QueryAsync<IEnumerable<TransactionDto>>(transactionsQuery);
+            var transactions = await _eventBus.QueryAsync(transactionsQuery);
             accounts.Add((account, transactions.ToList()));
         }
 
-        await InvokeAsync(
-            () => Accounts = accounts
-        );
-
-
+        await InvokeAsync(workItem: () => Accounts = accounts);
     }
+
     private async Task TestAddAccount(MouseEventArgs e)
     {
-        var command = new CreateAccountCommand("Random Account");
+        var command = new CreateAccountCommand(description: "Random Account");
         var result = await _eventBus.CommandAsync(command);
     }
+
 }

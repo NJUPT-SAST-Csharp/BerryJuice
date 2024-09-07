@@ -3,7 +3,10 @@ using Shared.Primitives.DomainEvent;
 
 namespace Asset.Domain.AssetAggregate.AssetEntity.Event;
 
-public class AssetAdjustedDomainEvent(AssetId assetId, AdjustmentRecordId adjustmentRecordId) : IDomainEvent
+public class AssetAdjustedDomainEvent(
+    AssetId assetId,
+    AdjustmentRecordId adjustmentRecordId
+) : IDomainEvent
 {
     public AssetId AssetId { get; } = assetId;
 
