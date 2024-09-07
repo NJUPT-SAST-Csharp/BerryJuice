@@ -1,7 +1,7 @@
 ﻿using Accounts.Application.TransactionService.Models;
 using Accounts.Domain.AccountAggregate.AccountEntity;
 using JetBrains.Annotations;
-using Shared.Primitives.Query;
+using Primitives.Query;
 
 namespace Accounts.Application.TransactionService.Queries;
 

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Shared.Primitives.DomainEvent;
 
 namespace Primitives.DomainEvent;
 

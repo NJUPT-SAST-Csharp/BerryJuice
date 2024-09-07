@@ -1,7 +1,6 @@
 ﻿using Accounts.Domain.AccountAggregate.TransactionEntity.Event;
 using Accounts.Domain.TagEntity;
 using Primitives.Entity;
-using Shared.Primitives;
 using Utilities;
 
 namespace Accounts.Domain.AccountAggregate.TransactionEntity;

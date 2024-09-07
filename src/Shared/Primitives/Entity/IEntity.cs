@@ -1,4 +1,4 @@
-﻿using Shared.Primitives.DomainEvent;
+﻿using Primitives.DomainEvent;
 
 namespace Primitives.Entity;
 

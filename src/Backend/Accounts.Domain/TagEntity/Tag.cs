@@ -1,6 +1,5 @@
 using Accounts.Domain.AccountAggregate.TransactionEntity;
 using Primitives.Entity;
-using Shared.Primitives;
 using Utilities;
 
 namespace Accounts.Domain.TagEntity;

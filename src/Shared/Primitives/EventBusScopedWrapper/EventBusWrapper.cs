@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Primitives.Command;
 using Primitives.Query;
-using Shared.Primitives.Query;
 
 namespace Primitives.EventBusScopedWrapper;
 

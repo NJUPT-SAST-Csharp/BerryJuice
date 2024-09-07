@@ -2,7 +2,6 @@ using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 using Budget.Domain.BudgetAggregate.SubBudgetEntity;
 using Budget.Domain.BudgetAggregate.TagEntity;
 using Primitives.Entity;
-using Shared.Primitives;
 
 namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 

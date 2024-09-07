@@ -1,5 +1,5 @@
 ﻿using MediatR;
 
-namespace Shared.Primitives.DomainEvent;
+namespace Primitives.DomainEvent;
 
 public interface IDomainEvent : INotification { }

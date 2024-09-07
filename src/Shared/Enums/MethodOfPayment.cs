@@ -1,4 +1,4 @@
-namespace Accounts.Domain.AccountAggregate.AccountEntity;
+namespace Enums;
 
 public enum MethodOfPayment
 {
