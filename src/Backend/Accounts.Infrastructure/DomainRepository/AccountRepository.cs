@@ -25,9 +25,9 @@ internal class AccountRepository(AccountsContext context) : IAccountRepository
     )
     {
         var a = await _context
-            .Accounts.Where<Account>(a => a.Id == id)
-            .Include("_transactions")
-            .FirstOrDefaultAsync(cancellationToken: cancellationToken);
+                     .Accounts.Where<Account>(a => a.Id == id)
+                     .Include("_transactions")
+                     .FirstOrDefaultAsync(cancellationToken: cancellationToken);
 
         return a ?? throw new DbNotFoundException(nameof(Account), id.Value.ToString());
     }

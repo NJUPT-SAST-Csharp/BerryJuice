@@ -1,14 +1,13 @@
 ﻿using Shared.Primitives.DomainEvent;
 
-namespace Primitives.Entity
+namespace Primitives.Entity;
+
+public interface IEntity<T>
+    where T : IEquatable<T>
 {
-    public interface IEntity<T>
-        where T : IEquatable<T>
-    {
-        public T Id { get; }
+    public T Id { get; }
 
-        public IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
+    public IReadOnlyCollection<IDomainEvent> DomainEvents { get; }
 
-        public void ClearDomainEvents();
-    }
+    public void ClearDomainEvents();
 }

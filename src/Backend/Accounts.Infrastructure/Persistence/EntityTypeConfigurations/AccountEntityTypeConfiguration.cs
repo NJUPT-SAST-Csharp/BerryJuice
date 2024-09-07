@@ -13,16 +13,16 @@ internal class AccountEntityTypeConfiguration : IEntityTypeConfiguration<Account
 
         builder.HasKey(account => account.Id);
         builder
-            .Property(account => account.Id)
-            .HasColumnName("id")
-            .HasConversion(x => x.Value, x => new AccountId(x));
+           .Property(account => account.Id)
+           .HasColumnName("id")
+           .HasConversion(x => x.Value, x => new AccountId(x));
 
         builder.Ignore(account => account.DomainEvents);
 
         builder
-            .Property<AccountDescription>("_description")
-            .HasColumnName("description")
-            .HasConversion(x => x.Value, x => new AccountDescription(x));
+           .Property<AccountDescription>("_description")
+           .HasColumnName("description")
+           .HasConversion(x => x.Value, x => new AccountDescription(x));
 
         builder.HasMany<Transaction>(
             "_transactions"

@@ -13,18 +13,18 @@ internal class TagEntityTypeConfiguration : IEntityTypeConfiguration<Tag>
 
         builder.HasKey(tag => tag.Id);
         builder
-            .Property(tag => tag.Id)
-            .HasColumnName("id")
-            .HasConversion(x => x.Value, x => new TagId(x));
+           .Property(tag => tag.Id)
+           .HasColumnName("id")
+           .HasConversion(x => x.Value, x => new TagId(x));
 
         builder.Ignore(tag => tag.DomainEvents);
 
         builder.Property<string>("_name").HasColumnName("name").HasField("_name");
 
         builder
-            .HasMany<Transaction>("_transactions")
-            .WithMany("_tags")
-            .UsingEntity(
+           .HasMany<Transaction>("_transactions")
+           .WithMany("_tags")
+           .UsingEntity(
                 "TransactionTag",
                 l => l.HasOne(typeof(Transaction)).WithMany().HasForeignKey("TransactionId"),
                 r => r.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagId"),

@@ -116,21 +116,21 @@ public static class IServiceCollectionExtension
         services.AddDbContext<BerryJuiceDbContext>(options =>
         {
             options
-                .UseNpgsql(
+               .UseNpgsql(
                     connectionString,
                     x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_berryjuice")
                 )
-                .UseSnakeCaseNamingConvention();
+               .UseSnakeCaseNamingConvention();
         });
 
         services.AddDbContext<AccountsContext>(options =>
         {
             options
-                .UseNpgsql(
+               .UseNpgsql(
                     connectionString,
                     x => x.MigrationsHistoryTable("__EFMigrationsHistory", "bj_accounts")
                 )
-                .UseSnakeCaseNamingConvention();
+               .UseSnakeCaseNamingConvention();
         });
 
         services.AddKeyedScoped<IUnitOfWork, UnitOfWork>("berryjuice");
@@ -138,8 +138,8 @@ public static class IServiceCollectionExtension
         SqlMapper.AddTypeHandler(new UriStringConverter());
         services.AddSingleton<DbDataSource>(new NpgsqlDataSourceBuilder(connectionString).Build());
         services.AddScoped<IDbConnectionFactory, DbConnectionFactory>(_ => new DbConnectionFactory(
-            connectionString
-        ));
+                                                                          connectionString
+                                                                      ));
 
         services.ConfigureAccountsRepository();
         // services.ConfigureAssetRepository();
