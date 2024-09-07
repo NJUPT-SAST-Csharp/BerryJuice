@@ -7,8 +7,11 @@ namespace Accounts.Domain.TagEntity;
 
 public class Tag : EntityBase<TagId>, IAggregateRoot<Tag>
 {
-    private Tag(string name)
-        : base(new TagId(SnowFlakeIdGenerator.NewId))
+    private string _name;
+
+    private List<Transaction> _transactions = [];
+
+    private Tag(string name) : base(new TagId(SnowFlakeIdGenerator.NewId))
     {
         _name = name;
     }
@@ -18,8 +21,4 @@ public class Tag : EntityBase<TagId>, IAggregateRoot<Tag>
         var tag = new Tag(name);
         return tag;
     }
-
-    private string _name;
-
-    private List<Transaction> _transactions = [];
 }

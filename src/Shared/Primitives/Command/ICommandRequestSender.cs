@@ -7,8 +7,5 @@ public interface ICommandRequestSender
         CancellationToken cancellationToken = default
     );
 
-    public Task CommandAsync(
-        ICommandRequest command,
-        CancellationToken cancellationToken = default
-    );
+    public Task CommandAsync(ICommandRequest command, CancellationToken cancellationToken = default);
 }

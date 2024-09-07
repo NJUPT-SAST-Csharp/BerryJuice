@@ -9,13 +9,10 @@ public static class WebApplicationBuilderExtension
     private static readonly Dictionary<string, string> switchMappings =
         new() { { "--use-blazor", "BERRYJUICE_USE_BLAZOR" } };
 
-    public static WebApplicationBuilder ConfigureConfiguration(
-        this WebApplicationBuilder builder,
-        string[] args
-    )
+    public static WebApplicationBuilder ConfigureConfiguration(this WebApplicationBuilder builder, string[] args)
     {
         builder
-           .Configuration.AddJsonFile("appsettings.json")
+           .Configuration.AddJsonFile(path: "appsettings.json")
            .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json")
            .AddEnvironmentVariables()
            .AddCommandLine(args, switchMappings)
@@ -32,23 +29,22 @@ public static class WebApplicationBuilderExtension
         builder
            .Services.IfIsDevelopment(
                 environment,
-                services =>
-                    services
-                       .ConfigureSwagger()
-                       .ConfigureLocalDatabase(
-                            configuration.GetConnectionString("LocalPostgres")
-                         ?? throw new ConnectionStringNotFoundException("LocalPostgres")
-                        )
+                action: services
+                    => services
+                      .ConfigureSwagger()
+                      .ConfigureLocalDatabase(
+                           configuration.GetConnectionString(name: "LocalPostgres")
+                        ?? throw new ConnectionStringNotFoundException(message: "LocalPostgres")
+                       )
             )
            .IfIsNotDevelopment(
                 environment,
-                services =>
-                    services.ConfigureAzureDatabase(
-                        configuration.GetConnectionString("CSharpGroupAzure")
-                     ?? throw new ConnectionStringNotFoundException("CSharpGroupAzure")
-                    )
+                action: services => services.ConfigureAzureDatabase(
+                    configuration.GetConnectionString(name: "CSharpGroupAzure")
+                 ?? throw new ConnectionStringNotFoundException(message: "CSharpGroupAzure")
+                )
             )
-           .IfBlazorEnabled(configuration, services => services.ConfigureBlazor())
+           .IfBlazorEnabled(configuration, action: services => services.ConfigureBlazor())
            .ConfigureRepository()
            .ConfigureLogging()
            .ConfigureExternalEventBus()

@@ -1,22 +1,22 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\Shared\Exceptions\Exceptions.csproj" />
-    <ProjectReference Include="..\Accounts.Domain\Accounts.Domain.csproj" />
-    <ProjectReference Include="..\Accounts.IntegrationEvent\Accounts.IntegrationEvent.csproj" />
-    <ProjectReference Include="..\Asset.IntegrationEvent\Asset.IntegrationEvent.csproj" />
-    <ProjectReference Include="..\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Shared\Exceptions\Exceptions.csproj"/>
+        <ProjectReference Include="..\Accounts.Domain\Accounts.Domain.csproj"/>
+        <ProjectReference Include="..\Accounts.IntegrationEvent\Accounts.IntegrationEvent.csproj"/>
+        <ProjectReference Include="..\Asset.IntegrationEvent\Asset.IntegrationEvent.csproj"/>
+        <ProjectReference Include="..\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj"/>
+    </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="TagService\Commands\" />
-    <Folder Include="TagService\Queries\" />
-  </ItemGroup>
+    <ItemGroup>
+        <Folder Include="TagService\Commands\"/>
+        <Folder Include="TagService\Queries\"/>
+    </ItemGroup>
 
 </Project>

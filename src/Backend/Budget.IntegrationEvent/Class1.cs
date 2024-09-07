@@ -1,6 +1,3 @@
 ﻿namespace Budget.IntegrationEvent;
 
-public class Class1
-{
-
-}
+public class Class1 { }

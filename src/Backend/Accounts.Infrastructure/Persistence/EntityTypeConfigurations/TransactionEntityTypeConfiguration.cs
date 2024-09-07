@@ -9,30 +9,38 @@ public class TransactionEntityTypeConfiguration : IEntityTypeConfiguration<Trans
 {
     public void Configure(EntityTypeBuilder<Transaction> builder)
     {
-        builder.ToTable("transactions");
+        builder.ToTable(name: "transactions");
 
-        builder.HasKey(transaction => transaction.Id);
+        builder.HasKey(keyExpression: transaction => transaction.Id);
         builder
-           .Property(transaction => transaction.Id)
-           .HasColumnName("id")
-           .HasConversion(x => x.Value, x => new TransactionId(x));
+           .Property(propertyExpression: transaction => transaction.Id)
+           .HasColumnName(name: "id")
+           .HasConversion(
+                convertToProviderExpression: x => x.Value,
+                convertFromProviderExpression: x => new TransactionId(x)
+            );
 
-        builder.Ignore(transaction => transaction.DomainEvents);
+        builder.Ignore(propertyExpression: transaction => transaction.DomainEvents);
 
-        builder.Property<DateTime>("_createdAt").HasColumnName("created_at");
+        builder.Property<DateTime>(propertyName: "_createdAt").HasColumnName(name: "created_at");
 
         builder.ComplexProperty<TransactionAmount>(
-            "_amount",
-            builder =>
+            propertyName: "_amount",
+            buildAction: builder =>
             {
-                builder.Property(x => x.Amount).HasColumnName("amount");
-                builder.Property(x => x.Currency).HasColumnName("currency");
+                builder.Property(propertyExpression: x => x.Amount).HasColumnName(name: "amount");
+                builder.Property(propertyExpression: x => x.Currency).HasColumnName(name: "currency");
             }
         );
 
-        builder.Property<TransactionDescription>("_description")
-               .HasColumnName("description").HasConversion(x => x.Value, x => new TransactionDescription(x));
+        builder
+           .Property<TransactionDescription>(propertyName: "_description")
+           .HasColumnName(name: "description")
+           .HasConversion(
+                convertToProviderExpression: x => x.Value,
+                convertFromProviderExpression: x => new TransactionDescription(x)
+            );
 
-        builder.HasMany<Tag>("_tags");
+        builder.HasMany<Tag>(navigationName: "_tags");
     }
 }

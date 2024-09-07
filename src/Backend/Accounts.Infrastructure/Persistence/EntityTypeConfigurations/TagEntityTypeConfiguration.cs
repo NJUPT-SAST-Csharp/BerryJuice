@@ -9,29 +9,29 @@ internal class TagEntityTypeConfiguration : IEntityTypeConfiguration<Tag>
 {
     public void Configure(EntityTypeBuilder<Tag> builder)
     {
-        builder.ToTable("tags");
+        builder.ToTable(name: "tags");
 
-        builder.HasKey(tag => tag.Id);
+        builder.HasKey(keyExpression: tag => tag.Id);
         builder
-           .Property(tag => tag.Id)
-           .HasColumnName("id")
-           .HasConversion(x => x.Value, x => new TagId(x));
+           .Property(propertyExpression: tag => tag.Id)
+           .HasColumnName(name: "id")
+           .HasConversion(convertToProviderExpression: x => x.Value, convertFromProviderExpression: x => new TagId(x));
 
-        builder.Ignore(tag => tag.DomainEvents);
+        builder.Ignore(propertyExpression: tag => tag.DomainEvents);
 
-        builder.Property<string>("_name").HasColumnName("name").HasField("_name");
+        builder.Property<string>(propertyName: "_name").HasColumnName(name: "name").HasField(fieldName: "_name");
 
         builder
-           .HasMany<Transaction>("_transactions")
-           .WithMany("_tags")
+           .HasMany<Transaction>(navigationName: "_transactions")
+           .WithMany(navigationName: "_tags")
            .UsingEntity(
-                "TransactionTag",
-                l => l.HasOne(typeof(Transaction)).WithMany().HasForeignKey("TransactionId"),
-                r => r.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagId"),
-                j =>
+                joinEntityName: "TransactionTag",
+                configureRight: l => l.HasOne(typeof(Transaction)).WithMany().HasForeignKey("TransactionId"),
+                configureLeft: r => r.HasOne(typeof(Tag)).WithMany().HasForeignKey("TagId"),
+                configureJoinEntityType: j =>
                 {
                     j.HasKey("TransactionId", "TagId");
-                    j.ToTable("transactions_tags");
+                    j.ToTable(name: "transactions_tags");
                 }
             );
     }

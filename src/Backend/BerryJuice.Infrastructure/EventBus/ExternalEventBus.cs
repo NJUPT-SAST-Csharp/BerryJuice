@@ -3,7 +3,9 @@ using Primitives.IntegrationEvent;
 
 namespace BerryJuice.Infrastructure.EventBus;
 
-internal class ExternalEventBus(IMediator mediator) : IIntegrationEventPublisher
+internal class ExternalEventBus(
+    IMediator mediator
+) : IIntegrationEventPublisher
 {
     private readonly IMediator _mediator = mediator;
 

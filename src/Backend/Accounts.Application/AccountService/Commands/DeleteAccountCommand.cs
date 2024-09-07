@@ -2,7 +2,9 @@
 
 namespace Accounts.Application.AccountService.DeleteAccount;
 
-public sealed class DeleteAccountCommand(long id)
+public sealed class DeleteAccountCommand(
+    long id
+)
 {
     public AccountId Id { get; } = new(id);
 }

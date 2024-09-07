@@ -9,7 +9,10 @@ internal static class IServiceCollectionExtension
     )
     {
         if (environment.IsDevelopment())
+        {
             action(services);
+        }
+
         return services;
     }
 
@@ -20,7 +23,10 @@ internal static class IServiceCollectionExtension
     )
     {
         if (!environment.IsDevelopment())
+        {
             action(services);
+        }
+
         return services;
     }
 
@@ -30,8 +36,11 @@ internal static class IServiceCollectionExtension
         Action<IServiceCollection> action
     )
     {
-        if (configuration["BERRYJUICE_USE_BLAZOR"] == "true")
+        if (configuration[key: "BERRYJUICE_USE_BLAZOR"] == "true")
+        {
             action(services);
+        }
+
         return services;
     }
 }

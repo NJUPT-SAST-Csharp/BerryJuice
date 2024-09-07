@@ -7,8 +7,11 @@ namespace Budget.Domain.BudgetAggregate.SubBudgetEntity;
 
 public class SubBudget : EntityBase<SubBudgetId>
 {
-    private SubBudget(TagId tagId, decimal amount)
-        : base(new SubBudgetId(SnowFlakeIdGenerator.NewId))
+    private decimal _amount;
+
+    private TagId _tagId;
+
+    private SubBudget(TagId tagId, decimal amount) : base(new SubBudgetId(SnowFlakeIdGenerator.NewId))
     {
         _tagId = tagId;
         _amount = amount;
@@ -20,7 +23,4 @@ public class SubBudget : EntityBase<SubBudgetId>
         subBudget.AddDomainEvent(new SubBudgetCreatedDomainEvent(subBudget.Id));
         return subBudget;
     }
-
-    private TagId _tagId;
-    private decimal _amount;
 }

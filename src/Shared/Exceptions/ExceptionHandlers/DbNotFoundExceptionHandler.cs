@@ -17,24 +17,20 @@ public sealed class DbNotFoundExceptionHandler : IExceptionHandler
         {
             httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             httpContext.Response.WriteAsJsonAsync(
-                new ProblemDetails()
+                new ProblemDetails
                 {
-                    Status = StatusCodes.Status404NotFound,
-                    Detail = ex.Message,
-                    Title = "Not Found",
+                    Status = StatusCodes.Status404NotFound, Detail = ex.Message, Title = "Not Found",
                 },
                 cancellationToken
             );
-            return ValueTask.FromResult(true);
+            return ValueTask.FromResult(result: true);
         }
-        else if (
-            exception is InvalidOperationException invalidEx
-         && invalidEx.Message == "Sequence contains no elements"
-        )
+
+        if (exception is InvalidOperationException invalidEx && invalidEx.Message == "Sequence contains no elements")
         {
             httpContext.Response.StatusCode = StatusCodes.Status404NotFound;
             httpContext.Response.WriteAsJsonAsync(
-                new ProblemDetails()
+                new ProblemDetails
                 {
                     Status = StatusCodes.Status404NotFound,
                     Title = "Not Found",
@@ -43,9 +39,9 @@ public sealed class DbNotFoundExceptionHandler : IExceptionHandler
                 },
                 cancellationToken
             );
-            return ValueTask.FromResult(true);
+            return ValueTask.FromResult(result: true);
         }
 
-        return ValueTask.FromResult(false);
+        return ValueTask.FromResult(result: false);
     }
 }

@@ -2,6 +2,6 @@
 
 public interface IAsyncDomainBusinessRule
 {
-    public Task<bool> IsBrokenAsync();
     public string Message { get; }
+    public Task<bool> IsBrokenAsync();
 }

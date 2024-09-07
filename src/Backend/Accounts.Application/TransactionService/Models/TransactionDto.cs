@@ -5,13 +5,6 @@ namespace Accounts.Application.TransactionService;
 
 public record TransactionDto
 {
-    public required long TransactionId { get; init; }
-    public required long Amount { get; init; }
-    public required CurrencyType CurrencyType { get; init; }
-    public required string Description { get; init; }
-    public required DateTime TimeCreated { get; init; }
-    public required List<TagDto> Tags { get; init; }
-
     public TransactionDto()
     {
         Tags = new List<TagDto>();
@@ -33,4 +26,11 @@ public record TransactionDto
         TimeCreated = timeCreated;
         Tags = tags;
     }
+
+    public required long TransactionId { get; init; }
+    public required long Amount { get; init; }
+    public required CurrencyType CurrencyType { get; init; }
+    public required string Description { get; init; }
+    public required DateTime TimeCreated { get; init; }
+    public required List<TagDto> Tags { get; init; }
 }
