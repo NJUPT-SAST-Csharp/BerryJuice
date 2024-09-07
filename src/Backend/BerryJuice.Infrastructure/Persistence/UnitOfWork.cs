@@ -1,6 +1,5 @@
 ﻿using Primitives;
 using Primitives.DomainEvent;
-using Shared.Primitives.DomainEvent;
 
 namespace BerryJuice.Infrastructure.Persistence;
 

@@ -2,8 +2,6 @@
 using Primitives.Command;
 using Primitives.DomainEvent;
 using Primitives.Query;
-using Shared.Primitives.DomainEvent;
-using Shared.Primitives.Query;
 
 namespace BerryJuice.Infrastructure.EventBus;
 

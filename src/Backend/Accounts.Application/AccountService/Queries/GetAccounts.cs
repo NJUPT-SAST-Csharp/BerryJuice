@@ -1,6 +1,6 @@
 ﻿using Accounts.Application.AccountService.Models;
 using JetBrains.Annotations;
-using Shared.Primitives.Query;
+using Primitives.Query;
 
 namespace Accounts.Application.AccountService.Queries;
 

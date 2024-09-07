@@ -1,7 +1,6 @@
 using Asset.Domain.AssetAggregate.AdjustmentRecordEntity;
-using Asset.Domain.AssetAggregate.AssetEntity.Event;
+using Asset.Domain.AssetAggregate.AssetEntity.Events;
 using Primitives.Entity;
-using Shared.Primitives;
 using Utilities;
 
 namespace Asset.Domain.AssetAggregate.AssetEntity;

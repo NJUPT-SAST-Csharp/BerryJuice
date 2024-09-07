@@ -1,5 +1,5 @@
 using Asset.Domain.AssetAggregate.AssetEntity;
-using Asset.Domain.AssetAggregate.AssetEntity.Event;
+using Asset.Domain.AssetAggregate.AssetEntity.Events;
 using Primitives.Entity;
 using Utilities;
 

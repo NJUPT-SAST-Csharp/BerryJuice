@@ -1,5 +1,4 @@
 using Primitives.Entity;
-using Shared.Primitives;
 using Utilities;
 
 namespace Budget.Domain.BudgetAggregate.TagEntity;

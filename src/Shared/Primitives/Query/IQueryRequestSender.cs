@@ -1,6 +1,4 @@
-﻿using Shared.Primitives.Query;
-
-namespace Primitives.Query;
+﻿namespace Primitives.Query;
 
 public interface IQueryRequestSender
 {

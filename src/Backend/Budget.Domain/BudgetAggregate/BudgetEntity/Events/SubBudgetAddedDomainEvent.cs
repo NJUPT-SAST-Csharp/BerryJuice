@@ -1,5 +1,5 @@
 using Budget.Domain.BudgetAggregate.SubBudgetEntity;
-using Shared.Primitives.DomainEvent;
+using Primitives.DomainEvent;
 
 namespace Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 

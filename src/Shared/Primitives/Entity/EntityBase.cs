@@ -1,5 +1,5 @@
-﻿using Primitives.Rule;
-using Shared.Primitives.DomainEvent;
+﻿using Primitives.DomainEvent;
+using Primitives.Rule;
 
 namespace Primitives.Entity;
 
