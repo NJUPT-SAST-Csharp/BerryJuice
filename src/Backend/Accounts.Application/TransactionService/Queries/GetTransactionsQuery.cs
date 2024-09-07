@@ -1,17 +1,21 @@
 ﻿using Accounts.Application.TransactionService.Models;
 using Accounts.Domain.AccountAggregate.AccountEntity;
+using JetBrains.Annotations;
 using Shared.Primitives.Query;
 
 namespace Accounts.Application.TransactionService.Queries;
 
 public sealed class GetTransactionsQuery(
     long accountId
-) : IQueryRequest<IEnumerable<TransactionModel>>
+) : IQueryRequest<GetTransactionDto>
 {
     public AccountId AccountId { get; } = new(accountId);
 }
 
-// TODO: Implement DTO
+public record GetTransactionDto(
+    IEnumerable<TransactionModel> Transactions
+);
+
 public interface IGetTransactionRepository
 {
     public Task<IEnumerable<TransactionModel>> GetTransactionsByAdminAsync(
@@ -20,12 +24,13 @@ public interface IGetTransactionRepository
     );
 }
 
+[UsedImplicitly]
 public sealed class GetTransactionQueryHandler(
     IGetTransactionRepository repo
-) : IQueryRequestHandler<GetTransactionsQuery, IEnumerable<TransactionModel>>
+) : IQueryRequestHandler<GetTransactionsQuery, GetTransactionDto>
 {
-    public Task<IEnumerable<TransactionModel>> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
+    public async Task<GetTransactionDto> Handle(GetTransactionsQuery request, CancellationToken cancellationToken)
     {
-        return repo.GetTransactionsByAdminAsync(request.AccountId, cancellationToken);
+        return new GetTransactionDto(await repo.GetTransactionsByAdminAsync(request.AccountId, cancellationToken));
     }
 }

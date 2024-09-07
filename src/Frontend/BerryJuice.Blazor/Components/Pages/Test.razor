@@ -62,11 +62,11 @@
 
         var accounts = new List<(AccountModel, List<TransactionModel>)>();
 
-        foreach (var account in result)
+        foreach (var account in result.Accounts)
         {
             var transactionsQuery = new GetTransactionsQuery(account.Id);
             var transactions = await _eventBus.QueryAsync(transactionsQuery);
-            accounts.Add((account, transactions.ToList()));
+            accounts.Add((account, transactions.Transactions.ToList()));
         }
 
         await InvokeAsync(workItem: () => Accounts = accounts);
