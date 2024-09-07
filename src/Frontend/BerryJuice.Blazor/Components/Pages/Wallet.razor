@@ -1,8 +1,10 @@
 ﻿@page "/Wallet"
 @using Accounts.Application.AccountService
-@using Accounts.Application.AccountService.GetAccounts
+@using Accounts.Application.AccountService.Models
+@using Accounts.Application.AccountService.Queries
 @using Accounts.Application.TransactionService
-@using Accounts.Application.TransactionService.AddTransaction
+@using Accounts.Application.TransactionService.Commands
+@using Accounts.Application.TransactionService.Models
 @using Enums
 @using Primitives.EventBusScopedWrapper
 @inject IEventBusWrapper EventBus
@@ -43,13 +45,13 @@
 
 @code {
 
-    private AccountDto? _selectedAccount;
+    private AccountModel? _selectedAccount;
 
     private string? _moneyInput;
 
-    private List<AccountDto> _accounts = [];
+    private List<AccountModel> _accounts = [];
 
-    private readonly List<TransactionDto> _transactions = [];
+    private readonly List<TransactionModel> _transactions = [];
 
 
     protected override async Task OnInitializedAsync()

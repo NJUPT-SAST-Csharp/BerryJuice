@@ -1,7 +1,9 @@
 ﻿using System.Data;
 using Accounts.Application.TagService;
+using Accounts.Application.TagService.Models;
 using Accounts.Application.TransactionService;
-using Accounts.Application.TransactionService.GetTransactions;
+using Accounts.Application.TransactionService.Models;
+using Accounts.Application.TransactionService.Queries;
 using Accounts.Domain.AccountAggregate.AccountEntity;
 using Dapper;
 using Primitives.QueryDatabase;
@@ -14,7 +16,7 @@ internal class TransactionQueryRepository(
 {
     private readonly IDbConnection _connection = factory.GetConnection();
 
-    public async Task<IEnumerable<TransactionDto>> GetTransactionsByAdminAsync(
+    public async Task<IEnumerable<TransactionModel>> GetTransactionsByAdminAsync(
         AccountId id,
         CancellationToken cancellationToken = default
     )
@@ -43,9 +45,9 @@ internal class TransactionQueryRepository(
                 WHERE t.account_id = @AccountId
             ";
 
-        var transactions = await _connection.QueryAsync<TransactionDto>(sql2, new { AccountId = id.Value });
+        var transactions = await _connection.QueryAsync<TransactionModel>(sql2, new { AccountId = id.Value });
 
-        var transactions_tag = await _connection.QueryAsync<TransactionDto, TagDto, TransactionDto>(
+        var transactions_tag = await _connection.QueryAsync<TransactionModel, TagModel, TransactionModel>(
             sql1,
             map: (transaction, tag) =>
             {

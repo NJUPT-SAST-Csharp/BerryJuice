@@ -1,23 +1,22 @@
-﻿using Shared.Primitives.Query;
+﻿using Accounts.Application.AccountService.Models;
+using Shared.Primitives.Query;
 
-namespace Accounts.Application.AccountService.GetAccounts;
+namespace Accounts.Application.AccountService.Queries;
 
-public sealed class GetAccountsQuery : IQueryRequest<IEnumerable<AccountDto>> { }
+public sealed class GetAccountsQuery : IQueryRequest<IEnumerable<AccountModel>> { }
 
 public interface IGetAccountsRepository
 {
-    public Task<IEnumerable<AccountDto>> GetAccountsByAdminAsync(CancellationToken cancellationToken = default);
+    public Task<IEnumerable<AccountModel>> GetAccountsByAdminAsync(CancellationToken cancellationToken = default);
 }
 
 public sealed class GetAccountsQueryHandler(
     IGetAccountsRepository getAccountsRepository
-) : IQueryRequestHandler<GetAccountsQuery, IEnumerable<AccountDto>>
+) : IQueryRequestHandler<GetAccountsQuery, IEnumerable<AccountModel>>
 {
-    private readonly IGetAccountsRepository _getAccountsRepository = getAccountsRepository;
-
-    public async Task<IEnumerable<AccountDto>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<AccountModel>> Handle(GetAccountsQuery request, CancellationToken cancellationToken)
     {
-        return await _getAccountsRepository.GetAccountsByAdminAsync(cancellationToken);
+        return await getAccountsRepository.GetAccountsByAdminAsync(cancellationToken);
     }
 }
 
