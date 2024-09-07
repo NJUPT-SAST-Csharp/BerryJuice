@@ -1,0 +1,42 @@
+﻿@page "/Wallet"
+@using Accounts.Application.AccountService
+@using Accounts.Application.AccountService.Models
+@using Accounts.Application.AccountService.Queries
+@using Accounts.Application.TransactionService
+@using Accounts.Application.TransactionService.Commands
+@using Accounts.Application.TransactionService.Models
+@using Accounts.Application.TransactionService.Queries
+@using Enums
+@using Primitives.EventBusScopedWrapper
+@inject IEventBusWrapper EventBus
+@rendermode InteractiveServer
+
+<h3>My Wallet</h3>
+
+<div class="form-group">
+    <label for="selectAccount">Select Account:</label>
+    <InputSelect id="selectAccount" @bind-Value="SelectedAccountId">
+        @foreach (var account in _accounts)
+        {
+            <option value="@account.Id">
+                @account.Description
+            </option>
+        }
+    </InputSelect>
+</div>
+
+<CascadingValue Name="AccountId" Value="SelectedAccountId">
+    <TransactionList/>
+</CascadingValue>
+
+
+<div class="form-group">
+    <label for="money">Money:</label>
+    <InputText id="money" @bind-Value="MoneyInput"/>
+</div>
+
+<button class="btn" @onclick="AddTransactionAsync">Add</button>
+
+
+
+<h4>Total Money: @* @(totalMoney) *@</h4>
