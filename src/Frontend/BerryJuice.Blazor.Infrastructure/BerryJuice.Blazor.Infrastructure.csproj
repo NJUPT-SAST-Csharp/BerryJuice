@@ -11,4 +11,8 @@
         <ProjectReference Include="..\BerryJuice.Blazor\BerryJuice.Blazor.csproj"/>
     </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MudBlazor" Version="7.8.0" />
+  </ItemGroup>
+
 </Project>
