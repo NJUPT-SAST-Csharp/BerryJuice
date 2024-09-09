@@ -19,7 +19,9 @@ public sealed class DbNotFoundExceptionHandler : IExceptionHandler
             httpContext.Response.WriteAsJsonAsync(
                 new ProblemDetails
                 {
-                    Status = StatusCodes.Status404NotFound, Detail = ex.Message, Title = "Not Found",
+                    Status = StatusCodes.Status404NotFound,
+                    Detail = ex.Message,
+                    Title = "Not Found",
                 },
                 cancellationToken
             );
