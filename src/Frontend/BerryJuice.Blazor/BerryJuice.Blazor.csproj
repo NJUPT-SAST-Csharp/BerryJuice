@@ -9,11 +9,11 @@
 
     <ItemGroup>
 
-        <None Remove="Components\Pages\Home.razor.css"/>
+        <None Remove="Components\Pages\Home.razor.css" />
     </ItemGroup>
 
     <ItemGroup>
-        <Content Include="Components\Pages\Home.razor.css"/>
+        <Content Include="Components\Pages\Home.razor.css" />
     </ItemGroup>
 
   <ItemGroup>
@@ -22,15 +22,15 @@
   </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Backend\Accounts.Application\Accounts.Application.csproj"/>
-        <ProjectReference Include="..\..\Backend\Asset.Application\Asset.Application.csproj"/>
-        <ProjectReference Include="..\..\Backend\Budget.Application\Budget.Application.csproj"/>
-        <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj"/>
-        <ProjectReference Include="..\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj"/>
+        <ProjectReference Include="..\..\Backend\Accounts.Application\Accounts.Application.csproj" />
+        <ProjectReference Include="..\..\Backend\Asset.Application\Asset.Application.csproj" />
+        <ProjectReference Include="..\..\Backend\Budget.Application\Budget.Application.csproj" />
+        <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
+        <ProjectReference Include="..\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="EventBus\"/>
+        <Folder Include="EventBus\" />
     </ItemGroup>
 
 </Project>

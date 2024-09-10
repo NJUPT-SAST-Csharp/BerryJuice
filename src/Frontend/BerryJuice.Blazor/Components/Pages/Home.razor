@@ -2,17 +2,27 @@
 
 <PageTitle>Home</PageTitle>
 
-<h1>Welcome to Berry Juice</h1>
+<MudText Typo="Typo.h2">Welcome to BerryJuice!</MudText>
 
-<p>Hello Berry Juice</p>
+<MudText Typo="Typo.h3">Hello BerryJuice!</MudText>
 
-<nav>
-    <ul class="nav-list">
-        <li class="nav-item">
-            <NavLink class="nav-link" href="/Transaction">Transactions</NavLink>
-        </li>
-        <li class="nav-item">
-            <NavLink class="nav-link" href="/BookKeepPage">Bookkeep</NavLink>
-        </li>
-    </ul>
-</nav>
+<MudStack Wrap="@Wrap.Wrap" Row="true">
+    <MudCard>
+        <MudCardContent >
+            <MudText>查看账单</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="Transaction">记账</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="Transaction">查看</MudButton>
+        </MudCardActions>
+    </MudCard>
+    <MudCard>
+        <MudCardContent>
+            <MudText>查看资产</MudText>
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="BookKeepPage">资产</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudStack>
+
