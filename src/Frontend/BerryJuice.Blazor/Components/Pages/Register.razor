@@ -1,8 +1,35 @@
 ﻿@page "/Register"
+@using MudBlazor
+@inject NavigationManager Navigation
 
-<h3>Register</h3>
+
+<MudContainer MaxWidth="MaxWidth.Small" Class="mx-auto mt-5">
+    <MudCard>
+        <MudCardContent>
+            <MudText Typo="Typo.h5" Align="Align.Center">注册</MudText>
+            <MudTextField Label="用户名" @bind-Value="username" Required="true" />
+            <MudTextField Label="密码" @bind-Value="password" InputType="InputType.Password" Required="true" />
+            <MudTextField Label="确认密码" @bind-Value="confirmPassword" InputType="InputType.Password" Required="true" />
+        </MudCardContent>
+        <MudCardActions>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Registers_user">注册</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Secondary" OnClick="NavigateToLogin">登录</MudButton>
+        </MudCardActions>
+    </MudCard>
+</MudContainer>
 
 @code {
+    private string username;
+    private string password;
+    private string confirmPassword;
 
+    private void Registers_user()
+    {
+       
+    }
 
+    private void NavigateToLogin()
+    {
+        Navigation.NavigateTo(uri: "/Login");
+    }
 }
