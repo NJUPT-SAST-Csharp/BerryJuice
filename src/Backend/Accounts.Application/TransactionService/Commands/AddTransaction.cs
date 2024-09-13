@@ -18,13 +18,10 @@ public sealed class AddTransactionCommand(
     string description
 ) : ICommandRequest<AddTransactionDto>
 {
-    public AccountId AccountId { get; } = new(id);
-
-    public TransactionAmount TransactionAmount { get; } = new(currency, amount);
-
-    public TagId[] Tags { get; } = Array.ConvertAll(tags, converter: t => new TagId(t));
-
-    public TransactionDescription Description { get; } = new(description);
+    internal AccountId AccountId { get; } = new(id);
+    internal TransactionAmount TransactionAmount { get; } = new(currency, amount);
+    internal TagId[] Tags { get; } = Array.ConvertAll(tags, converter: t => new TagId(t));
+    internal TransactionDescription Description { get; } = new(description);
 }
 
 public record AddTransactionDto(

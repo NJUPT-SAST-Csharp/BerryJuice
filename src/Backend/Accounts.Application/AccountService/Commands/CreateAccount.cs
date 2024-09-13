@@ -11,7 +11,7 @@ public sealed class CreateAccountCommand(
     string description
 ) : ICommandRequest<CreateAccountDto>
 {
-    public AccountDescription Description { get; } = new(description);
+    internal AccountDescription Description { get; } = new(description);
 }
 
 public record CreateAccountDto(
