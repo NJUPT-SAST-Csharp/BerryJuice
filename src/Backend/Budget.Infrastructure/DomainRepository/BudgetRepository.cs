@@ -21,7 +21,7 @@ public sealed class BudgetRepository(
     }
 
     /// <inheritdoc />
-    public async Task<BudgetId> SaveBudgetAsync(Domain.BudgetAggregate.BudgetEntity.Budget budget, CancellationToken cancellationToken = default)
+    public async Task<BudgetId> AddBudgetAsync(Domain.BudgetAggregate.BudgetEntity.Budget budget, CancellationToken cancellationToken = default)
     {
         var a = await _context.Budgets.AddAsync(budget, cancellationToken);
         return a.Entity.Id;
