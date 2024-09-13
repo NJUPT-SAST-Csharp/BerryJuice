@@ -1,0 +1,204 @@
+@startuml BerryJuice
+
+' inclusions <1>
+!include https://raw.githubusercontent.com/tmorin/plantuml-libs/v13.0.0/distribution/eventstorming/single.puml
+
+DomainEvent("AccountCreated")[
+账本已创建
+--fields--
+用户ID
+账本ID
+]
+
+DomainEvent("AccountInfoUpdated")[
+账本信息已更新
+--fields--
+用户ID
+账本ID
+]
+
+DomainEvent("TransactionCreated")[
+账目已创建
+--fields--
+用户ID
+账本ID
+账目ID
+金额
+账目日期
+]
+
+DomainEvent("TransactionInfoUpdated")[
+账目信息已更新
+--fields--
+用户ID
+账本ID
+账目ID
+金额
+账目日期
+]
+
+Person("User") #LightBlue[ 
+用户
+]
+
+Command("CreateAccount")[
+创建账本
+--fields--
+账本描述
+]
+User -down-> CreateAccount
+
+Command("EditAccountInfo")[
+编辑账本信息
+--fields--
+账本描述
+账本ID
+]
+User -down-> EditAccountInfo
+
+Command("CreateTransaction")[
+创建账目
+--fields--
+账本ID
+金额
+账目日期
+]
+User -down-> CreateTransaction
+
+Command("EditTransaction")[
+编辑账目
+--fields--
+账目ID
+金额
+账目日期
+]
+User -down-> EditTransaction
+
+Aggregate("Account")[
+账本
+--id--
+账本ID
+--fields--
+账本描述
+账目列表
+预算列表
+]
+CreateAccount -down-> Account
+EditAccountInfo -down-> Account
+
+Account -down-> AccountCreated
+Account -down-> AccountInfoUpdated
+
+CreateTransaction -down-> Account
+EditTransaction -down-> Account
+
+Account -down-> TransactionCreated
+Account -down-> TransactionInfoUpdated
+
+' Budget Domain
+
+DomainEvent("BudgetCreated")[
+预算已创建
+--fields--
+用户ID
+账本ID
+预算ID
+]
+
+DomainEvent("BudgetInfoUpdated")[
+预算信息已更新
+--fields--
+用户ID
+账本ID
+预算ID
+预算额度
+预算期限
+预算名称
+]
+
+DomainEvent("BudgetOverdue")[
+预算已超支
+--fields--
+账本ID
+预算ID
+]
+
+Command("CreateBudget")[
+创建预算
+--fields--
+账本ID
+预算额度
+预算期限
+预算名称
+]
+User -down-> CreateBudget
+
+Command("EditBudgetInfo")[
+编辑预算信息
+--fields--
+账本ID
+预算ID
+预算额度
+预算期限
+预算名称
+]
+User -down-> EditBudgetInfo
+
+IntegrationEvent("TransactionUpdatedIntegrationEvent")[
+账目已更新
+--fields--
+账本ID
+账目ID
+]
+TransactionInfoUpdated -up-> TransactionUpdatedIntegrationEvent
+
+Policy("UpdateBudgetBalanceWhenTransactionUpdated")[
+更新账目时更新预算余额
+]
+TransactionUpdatedIntegrationEvent -up-> UpdateBudgetBalanceWhenTransactionUpdated
+
+Command("UpdateBudgetBalance")[
+更新预算余额
+--fields--
+账本ID
+预算余额变化
+]
+UpdateBudgetBalanceWhenTransactionUpdated -down-> UpdateBudgetBalance
+
+Policy("RefreshBudgetBalanceWhenBudgetUpdated")[
+更新预算时刷新预算已用量
+]
+BudgetInfoUpdated -up-> RefreshBudgetBalanceWhenBudgetUpdated
+BudgetCreated -up-> RefreshBudgetBalanceWhenBudgetUpdated
+
+Command("RefreshBudgetBalance")[
+刷新预算已用量
+--fields--
+账本ID
+预算已用量
+]
+User -down-> RefreshBudgetBalance
+RefreshBudgetBalanceWhenBudgetUpdated -down-> RefreshBudgetBalance
+
+Aggregate("Budget")[
+预算
+--id--
+账本ID
+预算ID
+--fields--
+预算额度
+预算期限
+预算名称
+
+当前已使用额度
+]
+CreateBudget -down-> Budget
+EditBudgetInfo -down-> Budget
+UpdateBudgetBalance -down-> Budget
+RefreshBudgetBalance -down-> Budget
+
+Budget -down-> BudgetCreated
+Budget -down-> BudgetInfoUpdated
+Budget -down-> BudgetOverdue
+
+@enduml
