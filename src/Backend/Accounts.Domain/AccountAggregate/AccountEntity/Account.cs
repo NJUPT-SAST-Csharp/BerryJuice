@@ -13,7 +13,8 @@ public class Account : EntityBase<AccountId>, IAggregateRoot<Account>
 
     private AccountDescription _description;
 
-    private Account(AccountDescription description) : base(new AccountId(SnowFlakeIdGenerator.NewId))
+    private Account(AccountDescription description)
+        : base(new AccountId(SnowFlakeIdGenerator.NewId))
     {
         _description = description;
     }

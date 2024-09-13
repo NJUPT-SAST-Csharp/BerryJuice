@@ -7,12 +7,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Dapper" Version="2.1.35"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.8"/>
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.4"/>
+        <PackageReference Include="System.Text.Json" Version="8.0.4"/>
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\Shared\Exceptions\Exceptions.csproj" />
         <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj"/>
         <ProjectReference Include="..\Budget.Application\Budget.Application.csproj"/>
+        <ProjectReference Include="..\Budget.Domain\Budget.Domain.csproj"/>
     </ItemGroup>
 
 </Project>

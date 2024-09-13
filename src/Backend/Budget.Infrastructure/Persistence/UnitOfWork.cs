@@ -1,16 +1,17 @@
 ﻿using Primitives;
 using Primitives.DomainEvent;
 
-namespace Accounts.Infrastructure.Persistence;
+namespace Budget.Infrastructure.Persistence;
 
 public sealed class UnitOfWork(
-    AccountsContext dbContext,
+    BudgetContext dbContext,
     IDomainEventPublisher eventBus
 ) : IUnitOfWork
 {
-    private readonly AccountsContext _dbContext = dbContext;
+    private readonly BudgetContext _dbContext = dbContext;
     private readonly IDomainEventPublisher _eventBus = eventBus;
 
+    /// <inheritdoc />
     public async Task CommitChangesAsync(CancellationToken cancellationToken = default)
     {
         await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);

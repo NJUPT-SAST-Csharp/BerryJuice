@@ -3,7 +3,7 @@ using Enums;
 
 namespace Accounts.Domain.AccountAggregate.TransactionEntity;
 
-public record TransactionAmount(
+public record struct TransactionAmount(
     CurrencyType Currency = CurrencyType.CNY,
     decimal Amount = 0m
 )
@@ -20,7 +20,9 @@ public record TransactionAmount(
     {
         if (a.Currency != b.Currency)
         {
-            throw new InvalidOperationException(message: "Cannot subtract amounts with different currencies");
+            throw new InvalidOperationException(
+                message: "Cannot subtract amounts with different currencies"
+            );
         }
 
         return new TransactionAmount(

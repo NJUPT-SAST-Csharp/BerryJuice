@@ -13,4 +13,12 @@
         <ProjectReference Include="..\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj"/>
     </ItemGroup>
 
+    <ItemGroup>
+        <PackageReference Include="JetBrains.Annotations" Version="2024.2.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="BudgetService\Queries\" />
+    </ItemGroup>
+    
 </Project>

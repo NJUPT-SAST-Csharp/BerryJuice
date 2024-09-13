@@ -7,6 +7,7 @@ using BerryJuice.Infrastructure.EventBus;
 using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
 using BerryJuice.Infrastructure.Persistence.TypeConverters;
+using Budget.Infrastructure.Configuration;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -141,7 +142,7 @@ public static class IServiceCollectionExtension
 
         services.ConfigureAccountsRepository();
         // services.ConfigureAssetRepository();
-        // services.ConfigureBudgetRepository();
+        services.ConfigureBudgetRepository();
 
         return services;
     }
