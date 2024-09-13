@@ -12,26 +12,26 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Backend\Accounts.Application\Accounts.Application.csproj"/>
-        <ProjectReference Include="..\Backend\Accounts.Domain\Accounts.Domain.csproj"/>
-        <ProjectReference Include="..\Backend\Accounts.Infrastructure\Accounts.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Backend\Accounts.IntegrationEvent\Accounts.IntegrationEvent.csproj"/>
-        <ProjectReference Include="..\Backend\Asset.Application\Asset.Application.csproj"/>
-        <ProjectReference Include="..\Backend\Asset.Domain\Asset.Domain.csproj"/>
-        <ProjectReference Include="..\Backend\Asset.Infrastructure\Asset.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Backend\Asset.IntegrationEvent\Asset.IntegrationEvent.csproj"/>
-        <ProjectReference Include="..\Backend\BerryJuice.Infrastructure\BerryJuice.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Backend\BerryJuice.WebAPI\BerryJuice.WebAPI.csproj"/>
-        <ProjectReference Include="..\Backend\Budget.Application\Budget.Application.csproj"/>
-        <ProjectReference Include="..\Backend\Budget.Domain\Budget.Domain.csproj"/>
-        <ProjectReference Include="..\Backend\Budget.Infrastructure\Budget.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Backend\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj"/>
-        <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj"/>
-        <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj"/>
-        <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj"/>
-        <ProjectReference Include="..\Shared\Exceptions\Exceptions.csproj"/>
-        <ProjectReference Include="..\Shared\Primitives\Primitives.csproj"/>
-        <ProjectReference Include="..\Shared\Utilities\Utilities.csproj"/>
+        <ProjectReference Include="..\Backend\Accounts.Application\Accounts.Application.csproj" />
+        <ProjectReference Include="..\Backend\Accounts.Domain\Accounts.Domain.csproj" />
+        <ProjectReference Include="..\Backend\Accounts.Infrastructure\Accounts.Infrastructure.csproj" />
+        <ProjectReference Include="..\Backend\Accounts.IntegrationEvent\Accounts.IntegrationEvent.csproj" />
+        <ProjectReference Include="..\Backend\Asset.Application\Asset.Application.csproj" />
+        <ProjectReference Include="..\Backend\Asset.Domain\Asset.Domain.csproj" />
+        <ProjectReference Include="..\Backend\Asset.Infrastructure\Asset.Infrastructure.csproj" />
+        <ProjectReference Include="..\Backend\Asset.IntegrationEvent\Asset.IntegrationEvent.csproj" />
+        <ProjectReference Include="..\Backend\BerryJuice.Infrastructure\BerryJuice.Infrastructure.csproj" />
+        <ProjectReference Include="..\Backend\BerryJuice.WebAPI\BerryJuice.WebAPI.csproj" />
+        <ProjectReference Include="..\Backend\Budget.Application\Budget.Application.csproj" />
+        <ProjectReference Include="..\Backend\Budget.Domain\Budget.Domain.csproj" />
+        <ProjectReference Include="..\Backend\Budget.Infrastructure\Budget.Infrastructure.csproj" />
+        <ProjectReference Include="..\Backend\Budget.IntegrationEvent\Budget.IntegrationEvent.csproj" />
+        <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Client\BerryJuice.Blazor.Client.csproj" />
+        <ProjectReference Include="..\Frontend\BerryJuice.Blazor.Infrastructure\BerryJuice.Blazor.Infrastructure.csproj" />
+        <ProjectReference Include="..\Frontend\BerryJuice.Blazor\BerryJuice.Blazor.csproj" />
+        <ProjectReference Include="..\Shared\Exceptions\Exceptions.csproj" />
+        <ProjectReference Include="..\Shared\Primitives\Primitives.csproj" />
+        <ProjectReference Include="..\Shared\Utilities\Utilities.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -39,6 +39,7 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.8" />
     </ItemGroup>
 
 </Project>

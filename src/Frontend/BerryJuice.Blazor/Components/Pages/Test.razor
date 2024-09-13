@@ -12,43 +12,49 @@
 
 <PageTitle>Test</PageTitle>
 
-<h1>Test</h1>
+<MudContainer>
+    <MudText Typo="Typo.h1">Test</MudText>
+    <MudDivider />
 
-<hr/>
+    <MudText Typo="Typo.h2">Test Get Accounts</MudText>
 
-<h2>Test Get Accounts</h2>
-
-<ul>
-    @foreach (var account in Accounts)
-    {
-        <li>
-            @account.Item1.Description
-            <ul>
-                id: @account.Item1.Id
-                Transactions:
-                @foreach (var transaction in account.Item2)
-                {
-                    <li>
-                        @transaction.Description
-                        <ul>
-                            id: @transaction.TransactionId
-                            amount: @transaction.Amount
-                            Tag:
-                            @foreach (var tag in transaction.Tags)
+    <MudList T="(AccountModel, List<TransactionModel>)">
+        @foreach (var account in Accounts)
+        {
+            <MudListItem>
+                <MudText>@account.Item1.Description</MudText>
+                <MudList T="TransactionModel">
+                    <MudListItem>id: @account.Item1.Id</MudListItem>
+                    <MudListItem>
+                        Transactions:
+                        <MudList T="TransactionModel">
+                            @foreach (var transaction in account.Item2)
                             {
-                                @tag.TagName
+                                <MudListItem>
+                                    <MudText>@transaction.Description</MudText>
+                                    <MudList T="string">
+                                        <MudListItem>id: @transaction.TransactionId</MudListItem>
+                                        <MudListItem>amount: @transaction.Amount</MudListItem>
+                                        <MudListItem>
+                                            Tag:
+                                            @foreach (var tag in transaction.Tags)
+                                            {
+                                                <MudChip>@tag.TagName</MudChip>
+                                            }
+                                        </MudListItem>
+                                    </MudList>
+                                </MudListItem>
                             }
-                        </ul>
-                    </li>
-                }
-            </ul>
-        </li>
-    }
-</ul>
+                        </MudList>
+                    </MudListItem>
+                </MudList>
+            </MudListItem>
+        }
+    </MudList>
 
-<button @onclick="TestGetAccounts">Query Button</button>
-
-<button @onclick="TestAddAccount">Add a new account with random name</button>
+    <MudButton OnClick="TestGetAccounts" Color="Color.Primary">Query Button</MudButton>
+    <MudButton OnClick="TestAddAccount" Color="Color.Secondary">Add a new account with random name</MudButton>
+</MudContainer>
 
 @code {
     public int Query { get; set; } = -1;
@@ -77,5 +83,4 @@
         var command = new CreateAccountCommand(description: "Random Account");
         var result = await _eventBus.CommandAsync(command);
     }
-
 }
