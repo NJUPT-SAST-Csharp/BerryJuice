@@ -1,41 +1,28 @@
 using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
-using Budget.Domain.BudgetAggregate.SubBudgetEntity;
-using Budget.Domain.BudgetAggregate.TagEntity;
 using Primitives.Entity;
+using Utilities;
 
 namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 
 public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
 {
-    private readonly List<SubBudget> SubBudgets;
-    private decimal _amount;
-    private string _description;
-    private DateTime _endDate;
+    private BudgetAmount _amount;
+    private BudgetDescription _description;
+    private BudgetDuration _duration;
 
-    private DateTime _startDate;
-
-    private Budget(DateTime startDate, DateTime endDate, decimal amount, string description) : base(
-        new BudgetId(Value: 1)
+    private Budget(BudgetAmount amount, BudgetDescription description, BudgetDuration duration) : base(
+        new BudgetId(SnowFlakeIdGenerator.NewId)
     )
     {
-        _startDate = startDate;
-        _endDate = endDate;
         _amount = amount;
         _description = description;
-        SubBudgets = new List<SubBudget>();
+        _duration = duration;
     }
 
-    public static Budget CreateBudget(DateTime startDate, DateTime endDate, decimal amount, string description)
+    public static Budget CreateBudget(BudgetAmount amount, BudgetDescription description, BudgetDuration duration)
     {
-        var budget = new Budget(startDate, endDate, amount, description);
+        var budget = new Budget(amount, description, duration);
         budget.AddDomainEvent(new BudgetCreatedDomainEvent(budget.Id));
         return budget;
-    }
-
-    public void AddSubBudget(TagId tagId, decimal amount)
-    {
-        var subBudget = SubBudget.CreateSubBudget(tagId, amount);
-        SubBudgets.Add(subBudget);
-        subBudget.AddDomainEvent(new SubBudgetAddedDomainEvent(subBudget.Id));
     }
 }
