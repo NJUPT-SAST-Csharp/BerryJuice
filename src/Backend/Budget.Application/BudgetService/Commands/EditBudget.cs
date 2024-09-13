@@ -12,8 +12,6 @@ public sealed class EditBudgetCommand() : ICommandRequest<EditBudgetDto>
 
 public record EditBudgetDto();
 
-public interface IEditBudgetRepository { }
-
 [UsedImplicitly]
 internal sealed class EditBudgetCommandHandler(
     [FromKeyedServices("")] IUnitOfWork unitOfWork
@@ -24,8 +22,3 @@ internal sealed class EditBudgetCommandHandler(
         return new EditBudgetDto();
     }
 }
-
-
-    
-    
-

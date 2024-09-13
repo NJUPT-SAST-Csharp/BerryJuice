@@ -12,8 +12,6 @@ public sealed class CreateBudgetCommand() : ICommandRequest<CreateBudgetDto>
 
 public record CreateBudgetDto();
 
-public interface ICreateBudgetRepository { }
-
 [UsedImplicitly]
 internal sealed class CreateBudgetCommandHandler(
     [FromKeyedServices("budget")] IUnitOfWork unitOfWork

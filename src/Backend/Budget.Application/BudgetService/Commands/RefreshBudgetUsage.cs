@@ -12,8 +12,6 @@ public sealed class RefreshBudgetUsageCommand() : ICommandRequest<RefreshBudgetU
 
 public record RefreshBudgetUsageDto();
 
-public interface IRefreshBudgetUsageRepository { }
-
 [UsedImplicitly]
 internal sealed class RefreshBudgetUsageCommandHandler(
     [FromKeyedServices("")] IUnitOfWork unitOfWork
@@ -27,8 +25,3 @@ internal sealed class RefreshBudgetUsageCommandHandler(
         return new RefreshBudgetUsageDto();
     }
 }
-
-
-    
-    
-
