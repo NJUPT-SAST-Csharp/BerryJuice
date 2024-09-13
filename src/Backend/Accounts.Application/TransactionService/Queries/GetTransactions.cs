@@ -9,7 +9,7 @@ public sealed class GetTransactionsQuery(
     long accountId
 ) : IQueryRequest<GetTransactionDto>
 {
-    public AccountId AccountId { get; } = new(accountId);
+    internal AccountId AccountId { get; } = new(accountId);
 }
 
 public record GetTransactionDto(
