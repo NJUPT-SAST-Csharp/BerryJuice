@@ -1,40 +1,71 @@
 ﻿@page "/Budget"
 @rendermode InteractiveServer
 
-<h1>Budget</h1>
-<label for="BudgetType">Type:</label>
-<input id="BudgetType" @bind="budget.Name" placeholder="Enter expense type"/>
+<MudContainer>
+    <MudText Typo="Typo.h4" Class="blueberry-text">Budget</MudText>
 
-<label for="Account">Amount:</label>
-<input id="Account" type="number" @bind="budget.Account" placeholder="Enter amount"/>
+    <MudTextField @bind-Value="budget.Name" Label="Type" Placeholder="Enter expense type" Variant="Variant.Outlined" Class="blueberry-textfield" />
 
-<button @onclick="AddBudgetEntries">Add Budget Entry</button>
+    <MudTextField @bind-Value="budget.Account" Label="Amount" Placeholder="Enter amount" Variant="Variant.Outlined" Type="number" Class="blueberry-textfield" />
 
-<h2>Budget Entries</h2>
-<table class="table">
-    <thead>
-    <tr>
-        <th>Type</th>
-        <th>Amount</th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach (var entry in BudgetEntries)
-    {
-        <tr>
-            <td>@entry.Name</td>
-            <td>@entry.Account.ToString(format: "C")</td>
-        </tr>
-    }
-    </tbody>
-</table>
+    <MudTextField @bind-Value="budget.Period" Label="Period (days)" Placeholder="Enter period in days" Variant="Variant.Outlined" Type="number" Class="blueberry-textfield" />
+
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="AddBudgetEntries" Class="blueberry-button">Add Budget Entry</MudButton>
+
+    <MudText Typo="Typo.h5" Class="blueberry-text">Budget Entries</MudText>
+    <MudTable Items="BudgetEntries">
+        <HeaderContent>
+            <MudTh class="blueberry-header">Type</MudTh>
+            <MudTh class="blueberry-header">Amount</MudTh>
+            <MudTh class="blueberry-header">Period</MudTh>
+            <MudTh class="blueberry-header">Actions</MudTh>
+        </HeaderContent>
+        <RowTemplate>
+            @if (@context.IsEditing)
+            {
+                <MudTd DataLabel="Type">
+                    <MudTextField @bind-Value="@context.Name" Class="blueberry-textfield" />
+                </MudTd>
+                <MudTd DataLabel="Amount">
+                    <MudTextField @bind-Value="@context.Account" Type="number" Class="blueberry-textfield" />
+                </MudTd>
+                <MudTd DataLabel="Period">
+                    <MudTextField @bind-Value="@context.Period" Type="number" Class="blueberry-textfield" />
+                </MudTd>
+                <MudTd>
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="@(() => SaveEdit(@context))" Class="blueberry-button">Save</MudButton>
+                </MudTd>
+            }
+            else
+            {
+                <MudTd DataLabel="Type" Class="blueberry-cell">@context.Name</MudTd>
+                <MudTd DataLabel="Amount" Class="blueberry-cell">@context.Account.ToString("C")</MudTd>
+                <MudTd DataLabel="Period" Class="blueberry-cell">@context.Period</MudTd>
+                <MudTd>
+                    <MudButton Variant="Variant.Outlined" Color="Color.Secondary" OnClick="@(() => OnEditButtonClick(@context))" Class="blueberry-button">Edit</MudButton>
+                </MudTd>
+            }
+        </RowTemplate>
+    </MudTable>
+</MudContainer>
 
 @code {
 
     private class BudgetItem
     {
-        public string Name { get; set; }
-        public decimal Account { get; set; }
+        public string Name
+        {
+            get; set;
+        }
+        public decimal Account
+        {
+            get; set;
+        }
+        public int Period
+        {
+            get; set;
+        } 
+        public bool IsEditing { get; set; } = false;
     }
 
     private readonly List<BudgetItem> BudgetEntries = new();
@@ -42,11 +73,25 @@
 
     private void AddBudgetEntries()
     {
-        if (!String.IsNullOrWhiteSpace(budget.Name) && budget.Account > 0)
+        if (!String.IsNullOrWhiteSpace(budget.Name) && budget.Account > 0 && budget.Period > 0)
         {
-            BudgetEntries.Add(new BudgetItem { Name = budget.Name, Account = budget.Account });
+            BudgetEntries.Add(new BudgetItem { Name = budget.Name, Account = budget.Account, Period = budget.Period });
             budget = new BudgetItem();
         }
     }
 
+    private void OnEditButtonClick(BudgetItem item)
+    {
+        EditBudgetEntry(item);
+    }
+
+    private void EditBudgetEntry(BudgetItem item)
+    {
+        item.IsEditing = true;
+    }
+
+    private void SaveEdit(BudgetItem item)
+    {
+        item.IsEditing = false;
+    }
 }

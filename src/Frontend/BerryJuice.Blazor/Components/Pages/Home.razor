@@ -2,13 +2,13 @@
 
 <PageTitle>Home</PageTitle>
 
-<MudText Typo="Typo.h2">Welcome to BerryJuice!</MudText>
+    <MudText Typo="Typo.h2" Align="Align.Center">Welcome to BerryJuice!</MudText>
 
-<MudText Typo="Typo.h3">Hello BerryJuice!</MudText>
+    <MudText Typo="Typo.h3" Align="Align.Center">Hello BerryJuice!</MudText>
 
-<MudStack Wrap="@Wrap.Wrap" Row="true">
-    <MudCard>
-        <MudCardContent >
+<MudStack Wrap="@Wrap.Wrap" Row="true" Spacing="3" Justify="Justify.Center" AlignItems="AlignItems.Center">
+    <MudCard Style="margin: 10px;">
+        <MudCardContent>
             <MudText>查看账单</MudText>
         </MudCardContent>
         <MudCardActions>
@@ -16,13 +16,12 @@
             <MudButton Variant="Variant.Text" Color="Color.Primary" Href="Transaction">查看</MudButton>
         </MudCardActions>
     </MudCard>
-    <MudCard>
+    <MudCard Style="margin: 10px;">
         <MudCardContent>
             <MudText>查看资产</MudText>
         </MudCardContent>
         <MudCardActions>
-            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="BookKeepPage">资产</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Primary" Href="Budget">资产</MudButton>
         </MudCardActions>
     </MudCard>
 </MudStack>
-
