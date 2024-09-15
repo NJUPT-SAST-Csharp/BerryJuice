@@ -3,7 +3,7 @@ using Primitives.DomainEvent;
 using Primitives.EventBusScopedWrapper;
 using Primitives.Policy;
 
-namespace Budget.Application.BudgetService.Policies;
+namespace Budget.IntegrationEvent.Policies;
 
 public sealed class RefreshBudgetBalanceWhenBudgetUpdatedPolicy(IEventBusWrapper eventBus)
     : PolicyBase(eventBus),
@@ -16,7 +16,7 @@ public sealed class RefreshBudgetBalanceWhenBudgetUpdatedPolicy(IEventBusWrapper
         CancellationToken cancellationToken
     )
     {
-        throw new NotImplementedException();
+        await _eventBus.QueryAsync();
     }
 
     /// <inheritdoc />

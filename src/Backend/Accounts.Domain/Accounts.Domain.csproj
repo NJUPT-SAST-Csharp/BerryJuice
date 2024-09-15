@@ -7,9 +7,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\Shared\Enums\Enums.csproj"/>
-        <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj"/>
-        <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj"/>
+        <ProjectReference Include="..\..\Shared\Enums\Enums.csproj" />
+        <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
+        <ProjectReference Include="..\..\Shared\Utilities\Utilities.csproj" />
     </ItemGroup>
 
 </Project>

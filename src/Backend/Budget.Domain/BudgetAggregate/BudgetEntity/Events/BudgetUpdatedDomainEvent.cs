@@ -2,7 +2,7 @@
 
 namespace Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 
-public sealed class BudgetUpdatedDomainEvent : IDomainEvent
+public sealed class BudgetUpdatedDomainEvent(BudgetId budgetId) : IDomainEvent
 {
-    
+    public BudgetId BudgetId { get; } = budgetId;
 }

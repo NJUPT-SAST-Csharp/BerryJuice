@@ -6,4 +6,11 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\Shared\Primitives\Primitives.csproj" />
+      <ProjectReference Include="..\Accounts.Application\Accounts.Application.csproj" />
+      <ProjectReference Include="..\Budget.Application\Budget.Application.csproj" />
+      <ProjectReference Include="..\Budget.Domain\Budget.Domain.csproj" />
+    </ItemGroup>
+
 </Project>
