@@ -22,7 +22,7 @@ public record UpdateBudgetUsageDto();
 
 [UsedImplicitly]
 internal sealed class UpdateBudgetUsageCommandHandler(
-    [FromKeyedServices("")] IUnitOfWork unitOfWork,
+    [FromKeyedServices("budget")] IUnitOfWork unitOfWork,
     IBudgetRepository repository,
     IQueryRequestSender querySender
 ) : ICommandRequestHandler<UpdateBudgetUsageCommand, UpdateBudgetUsageDto>

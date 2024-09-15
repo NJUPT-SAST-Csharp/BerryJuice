@@ -21,29 +21,33 @@ internal class TransactionQueryRepository(
         CancellationToken cancellationToken = default
     )
     {
-        const string sql1 = @"
-                SELECT  t.id as TransactionId,
-                        t.amount as Amount, 
-                        t.currency as CurrencyType, 
-                        t.description as Description, 
-                        t.created_at as TimeCreated,
-                        tags.id as TagId,
-                        tags.name as TagName
-                FROM bj_accounts.transactions t
-                INNER JOIN bj_accounts.transactions_tags tt ON tt.transaction_id = t.id
-                INNER JOIN bj_accounts.tags tags ON tags.id = tt.tag_id
-                WHERE t.account_id = @AccountId
-            ";
+        const string sql1 = """
+            
+                            SELECT  t.id as TransactionId,
+                                    t.amount as Amount, 
+                                    t.currency as CurrencyType, 
+                                    t.description as Description, 
+                                    t.created_at as TimeCreated,
+                                    tags.id as TagId,
+                                    tags.name as TagName
+                            FROM bj_accounts.transactions t
+                            INNER JOIN bj_accounts.transactions_tags tt ON tt.transaction_id = t.id
+                            INNER JOIN bj_accounts.tags tags ON tags.id = tt.tag_id
+                            WHERE t.account_id = @AccountId
+                        
+            """;
 
-        const string sql2 = @"
-                SELECT  t.id as TransactionId, 
-                        t.amount as Amount, 
-                        t.currency as CurrencyType, 
-                        t.description as Description, 
-                        t.created_at as TimeCreated
-                FROM bj_accounts.transactions t
-                WHERE t.account_id = @AccountId
-            ";
+        const string sql2 = """
+            
+                            SELECT  t.id as TransactionId, 
+                                    t.amount as Amount, 
+                                    t.currency as CurrencyType, 
+                                    t.description as Description, 
+                                    t.created_at as TimeCreated
+                            FROM bj_accounts.transactions t
+                            WHERE t.account_id = @AccountId
+                        
+            """;
 
         var transactions = await _connection.QueryAsync<TransactionModel>(sql2, new { AccountId = id.Value });
 

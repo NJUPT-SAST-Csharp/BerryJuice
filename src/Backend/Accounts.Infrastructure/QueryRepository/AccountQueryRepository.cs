@@ -15,10 +15,12 @@ internal sealed class AccountQueryRepository(
 
     public Task<IEnumerable<AccountModel>> GetAccountsByAdminAsync(CancellationToken cancellationToken = default)
     {
-        const string sql = @"
-                SELECT id as Id, description as Description
-                FROM bj_accounts.accounts
-            ";
+        const string sql = """
+            
+                            SELECT id as Id, description as Description
+                            FROM bj_accounts.accounts
+                        
+            """;
 
         return _connection.QueryAsync<AccountModel>(sql);
     }

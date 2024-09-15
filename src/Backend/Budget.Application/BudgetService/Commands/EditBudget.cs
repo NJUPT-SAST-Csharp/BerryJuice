@@ -14,7 +14,7 @@ public record EditBudgetDto();
 
 [UsedImplicitly]
 internal sealed class EditBudgetCommandHandler(
-    [FromKeyedServices("")] IUnitOfWork unitOfWork
+    [FromKeyedServices("budget")] IUnitOfWork unitOfWork
 ) : ICommandRequestHandler<EditBudgetCommand, EditBudgetDto>
 {
     public async Task<EditBudgetDto> Handle(EditBudgetCommand request, CancellationToken canecllationToken)

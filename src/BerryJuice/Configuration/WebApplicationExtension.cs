@@ -1,6 +1,7 @@
 ﻿using Accounts.Infrastructure.Persistence;
 using BerryJuice.Blazor.Components;
 using BerryJuice.Infrastructure.Persistence;
+using Budget.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
 using _Imports = BerryJuice.Blazor.Client._Imports;
 
@@ -49,6 +50,9 @@ public static class WebApplicationExtension
 
         var berryJuiceContext = scope.ServiceProvider.GetRequiredService<BerryJuiceDbContext>();
         berryJuiceContext.Database.Migrate();
+
+        var budgetContext = scope.ServiceProvider.GetRequiredService<BudgetContext>();
+        budgetContext.Database.Migrate();
 
         return app;
     }

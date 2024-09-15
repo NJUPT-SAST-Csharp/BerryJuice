@@ -21,6 +21,16 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
         _accountId = accountId;
     }
 
+    // EF Core need this constructor due to limitations that it can't use constructor which has owned entity
+    private Budget(BudgetDescription description, AccountId accountId) :
+        base(new BudgetId(SnowFlakeIdGenerator.NewId))
+    {
+        _amount = new BudgetAmount();
+        _description = description;
+        _duration = new BudgetDuration();
+        _accountId = accountId;
+    }
+
     public static Budget CreateBudget(
         BudgetAmount amount,
         BudgetDescription description,

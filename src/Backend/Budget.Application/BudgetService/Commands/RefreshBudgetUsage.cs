@@ -18,7 +18,7 @@ public record RefreshBudgetUsageDto(decimal usedAmount, decimal usageLimit);
 
 [UsedImplicitly]
 internal sealed class RefreshBudgetUsageCommandHandler(
-    [FromKeyedServices("")] IUnitOfWork unitOfWork,
+    [FromKeyedServices("budget")] IUnitOfWork unitOfWork,
     IBudgetRepository budgetRepository
 ) : ICommandRequestHandler<RefreshBudgetUsageCommand, RefreshBudgetUsageDto>
 {

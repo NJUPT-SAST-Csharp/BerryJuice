@@ -13,3 +13,9 @@ $command = "dotnet ef migrations add $migrationName --startup-project src\BerryJ
 
 # Execute the command
 Invoke-Expression $command
+
+# Generate the command to create EF Core migrations
+$command = "dotnet ef migrations add $migrationName --startup-project src\BerryJuice -o Persistence\Migrations --project src\Backend\Budget.Infrastructure\ --context BudgetContext"
+
+# Execute the command
+Invoke-Expression $command

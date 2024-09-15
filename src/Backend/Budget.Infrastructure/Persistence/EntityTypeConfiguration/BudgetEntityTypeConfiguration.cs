@@ -45,7 +45,7 @@ internal sealed class
             buildAction: builder =>
             {
                 builder.Property(x => x.Used).HasColumnName("used");
-                builder.Property(x => x.Limit).HasColumnName("limit");
+                builder.Property(x => x.Limit).HasColumnName("amount");
             }
         );
 

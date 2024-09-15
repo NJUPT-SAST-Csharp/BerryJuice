@@ -24,7 +24,7 @@ public interface IGetBudgetRepository
 
 [UsedImplicitly]
 internal sealed class GetBudgetsQueryHandler(
-    [FromKeyedServices("")] IUnitOfWork unitOfWork,
+    [FromKeyedServices("budget")] IUnitOfWork unitOfWork,
     IGetBudgetRepository repository
 ) : IQueryRequestHandler<GetBudgetsQuery, GetBudgetsDto>
 {
