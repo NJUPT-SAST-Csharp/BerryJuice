@@ -8,6 +8,7 @@ using BerryJuice.Infrastructure.Persistence;
 using BerryJuice.Infrastructure.Persistence.QueryDatabase;
 using BerryJuice.Infrastructure.Persistence.TypeConverters;
 using Budget.Infrastructure.Configuration;
+using Budget.Infrastructure.Persistence;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -131,6 +132,22 @@ public static class IServiceCollectionExtension
                    .UseSnakeCaseNamingConvention();
             }
         );
+
+        services.AddDbContext<BudgetContext>(
+            optionsAction: options =>
+            {
+                options
+                   .UseNpgsql(
+                        connectionString,
+                        npgsqlOptionsAction: x => x.MigrationsHistoryTable(
+                            tableName: "__EFMigrationsHistory",
+                            schema: "bj_budget"
+                        )
+                    )
+                   .UseSnakeCaseNamingConvention();
+            }
+        );
+
 
         services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "berryjuice");
 

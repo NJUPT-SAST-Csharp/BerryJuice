@@ -10,21 +10,25 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
     private BudgetDescription _description;
     private BudgetDuration _duration;
 
-    private Budget(BudgetAmount amount, BudgetDescription description, BudgetDuration duration)
+    private AccountId _accountId;
+
+    private Budget(BudgetAmount amount, BudgetDescription description, BudgetDuration duration, AccountId accountId)
         : base(new BudgetId(SnowFlakeIdGenerator.NewId))
     {
         _amount = amount;
         _description = description;
         _duration = duration;
+        _accountId = accountId;
     }
 
     public static Budget CreateBudget(
         BudgetAmount amount,
         BudgetDescription description,
-        BudgetDuration duration
+        BudgetDuration duration,
+        AccountId accountId
     )
     {
-        var budget = new Budget(amount, description, duration);
+        var budget = new Budget(amount, description, duration, accountId);
         budget.AddDomainEvent(new BudgetCreatedDomainEvent(budget.Id));
         return budget;
     }

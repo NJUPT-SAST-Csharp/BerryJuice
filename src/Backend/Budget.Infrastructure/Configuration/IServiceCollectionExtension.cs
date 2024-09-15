@@ -19,7 +19,7 @@ public static class IServiceCollectionExtension
         services.AddScoped<IGetBudgetRepository, BudgetQueryRepository>();
 
         // IUnitOfWork
-        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "accounts");
+        services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "budget");
 
         return services;
     }
