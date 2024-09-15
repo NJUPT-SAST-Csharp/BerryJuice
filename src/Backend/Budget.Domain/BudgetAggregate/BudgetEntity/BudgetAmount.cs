@@ -3,11 +3,11 @@
 namespace Budget.Domain.BudgetAggregate.BudgetEntity;
 
 public readonly record struct BudgetAmount(
-    decimal Value
+    decimal Used, decimal Limit
 )
 {
     public override string ToString()
     {
-        return Value.ToString(CultureInfo.CurrentCulture);
+        return $"{Used.ToString(CultureInfo.CurrentCulture)}/{Limit.ToString(CultureInfo.CurrentCulture)}";
     }
 }

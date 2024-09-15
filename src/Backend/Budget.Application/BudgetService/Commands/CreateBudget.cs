@@ -14,7 +14,7 @@ public sealed class CreateBudgetCommand(
     string description
 ) : ICommandRequest<CreateBudgetDto>
 {
-    internal BudgetAmount Amount { get; set; } = new(amount);
+    internal BudgetAmount Amount { get; set; } = new(Used: 0,Limit: amount);
     internal BudgetDescription Description { get; set; } = new(description);
     internal BudgetDuration Duration { get; set; } = new(duration, beginDate);
 }

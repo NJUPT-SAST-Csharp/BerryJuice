@@ -28,4 +28,16 @@ public class Budget : EntityBase<BudgetId>, IAggregateRoot<Budget>
         budget.AddDomainEvent(new BudgetCreatedDomainEvent(budget.Id));
         return budget;
     }
+
+    public BudgetAmount AddUsage(decimal amount)
+    {
+        _amount = new BudgetAmount(Used: _amount.Used + amount, Limit: _amount.Limit);
+        return _amount;
+    }
+
+    public BudgetAmount UpdateUsage(decimal amount)
+    {
+        _amount = new BudgetAmount(Used: amount, Limit: _amount.Limit);
+        return _amount;
+    }
 }

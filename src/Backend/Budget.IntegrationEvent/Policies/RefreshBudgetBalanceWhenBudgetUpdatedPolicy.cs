@@ -1,4 +1,5 @@
-﻿using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
+﻿using Budget.Application.BudgetService.Commands;
+using Budget.Domain.BudgetAggregate.BudgetEntity.Events;
 using Primitives.DomainEvent;
 using Primitives.EventBusScopedWrapper;
 using Primitives.Policy;
@@ -16,7 +17,8 @@ public sealed class RefreshBudgetBalanceWhenBudgetUpdatedPolicy(IEventBusWrapper
         CancellationToken cancellationToken
     )
     {
-        await _eventBus.QueryAsync();
+        var command = new RefreshBudgetUsageCommand(notification.BudgetId.Value, 0);// TODO: Implement get used amount
+        await _eventBus.CommandAsync(command, cancellationToken);
     }
 
     /// <inheritdoc />

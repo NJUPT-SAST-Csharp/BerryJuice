@@ -15,10 +15,11 @@ public sealed class BudgetRepository(
     /// <inheritdoc />
     public async Task<Domain.BudgetAggregate.BudgetEntity.Budget> GetBudgetAsync(BudgetId id, CancellationToken cancellationToken = default)
     {
-        var a = await _context.Budgets.SingleAsync(b => b.Id == id, cancellationToken: cancellationToken);
+        var a = await _context.Budgets.AsNoTracking().SingleAsync(b => b.Id == id, cancellationToken: cancellationToken);
 
         return a ?? throw new DbNotFoundException(nameof(Domain.BudgetAggregate.BudgetEntity.Budget), id.Value.ToString());
     }
+
 
     /// <inheritdoc />
     public async Task<BudgetId> AddBudgetAsync(Domain.BudgetAggregate.BudgetEntity.Budget budget, CancellationToken cancellationToken = default)

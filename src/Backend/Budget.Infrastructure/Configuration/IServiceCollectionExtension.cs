@@ -1,6 +1,8 @@
-﻿using Budget.Domain.BudgetAggregate;
+﻿using Budget.Application.BudgetService.Queries;
+using Budget.Domain.BudgetAggregate;
 using Budget.Infrastructure.DomainRepository;
 using Budget.Infrastructure.Persistence;
+using Budget.Infrastructure.QueryRepository;
 using Microsoft.Extensions.DependencyInjection;
 using Primitives;
 
@@ -14,6 +16,7 @@ public static class IServiceCollectionExtension
         services.AddScoped<IBudgetRepository, BudgetRepository>();
 
         // Query Repositories
+        services.AddScoped<IGetBudgetRepository, BudgetQueryRepository>();
 
         // IUnitOfWork
         services.AddKeyedScoped<IUnitOfWork, UnitOfWork>(serviceKey: "accounts");
