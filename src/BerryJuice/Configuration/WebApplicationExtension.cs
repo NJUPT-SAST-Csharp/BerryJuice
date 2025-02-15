@@ -29,7 +29,8 @@ public static class WebApplicationExtension
             if (app.Environment.IsDevelopment())
             {
                 app.UseWebAssemblyDebugging();
-            } else
+            }
+            else
             {
                 app.UseExceptionHandler(errorHandlingPath: "/Error", createScopeForErrors: true);
             }

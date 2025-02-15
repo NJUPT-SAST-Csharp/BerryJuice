@@ -38,7 +38,7 @@ internal static class CurrencyDomainService
             CurrencyType.CNY => $"{amount} ¥",
             CurrencyType.HKD => $"HK$ {amount}",
             CurrencyType.JPY => $"{amount} ¥",
-            _                => $"{amount}",
+            _ => $"{amount}",
         };
     }
 }
